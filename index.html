@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LivenOut — Coming Soon</title>
+  <meta name="description" content="LivenOut helps people discover local events and join them with real intent. Organizers see demand before committing. Payment only if the goal is reached." />
+  <meta name="keywords" content="LivenOut, local events, event discovery, event organizer, coming soon" />
+  <meta name="author" content="Liven Apps" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#FF3D8B" />
+  <link rel="canonical" href="https://livenout.com/" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FF3D8B'/><stop offset='1' stop-color='%23FF8A3D'/></linearGradient></defs><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='white'>LN</text></svg>" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FF3D8B'/><stop offset='1' stop-color='%23FF8A3D'/></linearGradient></defs><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='14' fill='white'>LN</text></svg>" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="en" href="https://livenout.com/" />
+  <link rel="alternate" hreflang="ru" href="https://livenout.com/" />
+  <link rel="alternate" hreflang="pl" href="https://livenout.com/" />
+  <link rel="alternate" hreflang="x-default" href="https://livenout.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LivenOut" />
+  <meta property="og:url" content="https://livenout.com/" />
+  <meta property="og:title" content="LivenOut — Events that happen because people actually want them" />
+  <meta property="og:description" content="Discover local events, join with real intent. Payment only if the event reaches its goal. Coming soon." />
+  <meta property="og:image" content="https://livenout.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="LivenOut — Coming Soon" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta property="og:locale:alternate" content="pl_PL" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="LivenOut — Events that happen because people actually want them" />
+  <meta name="twitter:description" content="Discover local events, join with real intent. Payment only if the event reaches its goal. Coming soon." />
+  <meta name="twitter:image" content="https://livenout.com/og-image.png" />
+  <meta name="twitter:image:alt" content="LivenOut — Coming Soon" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "LivenOut",
+      "url": "https://livenout.com",
+      "logo": "https://livenout.com/og-image.png",
+      "email": "livenapps@gmail.com",
+      "description": "LivenOut is a platform that connects people around shared real-world experiences. Discover local events, join with real intent. Payment only if the event reaches its goal.",
+      "sameAs": [
+        "https://buymeacoffee.com/livenout"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "LivenOut",
+      "url": "https://livenout.com",
+      "description": "Discover local events and join them with real intent. Organizers see demand before committing. Payment only if the goal is reached.",
+      "inLanguage": ["en", "ru", "pl"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://livenout.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "LivenOut",
+      "applicationCategory": "EventsApplication",
+      "operatingSystem": "Web",
+      "url": "https://livenout.com",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Discover local events, join with real intent. Payment only if the event reaches its goal."
+    }
+  ]
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does LivenOut work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You browse events on a live map, join the ones you want to happen, and payment is only charged if the event reaches its goal number of participants or amount by the deadline."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When am I charged?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You are only charged if the event reaches its goal. If the goal is not met by the deadline, no payment is taken and your reservation is released."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I organize events on LivenOut?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Organizers can create events, set a participant or amount goal, and a deadline. The event only runs if enough people join — giving organizers confidence before committing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is LivenOut free for attendees?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Free events stay free for attendees. For paid events, payment is reserved and only charged if the event goal is reached."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #FF3D8B;
+      --orange: #FF8A3D;
+      --violet: #7C3AED;
+      --violet-light: #a78bfa;
+      --bg: #050914;
+      --card: #0d1526;
+      --border: rgba(255,255,255,0.08);
+      --muted: rgba(255,255,255,0.45);
+      --text: #f1f5f9;
+      --radius: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100dvh;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      padding: 0 20px;
+      background: rgba(5,9,20,0.88);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .logo-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ─── LANG SWITCHER ─── */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .lang-btn:hover { color: var(--text); }
+
+    .lang-btn.active {
+      background: rgba(255,255,255,0.12);
+      color: var(--text);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.18s;
+    }
+
+    .chip-pink {
+      border: 1px solid rgba(236,72,153,0.35);
+      background: rgba(236,72,153,0.10);
+      color: #f9a8d4;
+    }
+    .chip-pink:hover { background: rgba(236,72,153,0.20); }
+
+    .chip-violet {
+      border: 1px solid rgba(124,58,237,0.40);
+      background: rgba(124,58,237,0.10);
+      color: var(--violet-light);
+    }
+    .chip-violet:hover { background: rgba(124,58,237,0.20); }
+
+    .chip-orange {
+      border: 1px solid rgba(255,138,61,0.40);
+      background: rgba(255,138,61,0.10);
+      color: #fdba74;
+    }
+    .chip-orange:hover { background: rgba(255,138,61,0.20); }
+
+    .chip svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    @media (max-width: 600px) {
+      .header-chips { display: none; }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 25% 35%, rgba(255,61,139,0.18) 0%, transparent 50%),
+        radial-gradient(circle at 75% 25%, rgba(255,138,61,0.14) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(124,58,237,0.10) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 16px;
+      border-radius: 99px;
+      border: 1px solid rgba(124,58,237,0.35);
+      background: rgba(124,58,237,0.12);
+      color: var(--violet-light);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 0 3px rgba(74,222,128,0.25);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.25); }
+      50% { box-shadow: 0 0 0 6px rgba(74,222,128,0.1); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      max-width: 1500px;
+      position: relative;
+    }
+
+    .grad-text {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      max-width: 560px;
+      margin: 22px auto 0;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .hero-cta {
+      margin-top: 40px;
+      position: relative;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(255,61,139,0.38);
+      transition: filter 0.18s, transform 0.18s;
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    /* ─── SECTIONS ─── */
+    section.block {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      border: 1px solid rgba(124,58,237,0.35);
+      background: rgba(124,58,237,0.10);
+      color: var(--violet-light);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 540px;
+      line-height: 1.65;
+      margin-bottom: 44px;
+    }
+
+    /* Steps grid */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .step-card:hover { border-color: rgba(124,58,237,0.4); transform: translateY(-2px); }
+
+    .step-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 20px;
+    }
+
+    .step-icon-violet { background: rgba(124,58,237,0.15); }
+    .step-icon-pink   { background: rgba(255,61,139,0.12); }
+    .step-icon-orange { background: rgba(255,138,61,0.12); }
+
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .step-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* Feature pills */
+    .feature-pills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: 12px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .pill strong {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .pill span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ─── SURVEY SECTION ─── */
+    .survey-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    .survey-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .survey-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .survey-card:hover { transform: translateY(-2px); }
+
+    .survey-card.survey-organizer {
+      border-color: rgba(255,138,61,0.25);
+      background: rgba(255,138,61,0.05);
+    }
+    .survey-card.survey-organizer:hover { border-color: rgba(255,138,61,0.5); }
+
+    .survey-card.survey-user {
+      border-color: rgba(124,58,237,0.25);
+      background: rgba(124,58,237,0.05);
+    }
+    .survey-card.survey-user:hover { border-color: rgba(124,58,237,0.5); }
+
+    .survey-icon { font-size: 28px; margin-bottom: 4px; }
+
+    .survey-card h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .survey-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .survey-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      padding: 8px 18px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      align-self: flex-start;
+      transition: filter 0.15s;
+    }
+
+    .survey-link-orange {
+      background: rgba(255,138,61,0.15);
+      border: 1px solid rgba(255,138,61,0.35);
+      color: #fdba74;
+    }
+    .survey-link-orange:hover { filter: brightness(1.2); }
+
+    .survey-link-violet {
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.4);
+      color: var(--violet-light);
+    }
+    .survey-link-violet:hover { filter: brightness(1.2); }
+
+    /* ─── SUPPORT SECTION ─── */
+    .support-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 100px;
+    }
+
+    .support-card-main {
+      background: rgba(255,61,139,0.07);
+      border: 1px solid rgba(255,61,139,0.22);
+      border-radius: var(--radius);
+      padding: 48px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .support-card-main > svg { color: #f9a8d4; margin-bottom: 18px; }
+
+    .support-card-main h2 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .support-card-main p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 480px;
+    }
+
+    .support-tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 12px;
+    }
+
+    .tier-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.18s, transform 0.18s;
+      text-decoration: none;
+    }
+    .tier-card:hover { transform: translateY(-2px); }
+
+    .tier-card.featured {
+      border-color: rgba(255,61,139,0.4);
+      background: rgba(255,61,139,0.06);
+    }
+
+    .tier-icon { font-size: 20px; margin-bottom: 4px; }
+
+    .tier-amount {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .tier-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tier-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .tier-cta {
+      margin-top: auto;
+      display: inline-flex;
+      padding: 7px 14px;
+      border-radius: 99px;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      align-self: flex-start;
+      transition: background 0.15s;
+    }
+    .tier-cta:hover { background: rgba(255,255,255,0.07); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.15s;
+    }
+    footer a:hover { color: var(--text); }
+
+    .divider { color: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-logo">
+      <div class="logo-icon">LN</div>
+      <span class="logo-name">LivenOut</span>
+    </div>
+    <div class="header-right">
+      <div class="header-chips">
+        <a href="#support" class="chip chip-pink">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span data-i18n="nav_support">Support us</span>
+        </a>
+        <a href="#how-it-works" class="chip chip-violet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+          <span data-i18n="nav_how">How it works</span>
+        </a>
+        <a href="#surveys" class="chip chip-orange">
+          <span data-i18n="nav_surveys">Surveys</span>
+        </a>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="pl">PL</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">
+      <div class="logo-icon" style="width:26px; height:26px; font-size:11px; border-radius:8px;">LN</div>
+      <span style="font-weight:800; font-size:15px; color: var(--text); letter-spacing:-0.2px;">LivenOut</span>
+      <span style="color: var(--muted); font-size:12px; font-weight:500;" data-i18n="hero_badge">· Coming Soon</span>
+    </div>
+    <h1>
+      <span data-i18n="hero_h1_1">Events that happen</span><br>
+      <span data-i18n="hero_h1_2">because people</span><br>
+      <span class="grad-text" data-i18n="hero_h1_grad">actually want them</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">
+      Discover local events. Join with real intent. Payment only if the goal is reached.
+    </p>
+    <!-- Survey CTAs as primary hero buttons -->
+    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:40px; position:relative;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScHdGr7-RKIa5EoiAbAHh7Tz71KnfYwBD9Acoc6uEpukQ7eFQ/viewform?usp=sharing&ouid=100023640931032038172" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width:240px; justify-content:center;">
+        🎪 <span data-i18n="survey_org_btn">Organizer Survey</span>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdg22dHbQYaXmp9m4YcPIiaeZNCUhR0Vej95IoPKchawQE47w/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width:240px; justify-content:center; background: linear-gradient(135deg, #7C3AED, #a78bfa); box-shadow: 0 8px 30px rgba(124,58,237,0.38);">
+        🙋 <span data-i18n="survey_user_btn">User Survey</span>
+      </a>
+    </div>
+
+    <!-- Feature pills -->
+    <div class="feature-pills" style="max-width:820px; margin: 52px auto 0;">
+      <div class="pill">
+        <strong data-i18n="pill1_title">📍 Map-first discovery</strong>
+        <span data-i18n="pill1_body">Find events around you, filtered by date, price, type and visible area.</span>
+      </div>
+      <div class="pill">
+        <strong data-i18n="pill2_title">🎯 Visible goals</strong>
+        <span data-i18n="pill2_body">See people joined, target, price, deadline and progress before committing.</span>
+      </div>
+      <div class="pill">
+        <strong data-i18n="pill3_title">💳 No charge until goal</strong>
+        <span data-i18n="pill3_body">Reserve your spot. Payment only happens if the event actually reaches its goal.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="block" id="how-it-works">
+    <div class="section-label">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+      <span data-i18n="how_label">How LivenOut works</span>
+    </div>
+    <h2 class="section-title" data-i18n="how_title">Events should start with<br>real demand.</h2>
+    <p class="section-sub" data-i18n="how_sub">
+      LivenOut connects people who want events to happen with organizers who can run them —
+      only when there's enough real interest.
+    </p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-icon step-icon-violet">📍</div>
+        <h3 data-i18n="step1_title">Discover what is nearby</h3>
+        <p data-i18n="step1_body">Browse events on a live map, filter by date, price, goal type, media, and the visible map area.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon step-icon-pink">🎟️</div>
+        <h3 data-i18n="step2_title">Join with intent</h3>
+        <p data-i18n="step2_body">Reserve tickets for events you want to happen. Free events stay free for attendees.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon step-icon-orange">✅</div>
+        <h3 data-i18n="step3_title">Goals decide what runs</h3>
+        <p data-i18n="step3_body">Organizers set a people or amount goal. Everyone sees whether the event has enough support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SURVEYS -->
+  <div class="survey-section" id="surveys">
+    <div class="section-label" style="border-color: rgba(255,138,61,0.35); background: rgba(255,138,61,0.08); color: #fdba74;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span data-i18n="survey_label">Help us improve</span>
+    </div>
+    <h2 class="section-title" data-i18n="survey_title">We'd love your feedback</h2>
+    <p class="section-sub" data-i18n="survey_sub">Take a couple of minutes to share your thoughts. Your input directly shapes what we build next.</p>
+    <div class="survey-grid">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScHdGr7-RKIa5EoiAbAHh7Tz71KnfYwBD9Acoc6uEpukQ7eFQ/viewform?usp=sharing&ouid=100023640931032038172" target="_blank" rel="noopener noreferrer" class="survey-card survey-organizer">
+        <div class="survey-icon">🎪</div>
+        <h3 data-i18n="survey_org_title">Organizer Survey</h3>
+        <p data-i18n="survey_org_body">Are you an event organizer or thinking about running events? Tell us about your pain points, how you manage registrations, and what tools you need most.</p>
+        <span class="survey-link survey-link-orange">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span data-i18n="survey_take">Take the survey</span>
+        </span>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdg22dHbQYaXmp9m4YcPIiaeZNCUhR0Vej95IoPKchawQE47w/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="survey-card survey-user">
+        <div class="survey-icon">🙋</div>
+        <h3 data-i18n="survey_user_title">User Survey</h3>
+        <p data-i18n="survey_user_body">Do you enjoy attending local events? Share how you currently discover events, what frustrates you, and what would make LivenOut useful for you.</p>
+        <span class="survey-link survey-link-violet">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span data-i18n="survey_take">Take the survey</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- SUPPORT US -->
+  <div class="support-section" id="support">
+    <div class="support-card-main">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <h2 data-i18n="support_title">Support us</h2>
+      <p data-i18n="support_body">Donations help cover maps, servers, notifications, media storage, and payment infrastructure. Ads and partnerships can also support the platform, but donations keep the product moving faster.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top: 0; justify-content:center;">
+        <a href="https://buymeacoffee.com/livenout" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:13px; padding: 11px 22px;">
+          ☕ <span data-i18n="support_cta">Buy us a coffee</span>
+        </a>
+        <a href="mailto:livenapps@gmail.com?subject=LivenOut%20Support" class="btn-primary" style="font-size:13px; padding: 11px 22px; background: rgba(255,255,255,0.07); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); color: var(--text);">
+          <span data-i18n="support_contact">Get in touch</span>
+        </a>
+        <button onclick="sharePage()" class="btn-primary" style="font-size:13px; padding: 11px 22px; background: rgba(255,255,255,0.07); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); color: var(--text); cursor:pointer; display:inline-flex; align-items:center; gap:7px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <span data-i18n="support_share">Share</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+    const TRANSLATIONS = {
+      en: {
+        nav_support: "Support us",
+        nav_how: "How it works",
+        nav_surveys: "Surveys",
+        hero_badge: "· Coming Soon",
+        hero_h1_1: "Events that happen",
+        hero_h1_2: "because people",
+        hero_h1_grad: "actually want them",
+        hero_sub: "Discover local events. Join with real intent. Payment only if the goal is reached.",
+        hero_cta: "Get early access",
+        pill1_title: "📍 Map-first discovery",
+        pill1_body: "Find events around you, filtered by date, price, type and visible area.",
+        pill2_title: "🎯 Visible goals",
+        pill2_body: "See people joined, target, price, deadline and progress before committing.",
+        pill3_title: "💳 No charge until goal",
+        pill3_body: "Reserve your spot. Payment only happens if the event actually reaches its goal.",
+        survey_org_btn: "Organizer Survey",
+        survey_user_btn: "User Survey",
+        how_label: "How LivenOut works",
+        how_title: "Events should start with real demand.",
+        how_sub: "LivenOut connects people who want events to happen with organizers who can run them — only when there's enough real interest.",
+        step1_title: "Discover what is nearby",
+        step1_body: "Browse events on a live map, filter by date, price, goal type, media, and the visible map area.",
+        step2_title: "Join with intent",
+        step2_body: "Reserve tickets for events you want to happen. Free events stay free for attendees.",
+        step3_title: "Goals decide what runs",
+        step3_body: "Organizers set a people or amount goal. Everyone sees whether the event has enough support.",
+        survey_label: "Help us improve",
+        survey_title: "We'd love your feedback",
+        survey_sub: "Take a couple of minutes to share your thoughts. Your input directly shapes what we build next.",
+        survey_org_title: "Organizer Survey",
+        survey_org_body: "Are you an event organizer or thinking about running events? Tell us about your pain points, how you manage registrations, and what tools you need most.",
+        survey_user_title: "User Survey",
+        survey_user_body: "Do you enjoy attending local events? Share how you currently discover events, what frustrates you, and what would make LivenOut useful for you.",
+        survey_take: "Take the survey",
+        support_title: "Support us",
+        support_body: "Donations help cover maps, servers, notifications, media storage, and payment infrastructure. Ads and partnerships can also support the platform, but donations keep the product moving faster.",
+        support_cta: "Buy us a coffee",
+        support_contact: "Get in touch",
+        support_share: "Share",
+        tier1_name: "Coffee", tier1_desc: "Buy us a coffee. Seriously, we run on it.", tier1_cta: "Buy a coffee",
+        tier2_name: "Boost", tier2_desc: "Keep the lights on for a day. Maps, servers, APIs — it adds up.", tier2_cta: "Send a boost",
+        tier3_name: "Server hero", tier3_desc: "You're basically paying our server bill. We'll name a process after you.", tier3_cta: "Become a hero",
+        tier4_name: "Patron", tier4_desc: "Legendary. Your name goes in the credits. And our hearts. Forever.", tier4_cta: "Join the legends",
+        footer_terms: "Terms of Service",
+        footer_privacy: "Privacy & Cookies",
+        footer_contact: "Contact",
+      },
+      ru: {
+        nav_support: "Поддержать",
+        nav_how: "Как это работает",
+        nav_surveys: "Опросы",
+        hero_badge: "· Скоро",
+        hero_h1_1: "Места встреч,",
+        hero_h1_2: "которые рождаются из",
+        hero_h1_grad: "живого интереса",
+        hero_sub: "Находите локальные события. Присоединяйтесь осознанно. Оплата только при достижении цели.",
+        hero_cta: "Получить ранний доступ",
+        pill1_title: "📍 Карта в основе",
+        pill1_body: "Находите события рядом — фильтруйте по дате, цене, типу и видимой области карты.",
+        pill2_title: "🎯 Видимые цели",
+        pill2_body: "Смотрите количество участников, цель, цену, дедлайн и прогресс до регистрации.",
+        pill3_title: "💳 Оплата только при достижении цели",
+        pill3_body: "Резервируйте место. Оплата списывается только если событие набирает нужное количество участников.",
+        survey_org_btn: "Опрос для организаторов",
+        survey_user_btn: "Опрос для участников",
+        how_label: "Как работает LivenOut",
+        how_title: "События должны начинаться с реального спроса.",
+        how_sub: "LivenOut соединяет людей, которые хотят событий, с организаторами, которые могут их провести — только когда есть достаточный реальный интерес.",
+        step1_title: "Найдите что-то рядом",
+        step1_body: "Просматривайте события на живой карте, фильтруйте по дате, цене, типу цели и видимой области.",
+        step2_title: "Присоединяйтесь осознанно",
+        step2_body: "Резервируйте билеты на события, которые хотите посетить. Бесплатные события остаются бесплатными.",
+        step3_title: "Цели решают, что состоится",
+        step3_body: "Организаторы задают цель по числу людей или сумме. Все видят, набрало ли событие поддержку.",
+        survey_label: "Помогите нам стать лучше",
+        survey_title: "Нам важна ваша обратная связь",
+        survey_sub: "Уделите пару минут — расскажите о своём опыте. Ваши ответы напрямую влияют на то, что мы строим.",
+        survey_org_title: "Опрос для организаторов",
+        survey_org_body: "Вы организатор мероприятий или думаете о запуске? Расскажите о своих сложностях, как вы управляете регистрацией и какие инструменты нужны больше всего.",
+        survey_user_title: "Опрос для участников",
+        survey_user_body: "Вы ходите на локальные события? Расскажите, как вы их сейчас ищете, что раздражает и чем LivenOut мог бы вам помочь.",
+        survey_take: "Пройти опрос",
+        support_title: "Поддержите нас",
+        support_body: "Донаты помогают покрывать карты, серверы, уведомления, хранение медиа и платёжную инфраструктуру. Реклама и партнёрства тоже поддерживают платформу, но донаты ускоряют развитие продукта.",
+        support_cta: "Угостить кофе",
+        support_contact: "Написать нам",
+        support_share: "Поделиться",
+        tier1_name: "Кофе", tier1_desc: "Купите нам кофе. Серьёзно, мы на нём работаем.", tier1_cta: "Угостить кофе",
+        tier2_name: "Буст", tier2_desc: "Оплатите день работы серверов. Карты, API — всё складывается.", tier2_cta: "Отправить буст",
+        tier3_name: "Герой сервера", tier3_desc: "Вы фактически оплачиваете наш сервер. Назовём в вашу честь процесс.", tier3_cta: "Стать героем",
+        tier4_name: "Патрон", tier4_desc: "Легендарно. Ваше имя в титрах. И в наших сердцах. Навсегда.", tier4_cta: "Войти в легенды",
+        footer_terms: "Условия использования",
+        footer_privacy: "Конфиденциальность и куки",
+        footer_contact: "Контакт",
+      },
+      pl: {
+        nav_support: "Wesprzyj nas",
+        nav_how: "Jak to działa",
+        nav_surveys: "Ankiety",
+        hero_badge: "· Już wkrótce",
+        hero_h1_1: "Miejsca spotkań,",
+        hero_h1_2: "które rodzą się z",
+        hero_h1_grad: "prawdziwego zainteresowania",
+        hero_sub: "Odkrywaj lokalne wydarzenia. Dołączaj z intencją. Płatność tylko po osiągnięciu celu.",
+        hero_cta: "Uzyskaj wczesny dostęp",
+        pill1_title: "📍 Mapa jako baza",
+        pill1_body: "Znajdź wydarzenia w okolicy — filtruj po dacie, cenie, typie i widocznym obszarze mapy.",
+        pill2_title: "🎯 Widoczne cele",
+        pill2_body: "Sprawdź liczbę uczestników, cel, cenę, termin i postęp przed zapisaniem się.",
+        pill3_title: "💳 Płatność tylko po osiągnięciu celu",
+        pill3_body: "Zarezerwuj miejsce. Płatność następuje tylko wtedy, gdy wydarzenie osiągnie swój cel.",
+        survey_org_btn: "Ankieta dla organizatorów",
+        survey_user_btn: "Ankieta dla uczestników",
+        how_label: "Jak działa LivenOut",
+        how_title: "Wydarzenia powinny zaczynać się od prawdziwego popytu.",
+        how_sub: "LivenOut łączy ludzi, którzy chcą wydarzeń, z organizatorami, którzy mogą je przeprowadzić — tylko gdy jest wystarczające zainteresowanie.",
+        step1_title: "Odkryj, co jest w pobliżu",
+        step1_body: "Przeglądaj wydarzenia na żywej mapie, filtruj po dacie, cenie, typie celu i widocznym obszarze.",
+        step2_title: "Dołącz z intencją",
+        step2_body: "Zarezerwuj bilety na wydarzenia, na które chcesz pójść. Bezpłatne wydarzenia pozostają bezpłatne.",
+        step3_title: "Cele decydują, co się odbywa",
+        step3_body: "Organizatorzy ustawiają cel — liczbę osób lub kwotę. Wszyscy widzą, czy wydarzenie zdobyło wystarczające wsparcie.",
+        survey_label: "Pomóż nam się rozwijać",
+        survey_title: "Zależy nam na Twojej opinii",
+        survey_sub: "Poświęć chwilę i podziel się swoimi przemyśleniami. Twoje odpowiedzi bezpośrednio wpływają na to, co budujemy.",
+        survey_org_title: "Ankieta dla organizatorów",
+        survey_org_body: "Jesteś organizatorem wydarzeń lub myślisz o organizacji? Powiedz nam o swoich problemach, jak zarządzasz rejestracją i jakich narzędzi potrzebujesz.",
+        survey_user_title: "Ankieta dla uczestników",
+        survey_user_body: "Chodzisz na lokalne wydarzenia? Podziel się tym, jak je teraz odkrywasz, co Cię frustruje i jak LivenOut mógłby Ci pomóc.",
+        survey_take: "Wypełnij ankietę",
+        support_title: "Wesprzyj nas",
+        support_body: "Darowizny pomagają pokryć koszty map, serwerów, powiadomień, przechowywania mediów i infrastruktury płatności. Reklamy i partnerstwa też wspierają platformę, ale darowizny przyspieszają rozwój produktu.",
+        support_cta: "Postaw kawę",
+        support_contact: "Napisz do nas",
+        support_share: "Udostępnij",
+        tier1_name: "Kawa", tier1_desc: "Kup nam kawę. Serio, działamy na niej.", tier1_cta: "Postaw kawę",
+        tier2_name: "Boost", tier2_desc: "Utrzymaj serwery przez jeden dzień. Mapy, API — to się sumuje.", tier2_cta: "Wyślij boost",
+        tier3_name: "Bohater serwera", tier3_desc: "Właściwie opłacasz nasz serwer. Nazwiemy na Twoją cześć jeden proces.", tier3_cta: "Zostań bohaterem",
+        tier4_name: "Patron", tier4_desc: "Legendarnie. Twoje imię w napisach końcowych. I w naszych sercach. Na zawsze.", tier4_cta: "Dołącz do legend",
+        footer_terms: "Warunki korzystania",
+        footer_privacy: "Prywatność i cookies",
+        footer_contact: "Kontakt",
+      },
+    };
+
+    function detectLang() {
+      const saved = localStorage.getItem("livenout_lang");
+      if (saved && TRANSLATIONS[saved]) return saved;
+      const browser = (navigator.language || "en").toLowerCase();
+      if (browser.startsWith("ru")) return "ru";
+      if (browser.startsWith("pl")) return "pl";
+      return "en";
+    }
+
+    function applyLang(lang) {
+      const t = TRANSLATIONS[lang];
+      if (!t) return;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+      document.documentElement.lang = lang;
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+      localStorage.setItem("livenout_lang", lang);
+    }
+
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+    });
+
+    applyLang(detectLang());
+
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: "LivenOut — Coming Soon",
+          text: "Events that happen because people actually want them.",
+          url: window.location.href,
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const btn = document.querySelector("[onclick='sharePage()'] span");
+          if (btn) { btn.textContent = "Copied!"; setTimeout(() => applyLang(detectLang()), 1500); }
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>
