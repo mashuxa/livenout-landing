@@ -16,11 +16,7 @@ export default function TestApp() {
     <Drawer.Provider>
       <Drawer.IndentBackground className="fixed inset-0 bg-black" />
 
-      <Drawer.Indent
-        className="relative h-dvh w-dvw origin-top overflow-hidden will-change-transform
-          [transition:transform_0.4s_cubic-bezier(0.32,0.72,0,1),border-radius_0.25s_cubic-bezier(0.32,0.72,0,1)]
-          [transform:scale(1)] data-active:[transform:scale(0.94)] data-active:rounded-[1.5rem]"
-      >
+      <Drawer.Indent className="drawer-indent relative h-dvh w-dvw origin-center overflow-hidden will-change-transform">
         <Map onOpenFeed={openFeed} />
       </Drawer.Indent>
 
