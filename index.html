@@ -49,14 +49,6 @@
       </section>
     </div>
 
-    <button
-      id="toggle"
-      type="button"
-      class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 rounded-full bg-white px-5 py-2.5 font-medium text-black shadow-lg"
-    >
-      Toggle
-    </button>
-
     <div
       id="loading-toast"
       class="pointer-events-none fixed bottom-24 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-black opacity-0 transition-opacity duration-200"
@@ -119,7 +111,6 @@
     const map = document.getElementById('map');
     const feed = document.getElementById('feed');
     const screens = document.getElementById('screens');
-    const toggle = document.getElementById('toggle');
     const loadingToast = document.getElementById('loading-toast');
 
     const PAGE_SIZE = 5;
@@ -272,11 +263,6 @@
       marker.setAttribute('aria-label', events[index].title);
       marker.addEventListener('click', () => openFeed(index));
       map.appendChild(marker);
-    });
-
-    toggle.addEventListener('click', () => {
-      onFeeds = !onFeeds;
-      updateScreens();
     });
 
     appendBatch();
