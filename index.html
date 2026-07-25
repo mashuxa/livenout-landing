@@ -9,9 +9,14 @@
 <body>
   <div class="relative w-dvw h-dvh overflow-hidden">
     <div id="screens" class="flex flex-row size-full translate-x-0 transition-transform duration-300 ease-in-out">
-      <section class="size-full shrink-0 bg-neutral-900 bg-cover bg-center" style="background-image: url('https://livenout.com/images/map-dark.jpg')"></section>
-      <section class="size-full shrink-0 flex items-center justify-center bg-neutral-100 text-neutral-900 text-2xl">
-        Feeds
+      <section
+        id="map"
+        class="relative size-full shrink-0 bg-neutral-900 bg-cover bg-center"
+        style="background-image: url('https://livenout.com/images/map-dark.jpg')"
+      ></section>
+
+      <section class="size-full shrink-0">
+        <div id="feed" class="h-dvh w-full overflow-y-auto snap-y snap-mandatory"></div>
       </section>
     </div>
 
@@ -25,14 +30,61 @@
   </div>
 
   <script>
+    const events = [
+      { title: 'Sunset Rooftop Yoga', place: 'Riverside Terrace', time: 'Today · 19:00', going: 24, goal: 30, top: '32%', left: '58%', gradient: 'linear-gradient(135deg, #fb923c, #db2777)' },
+      { title: 'Live Jazz Night', place: 'Blue Note Bar', time: 'Today · 21:00', going: 41, goal: 40, top: '48%', left: '22%', gradient: 'linear-gradient(135deg, #6366f1, #7e22ce)' },
+      { title: 'Street Food Market', place: 'Central Square', time: 'Tomorrow · 12:00', going: 87, goal: 100, top: '65%', left: '70%', gradient: 'linear-gradient(135deg, #fbbf24, #dc2626)' },
+      { title: 'Beach Volleyball Cup', place: 'South Beach Court', time: 'Sat · 10:00', going: 12, goal: 16, top: '20%', left: '40%', gradient: 'linear-gradient(135deg, #22d3ee, #1d4ed8)' },
+      { title: 'Open Mic Comedy', place: 'Laugh Cellar', time: 'Sun · 20:00', going: 18, goal: 25, top: '75%', left: '35%', gradient: 'linear-gradient(135deg, #34d399, #0f766e)' },
+    ];
+
+    const map = document.getElementById('map');
+    const feed = document.getElementById('feed');
     const screens = document.getElementById('screens');
     const toggle = document.getElementById('toggle');
+
+    events.forEach((event, index) => {
+      const marker = document.createElement('button');
+      marker.type = 'button';
+      marker.className = 'absolute h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white ring-4 ring-black/30';
+      marker.style.top = event.top;
+      marker.style.left = event.left;
+      marker.setAttribute('aria-label', event.title);
+      marker.addEventListener('click', () => openFeed(index));
+      map.appendChild(marker);
+
+      const card = document.createElement('article');
+      card.dataset.card = index;
+      card.className = 'snap-start [scroll-snap-stop:always] min-h-dvh w-full flex flex-col justify-end p-6 text-white';
+      card.style.background = event.gradient;
+      card.innerHTML = `
+        <div class="rounded-2xl bg-black/30 p-5 backdrop-blur-sm">
+          <h2 class="text-2xl font-semibold">${event.title}</h2>
+          <p class="mt-1 text-white/70">${event.place}</p>
+          <p class="text-white/70">${event.time}</p>
+          <p class="mt-3 text-sm font-medium">${event.going}/${event.goal} going</p>
+        </div>
+      `;
+      feed.appendChild(card);
+    });
+
     let onFeeds = false;
+
+    function updateScreens() {
+      screens.classList.toggle('translate-x-0', !onFeeds);
+      screens.classList.toggle('-translate-x-[100dvw]', onFeeds);
+    }
+
+    function openFeed(index) {
+      const card = feed.querySelector(`[data-card="${index}"]`);
+      if (card) card.scrollIntoView({ block: 'start', behavior: 'auto' });
+      onFeeds = true;
+      updateScreens();
+    }
 
     toggle.addEventListener('click', () => {
       onFeeds = !onFeeds;
-      screens.classList.toggle('translate-x-0', !onFeeds);
-      screens.classList.toggle('-translate-x-[100dvw]', onFeeds);
+      updateScreens();
     });
   </script>
 </body>
