@@ -6,8 +6,10 @@ export default function App() {
   const [onFeeds, setOnFeeds] = useState(false);
   const [feedTarget, setFeedTarget] = useState({ index: 0, key: 0 });
 
-  const openFeed = useCallback((index = 0) => {
-    setFeedTarget((t) => ({ index, key: t.key + 1 }));
+  const openFeed = useCallback((index) => {
+    if (typeof index === 'number') {
+      setFeedTarget((t) => ({ index, key: t.key + 1 }));
+    }
     setOnFeeds(true);
     history.pushState({ view: 'feed' }, '', '');
   }, []);

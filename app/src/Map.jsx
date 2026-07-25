@@ -23,7 +23,7 @@ export default function Map({ onOpenFeed }) {
       <button
         type="button"
         className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black shadow-lg"
-        onClick={() => onOpenFeed(0)}
+        onClick={() => onOpenFeed()}
       >
         Explore events <span className="text-neutral-500">({events.length})</span>
       </button>
