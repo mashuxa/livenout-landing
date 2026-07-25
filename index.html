@@ -48,7 +48,7 @@
           type="button"
           class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black shadow-lg"
         >
-          All feeds
+          All events <span class="text-neutral-500" id="all-feeds-count"></span>
         </button>
       </section>
 
@@ -254,6 +254,7 @@
       map.appendChild(marker);
     });
 
+    document.getElementById('all-feeds-count').textContent = `(${events.length})`;
     document.getElementById('all-feeds-btn').addEventListener('click', openFeed);
 
     document.getElementById('feed-back-btn').addEventListener('click', () => {
