@@ -60,7 +60,7 @@ export default function TestApp() {
           />
           <Drawer.Viewport className="fixed inset-0 flex items-stretch justify-end">
             <Drawer.Popup
-              className="relative h-dvh w-dvw overflow-hidden bg-neutral-950 transition-transform duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]
+              className="drawer-popup relative h-dvh w-dvw overflow-hidden bg-neutral-950 transition-transform duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]
                 [transform:translateX(var(--drawer-swipe-movement-x))] data-swiping:select-none
                 data-ending-style:[transform:translateX(100%)] data-starting-style:[transform:translateX(100%)]"
             >

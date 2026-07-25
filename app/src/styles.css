@@ -52,3 +52,16 @@ body {
 .drawer-indent[data-active] {
   transform: scale(calc(1 - (0.06 * (1 - var(--indent-progress, 0)))));
 }
+
+/*
+  The popup's transform is normally driven live by Base UI's
+  --drawer-swipe-movement-x while a gesture is in progress. But once the
+  gesture ends and the drawer is open at rest (data-open, no data-swiping),
+  there's no guarantee that variable has been reset to 0 — if it lags or
+  isn't updated after a SwipeArea-driven open, the panel visibly stalls
+  partway across the screen. Force translateX(0) explicitly for the
+  open-at-rest state so it's never dependent on that variable's freshness.
+*/
+.drawer-popup[data-open]:not([data-swiping]) {
+  transform: translateX(0);
+}
