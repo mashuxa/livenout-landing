@@ -35,21 +35,24 @@ body {
 }
 
 /*
-  Binary open/closed toggle, not tied to --drawer-swipe-progress: that variable's
-  sign flips depending on whether the current gesture is opening (SwipeArea) or
-  closing an already-open drawer, so a progress-driven formula shrinks in the
-  wrong direction for one of the two cases. A plain data-active transition is
-  directionally correct regardless of what triggered the open (button, marker,
-  or edge swipe).
+  Raw --drawer-swipe-progress is 0 at rest (open OR closed — it's a transient
+  per-gesture value, not a persistent "how open" state) and only moves while a
+  drag is active. Its direction also depends on the gesture source: 0->1 means
+  "closing" while dragging an open popup shut, but 0->1 means "opening" while
+  Drawer.SwipeArea drives it. TestApp.jsx normalizes both into
+  --indent-progress using the "closing" convention (0 = open, 1 = closed), so
+  this formula only ever has to handle one direction.
 */
 .drawer-indent {
+  --indent-radius: calc(1.5rem * (1 - var(--indent-progress, 0)));
+  --indent-transition: calc(1 - clamp(0, calc(var(--indent-progress, 0) * 100000), 1));
   transform: scale(1);
   transition:
-    transform 0.4s cubic-bezier(0.32, 0.72, 0, 1),
-    border-radius 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+    transform calc(400ms * var(--indent-transition)) cubic-bezier(0.32, 0.72, 0, 1),
+    border-radius calc(250ms * var(--indent-transition)) cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .drawer-indent[data-active] {
-  transform: scale(0.94);
-  border-radius: 1.5rem;
+  transform: scale(calc(1 - (0.06 * (1 - var(--indent-progress, 0)))));
+  border-radius: var(--indent-radius);
 }
