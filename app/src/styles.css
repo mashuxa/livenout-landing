@@ -69,3 +69,7 @@ body {
 .drawer-popup[data-open]:not([data-swiping]) {
   transform: translateX(0);
 }
+
+.drawer-swipe-area {
+  outline: none;
+}

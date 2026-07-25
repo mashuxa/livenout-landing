@@ -50,7 +50,7 @@ export default function TestApp() {
       </Drawer.Indent>
 
       <Drawer.Root swipeDirection="right" open={open} onOpenChange={setOpen}>
-        <Drawer.SwipeArea ref={swipeAreaRef} className="fixed inset-y-0 right-0 z-10 w-8" />
+        <Drawer.SwipeArea ref={swipeAreaRef} className="drawer-swipe-area fixed inset-y-0 right-0 z-10 w-8 outline-none" />
 
         <Drawer.Portal>
           <Drawer.Backdrop
