@@ -21,6 +21,8 @@ export default function TestApp() {
       </Drawer.Indent>
 
       <Drawer.Root swipeDirection="right" open={open} onOpenChange={setOpen}>
+        <Drawer.SwipeArea className="fixed inset-y-0 right-0 z-10 w-8" />
+
         <Drawer.Portal>
           <Drawer.Backdrop
             className="fixed inset-0 bg-black/50 transition-opacity duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]
