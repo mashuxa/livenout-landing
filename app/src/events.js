@@ -1,19 +1,19 @@
 const eventTemplates = [
-  { title: 'Retro Wave — synth-pop концерт', category: 'Музыка', tags: ['Today', 'Live', 'Great alone'], description: 'Живой концерт с кавер-версиями хитов 80-х: синти-поп, неон и танцевальный вайб на всю ночь.' },
-  { title: 'Ужин при свечах на крыше', category: 'Еда и напитки', tags: ['Romantic', 'Small group'], description: 'Камерный ужин на крыше с видом на город: сет из 4 блюд и бокал вина в подарок.' },
-  { title: 'Утренняя йога у моря', category: 'Спорт', tags: ['Relaxed', 'Free'], description: 'Мягкая практика на закате прямо на песке. Коврики не нужны — только хорошее настроение.' },
-  { title: 'Open mic: стендап-вечер', category: 'Искусство и культура', tags: ['Chill', '18+'], description: 'Пять комиков, один микрофон и никаких правил. Заходи с друзьями или один — не соскучишься.' },
-  { title: 'Городской велозаезд, 20 км', category: 'Спорт', tags: ['Active', 'Group'], description: 'Неспешный вечерний заезд по набережной с остановками на фото и мороженое.' },
-  { title: 'Мастер-класс по керамике', category: 'Искусство и культура', tags: ['Hands-on', 'Small group'], description: 'Лепим на гончарном круге под руководством мастера. Забираешь свою работу через неделю.' },
-  { title: 'Кино под открытым небом', category: 'Кино', tags: ['Chill', 'Bring a blanket'], description: 'Показ культового фильма на большом экране во дворе. Плед и попкорн — с собой или на месте.' },
-  { title: 'Настольные игры в баре', category: 'Нетворкинг', tags: ['Casual', 'Great alone'], description: 'Библиотека из полусотни игр и компания, готовая сыграть в любую из них.' },
-  { title: 'Забег на 5 км по набережной', category: 'Спорт', tags: ['Active', 'Free'], description: 'Дружеский забег без хронометража. После — растяжка и свежевыжатые соки.' },
-  { title: 'Фримаркет и своп одежды', category: 'Сообщество', tags: ['Eco', 'Free entry'], description: 'Принеси вещи, которые больше не носишь, и найди новые — без денег, только обмен.' },
+  { title: 'Retro Wave — koncert synth-pop', category: 'Muzyka', tags: ['Dziś', 'Na żywo', 'Super samemu'], description: 'Koncert z coverami hitów lat 80.: synth-pop, neony i taneczny wibe na całą noc.' },
+  { title: 'Kolacja przy świecach na dachu', category: 'Jedzenie i napoje', tags: ['Romantyczne', 'Mała grupa'], description: 'Kameralna kolacja na dachu z widokiem na miasto: 4 dania i kieliszek wina w prezencie.' },
+  { title: 'Poranna joga nad morzem', category: 'Sport', tags: ['Na luzie', 'Za darmo'], description: 'Łagodna praktyka o wschodzie słońca, prosto na piasku. Maty niepotrzebne — tylko dobry humor.' },
+  { title: 'Open mic: wieczór stand-upu', category: 'Sztuka i kultura', tags: ['Wyluzowane', '18+'], description: 'Pięciu komików, jeden mikrofon i żadnych zasad. Przyjdź ze znajomymi albo sam — nie zanudzisz się.' },
+  { title: 'Miejski przejazd rowerowy, 20 km', category: 'Sport', tags: ['Aktywne', 'Grupa'], description: 'Spokojny wieczorny przejazd wzdłuż nabrzeża z postojami na zdjęcia i lody.' },
+  { title: 'Warsztat ceramiki', category: 'Sztuka i kultura', tags: ['Warsztat', 'Mała grupa'], description: 'Lepimy na kole garncarskim pod okiem mistrza. Swoją pracę odbierasz po tygodniu.' },
+  { title: 'Kino pod chmurką', category: 'Kino', tags: ['Wyluzowane', 'Weź koc'], description: 'Pokaz kultowego filmu na dużym ekranie na podwórku. Koc i popcorn — swój albo na miejscu.' },
+  { title: 'Gry planszowe w barze', category: 'Networking', tags: ['Swobodnie', 'Super samemu'], description: 'Biblioteka pięćdziesięciu gier i towarzystwo gotowe zagrać w każdą z nich.' },
+  { title: 'Bieg na 5 km wzdłuż nabrzeża', category: 'Sport', tags: ['Aktywne', 'Za darmo'], description: 'Towarzyski bieg bez pomiaru czasu. Potem rozciąganie i świeżo wyciskane soki.' },
+  { title: 'Free market i wymiana ubrań', category: 'Społeczność', tags: ['Eko', 'Wstęp wolny'], description: 'Przynieś rzeczy, których już nie nosisz, i znajdź nowe — bez pieniędzy, tylko wymiana.' },
 ];
 
 const places = ['Riverside Terrace', 'Central Square', 'South Beach Court', 'Blue Note Bar', 'Old Town Yard', 'Rooftop 25', 'Gallery Hall', 'Skate Park', 'Botanical Garden', 'Loft 9'];
-const languages = ['Русский, English', 'Polski, English', 'Русский, Українська', 'English', 'Русский, Polski, English'];
-const dayLabels = ['Сегодня', 'Завтра', 'Пт', 'Сб', 'Вс', 'Пн'];
+const languages = ['Polski, English', 'Polski, Українська', 'English', 'Polski, English, Русский'];
+const dayLabels = ['Dziś', 'Jutro', 'Pt', 'Sob', 'Nie', 'Pon'];
 
 export const events = Array.from({ length: 30 }, (_, i) => {
   const template = eventTemplates[i % eventTemplates.length];

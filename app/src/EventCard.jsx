@@ -73,12 +73,12 @@ export default function EventCard({ event, index, total }) {
         </div>
 
         <div className="flex shrink-0 items-center gap-3 px-4 pb-2 pt-3">
-          <button className="flex-1 rounded-full border border-white/20 py-3 text-sm font-semibold">Посмотреть детали</button>
+          <button className="flex-1 rounded-full border border-white/20 py-3 text-sm font-semibold">Zobacz szczegóły</button>
           <button
             className="flex-1 rounded-full py-3 text-sm font-semibold text-black"
             style={{ background: 'linear-gradient(90deg, #ff3d8b, #ff8a3d)' }}
           >
-            Присоединиться
+            Dołącz
           </button>
         </div>
 
