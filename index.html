@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hello World</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    .feed {
+      height: 100dvh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: auto;
+
+      scroll-snap-type: y mandatory;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .card {
+      flex: 0 0 100dvh;
+      height: 100dvh;
+      overflow: hidden;
+
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
   <div class="relative w-dvw h-dvh overflow-hidden">
@@ -13,33 +42,226 @@
         id="map"
         class="relative size-full shrink-0 bg-neutral-900 bg-cover bg-center"
         style="background-image: url('https://livenout.com/images/map-dark.jpg')"
-      ></section>
+      >
+        <button
+          id="all-feeds-btn"
+          type="button"
+          class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black shadow-lg"
+        >
+          All feeds
+        </button>
+      </section>
 
-      <section id="feed" class="size-full shrink-0 bg-neutral-950"></section>
+      <section class="relative size-full shrink-0 overflow-hidden">
+        <div id="feed" class="feed"></div>
+
+        <button
+          id="feed-back-btn"
+          type="button"
+          class="absolute left-4 top-4 z-30 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-sm text-white backdrop-blur"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          Назад
+        </button>
+      </section>
+    </div>
+
+    <div
+      id="loading-toast"
+      class="pointer-events-none fixed bottom-24 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-black opacity-0 transition-opacity duration-200"
+    >
+      Загружаем ещё…
     </div>
   </div>
 
   <script>
+    const eventTemplates = [
+      { title: 'Retro Wave — synth-pop концерт', category: 'Музыка', tags: ['Today', 'Live', 'Great alone'], description: 'Живой концерт с кавер-версиями хитов 80-х: синти-поп, неон и танцевальный вайб на всю ночь.' },
+      { title: 'Ужин при свечах на крыше', category: 'Еда и напитки', tags: ['Romantic', 'Small group'], description: 'Камерный ужин на крыше с видом на город: сет из 4 блюд и бокал вина в подарок.' },
+      { title: 'Утренняя йога у моря', category: 'Спорт', tags: ['Relaxed', 'Free'], description: 'Мягкая практика на закате прямо на песке. Коврики не нужны — только хорошее настроение.' },
+      { title: 'Open mic: стендап-вечер', category: 'Искусство и культура', tags: ['Chill', '18+'], description: 'Пять комиков, один микрофон и никаких правил. Заходи с друзьями или один — не соскучишься.' },
+      { title: 'Городской велозаезд, 20 км', category: 'Спорт', tags: ['Active', 'Group'], description: 'Неспешный вечерний заезд по набережной с остановками на фото и мороженое.' },
+      { title: 'Мастер-класс по керамике', category: 'Искусство и культура', tags: ['Hands-on', 'Small group'], description: 'Лепим на гончарном круге под руководством мастера. Забираешь свою работу через неделю.' },
+      { title: 'Кино под открытым небом', category: 'Кино', tags: ['Chill', 'Bring a blanket'], description: 'Показ культового фильма на большом экране во дворе. Плед и попкорн — с собой или на месте.' },
+      { title: 'Настольные игры в баре', category: 'Нетворкинг', tags: ['Casual', 'Great alone'], description: 'Библиотека из полусотни игр и компания, готовая сыграть в любую из них.' },
+      { title: 'Забег на 5 км по набережной', category: 'Спорт', tags: ['Active', 'Free'], description: 'Дружеский забег без хронометража. После — растяжка и свежевыжатые соки.' },
+      { title: 'Фримаркет и своп одежды', category: 'Сообщество', tags: ['Eco', 'Free entry'], description: 'Принеси вещи, которые больше не носишь, и найди новые — без денег, только обмен.' },
+    ];
+
+    const places = ['Riverside Terrace', 'Central Square', 'South Beach Court', 'Blue Note Bar', 'Old Town Yard', 'Rooftop 25', 'Gallery Hall', 'Skate Park', 'Botanical Garden', 'Loft 9'];
+    const languages = ['Русский, English', 'Polski, English', 'Русский, Українська', 'English', 'Русский, Polski, English'];
+    const dayLabels = ['Сегодня', 'Завтра', 'Пт', 'Сб', 'Вс', 'Пн'];
+
+    const events = Array.from({ length: 30 }, (_, i) => {
+      const template = eventTemplates[i % eventTemplates.length];
+      const going = 8 + ((i * 7) % 90);
+      const goal = going + 3 + (i % 5) * 4;
+      const hour = 10 + ((i * 3) % 12);
+      return {
+        title: template.title,
+        category: template.category,
+        tags: template.tags,
+        description: template.description,
+        place: places[i % places.length],
+        languages: languages[i % languages.length],
+        distanceKm: (1.2 + (i % 12) * 3.7).toFixed(1),
+        date: `${dayLabels[i % dayLabels.length]}, ${hour}:00`,
+        duration: `${1 + (i % 3)}h`,
+        going,
+        goal,
+        image: `https://picsum.photos/seed/livenout-${i}/900/1200`,
+      };
+    });
+
     const screens = document.getElementById('screens');
     const map = document.getElementById('map');
     const feed = document.getElementById('feed');
+    const loadingToast = document.getElementById('loading-toast');
 
+    const PAGE_SIZE = 5;
+    let loaded = 0;
+    let lastCardObserver = null;
     let onFeeds = false;
+
+    function tagClass(i) {
+      const palette = [
+        'border-pink-400/60 text-pink-300',
+        'border-sky-400/60 text-sky-300',
+        'border-emerald-400/60 text-emerald-300',
+      ];
+      return palette[i % palette.length];
+    }
+
+    function renderCard(event, index) {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.id = `event-${index}`;
+      card.innerHTML = `
+        <div class="flex h-full flex-col bg-neutral-950 text-white">
+          <div class="relative mx-4 mt-4 min-h-0 flex-1 overflow-hidden rounded-3xl bg-neutral-800">
+            <img src="${event.image}" alt="${event.title}" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+            <button class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            </button>
+            <button class="absolute right-3 top-14 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5"><circle cx="7.5" cy="10.5" r="2.25"/><circle cx="16.5" cy="6" r="2.25"/><circle cx="16.5" cy="18" r="2.25"/><path stroke-linecap="round" d="m9.4 9.4 5.2-2.8M9.4 11.6l5.2 2.8"/></svg>
+            </button>
+          </div>
+
+          <div class="shrink-0 px-4 pt-3">
+            <h2 class="line-clamp-2 text-xl font-bold leading-snug">${event.title}</h2>
+
+            <div class="mt-2 flex flex-wrap gap-2 text-xs text-white/80">
+              <span class="flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-3.5 w-3.5"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 2"/></svg>
+                ${event.date}
+              </span>
+              <span class="flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-3.5 w-3.5"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 7v5l3 2"/></svg>
+                ${event.duration}
+              </span>
+              <span class="flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-3.5 w-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-6.5 7-11a7 7 0 10-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2"/></svg>
+                ${event.place} · ${event.distanceKm} km
+              </span>
+            </div>
+
+            <p class="mt-2 text-xs text-white/50">${event.category} · ${event.languages}</p>
+
+            <div class="mt-2 flex flex-wrap gap-2">
+              ${event.tags.map((tag, i) => `<span class="rounded-full border px-3 py-1 text-xs font-medium ${tagClass(i)}">${tag}</span>`).join('')}
+            </div>
+
+            <p class="mt-2 line-clamp-2 text-sm text-white/70">${event.description}</p>
+          </div>
+
+          <div class="flex shrink-0 items-center gap-3 px-4 pb-2 pt-3">
+            <button class="flex-1 rounded-full border border-white/20 py-3 text-sm font-semibold">Посмотреть детали</button>
+            <button class="flex-1 rounded-full py-3 text-sm font-semibold text-black" style="background: linear-gradient(90deg, #ff3d8b, #ff8a3d)">Присоединиться</button>
+          </div>
+
+          <div class="shrink-0 pb-3 text-center text-xs text-white/40">${index + 1} / ${events.length}</div>
+        </div>
+      `;
+      return card;
+    }
+
+    function appendBatch() {
+      const next = events.slice(loaded, loaded + PAGE_SIZE);
+      next.forEach((event, i) => feed.appendChild(renderCard(event, loaded + i)));
+      loaded += next.length;
+      observeLastCard();
+    }
+
+    function loadMoreWithDelay() {
+      if (loaded >= events.length) return;
+      loadingToast.classList.remove('opacity-0');
+      loadingToast.classList.add('opacity-100');
+      setTimeout(() => {
+        appendBatch();
+        loadingToast.classList.remove('opacity-100');
+        loadingToast.classList.add('opacity-0');
+      }, 500);
+    }
+
+    function observeLastCard() {
+      if (lastCardObserver) lastCardObserver.disconnect();
+      if (loaded >= events.length) return;
+      const cards = feed.querySelectorAll('.card');
+      const target = cards[cards.length - 1];
+      lastCardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            lastCardObserver.disconnect();
+            loadMoreWithDelay();
+          }
+        });
+      }, { root: feed, threshold: 0.6 });
+      lastCardObserver.observe(target);
+    }
+
+    const markerIndexes = [0, 3, 7, 11, 14, 18, 22, 27];
+    const markerPositions = [
+      { top: '32%', left: '58%' },
+      { top: '48%', left: '22%' },
+      { top: '65%', left: '70%' },
+      { top: '20%', left: '40%' },
+      { top: '75%', left: '35%' },
+      { top: '40%', left: '80%' },
+      { top: '58%', left: '12%' },
+      { top: '15%', left: '65%' },
+    ];
 
     function updateScreens() {
       screens.classList.toggle('translate-x-0', !onFeeds);
       screens.classList.toggle('-translate-x-[100dvw]', onFeeds);
     }
 
-    map.addEventListener('click', () => {
+    function openFeed() {
       onFeeds = true;
       updateScreens();
+    }
+
+    markerIndexes.forEach((index, i) => {
+      const pos = markerPositions[i];
+      const marker = document.createElement('button');
+      marker.type = 'button';
+      marker.className = 'absolute h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white ring-4 ring-black/30';
+      marker.style.top = pos.top;
+      marker.style.left = pos.left;
+      marker.setAttribute('aria-label', events[index].title);
+      marker.addEventListener('click', openFeed);
+      map.appendChild(marker);
     });
 
-    feed.addEventListener('click', () => {
+    document.getElementById('all-feeds-btn').addEventListener('click', openFeed);
+
+    document.getElementById('feed-back-btn').addEventListener('click', () => {
       onFeeds = false;
       updateScreens();
     });
+
+    appendBatch();
   </script>
 </body>
 </html>
