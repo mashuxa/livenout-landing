@@ -4,8 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hello World</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <div class="relative w-dvw h-dvh overflow-hidden">
+    <div id="screens" class="flex flex-row size-full translate-x-0 transition-transform duration-300 ease-in-out">
+      <section class="size-full shrink-0 flex items-center justify-center bg-neutral-900 text-white text-2xl">
+        Map
+      </section>
+      <section class="size-full shrink-0 flex items-center justify-center bg-neutral-100 text-neutral-900 text-2xl">
+        Feeds
+      </section>
+    </div>
+
+    <button
+      id="toggle"
+      type="button"
+      class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 rounded-full bg-white px-5 py-2.5 font-medium text-black shadow-lg"
+    >
+      Toggle
+    </button>
+  </div>
+
+  <script>
+    const screens = document.getElementById('screens');
+    const toggle = document.getElementById('toggle');
+    let onFeeds = false;
+
+    toggle.addEventListener('click', () => {
+      onFeeds = !onFeeds;
+      screens.classList.toggle('translate-x-0', !onFeeds);
+      screens.classList.toggle('-translate-x-[100dvw]', onFeeds);
+    });
+  </script>
 </body>
 </html>
