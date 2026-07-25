@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hello World</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    .feed {
+      height: 100dvh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+
+      scroll-snap-type: y mandatory;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .card {
+      flex: 0 0 100dvh;
+      height: 100dvh;
+
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+  </style>
 </head>
 <body>
   <div class="relative w-dvw h-dvh overflow-hidden">
@@ -16,7 +36,7 @@
       ></section>
 
       <section class="size-full shrink-0">
-        <div id="feed" class="h-dvh w-full overflow-y-auto snap-y snap-mandatory"></div>
+        <div id="feed" class="feed"></div>
       </section>
     </div>
 
@@ -55,7 +75,7 @@
 
       const card = document.createElement('article');
       card.dataset.card = index;
-      card.className = 'snap-start [scroll-snap-stop:always] min-h-dvh w-full flex flex-col justify-end p-6 text-white';
+      card.className = 'card w-full flex flex-col justify-end p-6 text-white';
       card.style.background = event.gradient;
       card.innerHTML = `
         <div class="rounded-2xl bg-black/30 p-5 backdrop-blur-sm">
