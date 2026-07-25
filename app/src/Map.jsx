@@ -13,7 +13,7 @@ export default function Map({ onOpenFeed }) {
             key={index}
             type="button"
             aria-label={events[index].title}
-            className="absolute h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white ring-4 ring-black/30"
+            className="absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-black/30 bg-white"
             style={{ top: pos.top, left: pos.left }}
             onClick={() => onOpenFeed(index)}
           />
