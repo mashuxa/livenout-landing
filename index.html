@@ -250,7 +250,16 @@
       ensureLoadedUpTo(index);
       onFeeds = true;
       updateScreens();
-      location.hash = `event-${index}`;
+
+      const card = document.getElementById(`event-${index}`);
+      if (card) {
+        feed.style.scrollSnapType = 'none';
+        feed.scrollTop = card.offsetTop;
+        requestAnimationFrame(() => {
+          feed.style.scrollSnapType = '';
+        });
+      }
+      history.replaceState(null, '', `#event-${index}`);
     }
 
     markerIndexes.forEach((index, i) => {
