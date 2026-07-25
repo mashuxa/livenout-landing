@@ -65,9 +65,10 @@ export default function Feed({ target, onClose }) {
         className="absolute left-4 top-4 z-30 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-sm text-white backdrop-blur"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="m15 18-6-6 6-6" />
+          <circle cx="11" cy="11" r="7" />
+          <path strokeLinecap="round" d="m20 20-4.3-4.3" />
         </svg>
-        Назад
+        Search this area
       </button>
     </>
   );
