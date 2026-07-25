@@ -22,7 +22,7 @@ export default function Map({ onOpenFeed }) {
 
       <button
         type="button"
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black shadow-lg"
+        className="absolute bottom-6 left-1/2 z-10 w-fit min-w-[240px] -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black shadow-lg"
         onClick={() => onOpenFeed()}
       >
         Odkryj wydarzenia <span className="text-neutral-500">({events.length})</span>
