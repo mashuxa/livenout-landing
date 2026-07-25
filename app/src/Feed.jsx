@@ -1,12 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { events } from './events.js';
 import EventCard from './EventCard.jsx';
 
 const WINDOW_RADIUS = 2;
 
-export default function Feed({ onClose }) {
+function FeedScroller({ initialIndex }) {
   const feedRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
+
+  useLayoutEffect(() => {
+    const el = feedRef.current;
+    if (el) el.scrollTop = initialIndex * el.clientHeight;
+  }, []);
 
   useEffect(() => {
     const el = feedRef.current;
@@ -37,16 +42,22 @@ export default function Feed({ onClose }) {
   const cardsAfter = events.length - 1 - windowEnd;
 
   return (
+    <div id="feed" className="feed" ref={feedRef}>
+      {cardsBefore > 0 && <div style={{ flex: `0 0 ${cardsBefore * 100}dvh` }} />}
+
+      {visibleEvents.map((event, i) => (
+        <EventCard key={event.id} event={event} index={windowStart + i} total={events.length} />
+      ))}
+
+      {cardsAfter > 0 && <div style={{ flex: `0 0 ${cardsAfter * 100}dvh` }} />}
+    </div>
+  );
+}
+
+export default function Feed({ target, onClose }) {
+  return (
     <section className="relative size-full shrink-0 overflow-hidden">
-      <div id="feed" ref={feedRef} className="feed">
-        {cardsBefore > 0 && <div style={{ flex: `0 0 ${cardsBefore * 100}dvh` }} />}
-
-        {visibleEvents.map((event, i) => (
-          <EventCard key={event.id} event={event} index={windowStart + i} total={events.length} />
-        ))}
-
-        {cardsAfter > 0 && <div style={{ flex: `0 0 ${cardsAfter * 100}dvh` }} />}
-      </div>
+      <FeedScroller key={target.key} initialIndex={target.index} />
 
       <button
         type="button"

@@ -4,8 +4,10 @@ import Feed from './Feed.jsx';
 
 export default function App() {
   const [onFeeds, setOnFeeds] = useState(false);
+  const [feedTarget, setFeedTarget] = useState({ index: 0, key: 0 });
 
-  const openFeed = useCallback(() => {
+  const openFeed = useCallback((index = 0) => {
+    setFeedTarget((t) => ({ index, key: t.key + 1 }));
     setOnFeeds(true);
     history.pushState({ view: 'feed' }, '', '');
   }, []);
@@ -35,7 +37,7 @@ export default function App() {
         style={{ transform: onFeeds ? 'translateX(-100dvw)' : 'translateX(0)' }}
       >
         <Map onOpenFeed={openFeed} />
-        <Feed onClose={closeFeed} />
+        <Feed target={feedTarget} onClose={closeFeed} />
       </div>
     </div>
   );
