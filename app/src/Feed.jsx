@@ -59,6 +59,7 @@ export default function Feed({ target, onClose }) {
     <>
       <FeedScroller key={target.key} initialIndex={target.index} />
 
+      {/* Finalized copy for this button, pending i18n: PL "Zmień lokalizację" / EN "Change search area" / RU "Область поиска" */}
       <button
         type="button"
         onClick={onClose}
