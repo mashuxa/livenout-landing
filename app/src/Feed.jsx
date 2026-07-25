@@ -56,7 +56,7 @@ function FeedScroller({ initialIndex }) {
 
 export default function Feed({ target, onClose }) {
   return (
-    <section className="relative size-full shrink-0 overflow-hidden">
+    <>
       <FeedScroller key={target.key} initialIndex={target.index} />
 
       <button
@@ -69,6 +69,6 @@ export default function Feed({ target, onClose }) {
         </svg>
         Назад
       </button>
-    </section>
+    </>
   );
 }
