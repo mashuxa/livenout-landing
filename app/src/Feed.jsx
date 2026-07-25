@@ -2,47 +2,50 @@ import { useEffect, useRef, useState } from 'react';
 import { events } from './events.js';
 import EventCard from './EventCard.jsx';
 
-const PAGE_SIZE = 5;
+const WINDOW_RADIUS = 2;
 
 export default function Feed({ onClose }) {
-  const [loaded, setLoaded] = useState(PAGE_SIZE);
-  const [showToast, setShowToast] = useState(false);
   const feedRef = useRef(null);
-  const sentinelRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    if (loaded >= events.length) return;
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
+    const el = feedRef.current;
+    if (!el) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            observer.disconnect();
-            setShowToast(true);
-            setTimeout(() => {
-              setLoaded((n) => Math.min(n + PAGE_SIZE, events.length));
-              setShowToast(false);
-            }, 500);
-          }
-        });
-      },
-      { root: feedRef.current, threshold: 0.6 }
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, [loaded]);
+    let raf = null;
+    function handleScroll() {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const cardHeight = el.clientHeight || 1;
+        const index = Math.round(el.scrollTop / cardHeight);
+        setActiveIndex(Math.max(0, Math.min(events.length - 1, index)));
+      });
+    }
 
-  const visibleEvents = events.slice(0, loaded);
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      el.removeEventListener('scroll', handleScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const windowStart = Math.max(0, activeIndex - WINDOW_RADIUS);
+  const windowEnd = Math.min(events.length - 1, activeIndex + WINDOW_RADIUS);
+  const visibleEvents = events.slice(windowStart, windowEnd + 1);
+  const cardsBefore = windowStart;
+  const cardsAfter = events.length - 1 - windowEnd;
 
   return (
     <section className="relative size-full shrink-0 overflow-hidden">
       <div id="feed" ref={feedRef} className="feed">
-        {visibleEvents.map((event, index) => (
-          <EventCard key={event.id} event={event} index={index} total={events.length} />
+        {cardsBefore > 0 && <div style={{ flex: `0 0 ${cardsBefore * 100}dvh` }} />}
+
+        {visibleEvents.map((event, i) => (
+          <EventCard key={event.id} event={event} index={windowStart + i} total={events.length} />
         ))}
-        {loaded < events.length && <div ref={sentinelRef} className="h-px shrink-0" />}
+
+        {cardsAfter > 0 && <div style={{ flex: `0 0 ${cardsAfter * 100}dvh` }} />}
       </div>
 
       <button
@@ -55,14 +58,6 @@ export default function Feed({ onClose }) {
         </svg>
         Назад
       </button>
-
-      <div
-        className={`pointer-events-none fixed bottom-24 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-black transition-opacity duration-200 ${
-          showToast ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        Загружаем ещё…
-      </div>
     </section>
   );
 }
