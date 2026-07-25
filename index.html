@@ -11,6 +11,7 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
+      scroll-behavior: auto;
 
       scroll-snap-type: y mandatory;
       overscroll-behavior-y: contain;
@@ -138,6 +139,7 @@
     function renderCard(event, index) {
       const card = document.createElement('article');
       card.className = 'card';
+      card.id = `event-${index}`;
       card.dataset.card = index;
       card.innerHTML = `
         <div class="flex h-full flex-col bg-neutral-950 text-white">
@@ -255,10 +257,9 @@
 
     function openFeed(index) {
       ensureLoadedUpTo(index);
-      const card = feed.querySelector(`[data-card="${index}"]`);
-      if (card) card.scrollIntoView({ block: 'start', behavior: 'auto' });
       onFeeds = true;
       updateScreens();
+      location.hash = `event-${index}`;
     }
 
     markerIndexes.forEach((index, i) => {
