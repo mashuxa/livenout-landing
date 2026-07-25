@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+html,
+body {
+  background: #000;
+}
+
 .feed {
   height: 100dvh;
   overflow-y: auto;
