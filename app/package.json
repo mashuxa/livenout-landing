@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "build:test": "vite build --config vite.test.config.js",
+    "build:all": "npm run build && npm run build:test"
   },
   "dependencies": {
+    "@base-ui/react": "^1.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

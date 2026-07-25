@@ -4,7 +4,7 @@ import EventCard from './EventCard.jsx';
 
 const WINDOW_RADIUS = 2;
 
-function FeedScroller({ initialIndex }) {
+export function FeedScroller({ initialIndex }) {
   const feedRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(initialIndex);
 
