@@ -44,8 +44,24 @@
         style="background-image: url('https://livenout.com/images/map-dark.jpg')"
       ></section>
 
-      <section class="size-full shrink-0">
+      <section class="relative size-full shrink-0 overflow-hidden">
         <div id="feed" class="feed"></div>
+
+        <div class="pointer-events-none absolute inset-x-0 top-0 z-30 flex h-[84px] flex-col justify-between bg-black/10 px-4 pb-3 pt-4 backdrop-blur-md">
+          <div class="pointer-events-auto flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-sm text-white/70">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-6.5 7-11a7 7 0 10-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span id="feed-count"></span>
+            </div>
+            <button id="feed-back-btn" type="button" class="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-sm text-white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              Назад
+            </button>
+          </div>
+          <div class="flex justify-center">
+            <div class="h-1 w-10 rounded-full bg-white/25"></div>
+          </div>
+        </div>
       </section>
     </div>
 
@@ -133,22 +149,7 @@
       card.id = `event-${index}`;
       card.dataset.card = index;
       card.innerHTML = `
-        <div class="flex h-full flex-col bg-neutral-950 text-white">
-          <div class="flex shrink-0 items-center justify-between px-4 pt-4">
-            <div class="flex items-center gap-1.5 text-sm text-white/70">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-6.5 7-11a7 7 0 10-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-              ${events.length} событий
-            </div>
-            <button class="back-btn flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-sm">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3.5 w-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-              Назад
-            </button>
-          </div>
-
-          <div class="mt-3 flex shrink-0 justify-center">
-            <div class="h-1 w-10 rounded-full bg-white/25"></div>
-          </div>
-
+        <div class="flex h-full flex-col bg-neutral-950 pt-[84px] text-white">
           <div class="relative mx-4 mt-3 min-h-0 flex-1 overflow-hidden rounded-3xl bg-neutral-800">
             <img src="${event.image}" alt="${event.title}" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
             <button class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur">
@@ -194,10 +195,6 @@
           <div class="shrink-0 pb-3 text-center text-xs text-white/40">${index + 1} / ${events.length}</div>
         </div>
       `;
-      card.querySelector('.back-btn').addEventListener('click', () => {
-        onFeeds = false;
-        updateScreens();
-      });
       return card;
     }
 
@@ -246,23 +243,26 @@
       screens.classList.toggle('-translate-x-[100dvw]', onFeeds);
     }
 
-    function openFeed(index) {
-      ensureLoadedUpTo(index);
-      onFeeds = true;
-      updateScreens();
-      location.hash = `event-${index}`;
-    }
-
     markerIndexes.forEach((index, i) => {
       const pos = markerPositions[i];
-      const marker = document.createElement('button');
-      marker.type = 'button';
+      const marker = document.createElement('a');
+      marker.href = `#event-${index}`;
       marker.className = 'absolute h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white ring-4 ring-black/30';
       marker.style.top = pos.top;
       marker.style.left = pos.left;
       marker.setAttribute('aria-label', events[index].title);
-      marker.addEventListener('click', () => openFeed(index));
+      marker.addEventListener('click', () => {
+        ensureLoadedUpTo(index);
+        onFeeds = true;
+        updateScreens();
+      });
       map.appendChild(marker);
+    });
+
+    document.getElementById('feed-count').textContent = `${events.length} событий`;
+    document.getElementById('feed-back-btn').addEventListener('click', () => {
+      onFeeds = false;
+      updateScreens();
     });
 
     appendBatch();
