@@ -55,47 +55,8 @@ function FeedScroller({ initialIndex }) {
 }
 
 export default function Feed({ target, onClose }) {
-  const wrapperRef = useRef(null);
-
-  useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el) return;
-
-    let startX = 0;
-    let tracking = false;
-    let triggered = false;
-
-    function onTouchStart(e) {
-      startX = e.touches[0].clientX;
-      tracking = true;
-      triggered = false;
-    }
-
-    function onTouchMove(e) {
-      if (!tracking || triggered) return;
-      const dx = e.touches[0].clientX - startX;
-      if (dx <= -20) {
-        triggered = true;
-        onClose();
-      }
-    }
-
-    function onTouchEnd() {
-      tracking = false;
-    }
-
-    el.addEventListener('touchstart', onTouchStart, { passive: true });
-    el.addEventListener('touchmove', onTouchMove, { passive: true });
-    el.addEventListener('touchend', onTouchEnd, { passive: true });
-    return () => {
-      el.removeEventListener('touchstart', onTouchStart);
-      el.removeEventListener('touchmove', onTouchMove);
-      el.removeEventListener('touchend', onTouchEnd);
-    };
-  }, [onClose]);
-
   return (
-    <section ref={wrapperRef} className="relative size-full shrink-0 overflow-hidden">
+    <section className="relative size-full shrink-0 overflow-hidden">
       <FeedScroller key={target.key} initialIndex={target.index} />
 
       <button
