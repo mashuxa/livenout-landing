@@ -44,13 +44,17 @@ body {
   this formula only ever has to handle one direction.
 */
 .drawer-indent {
+  --indent-radius: calc(1.5rem * (1 - var(--indent-progress, 0)));
   --indent-transition: calc(1 - clamp(0, calc(var(--indent-progress, 0) * 100000), 1));
   transform: scale(1);
-  transition: transform calc(400ms * var(--indent-transition)) cubic-bezier(0.32, 0.72, 0, 1);
+  transition:
+    transform calc(400ms * var(--indent-transition)) cubic-bezier(0.32, 0.72, 0, 1),
+    border-radius calc(250ms * var(--indent-transition)) cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .drawer-indent[data-active] {
   transform: scale(calc(1 - (0.06 * (1 - var(--indent-progress, 0)))));
+  border-radius: var(--indent-radius);
 }
 
 /*
