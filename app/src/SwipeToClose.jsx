@@ -20,7 +20,7 @@ export default function SwipeToClose({ onSwipeRight, className, children }) {
     function onTouchMove(e) {
       if (!tracking || triggered) return;
       const dx = e.touches[0].clientX - startX;
-      if (dx >= 20) {
+      if (dx >= 40) {
         triggered = true;
         onSwipeRight();
       }
