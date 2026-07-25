@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export default function SwipeToClose({ onSwipeLeft, className, children }) {
+export default function SwipeToClose({ onSwipeRight, className, children }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -20,9 +20,9 @@ export default function SwipeToClose({ onSwipeLeft, className, children }) {
     function onTouchMove(e) {
       if (!tracking || triggered) return;
       const dx = e.touches[0].clientX - startX;
-      if (dx <= -20) {
+      if (dx >= 20) {
         triggered = true;
-        onSwipeLeft();
+        onSwipeRight();
       }
     }
 
@@ -38,7 +38,7 @@ export default function SwipeToClose({ onSwipeLeft, className, children }) {
       el.removeEventListener('touchmove', onTouchMove);
       el.removeEventListener('touchend', onTouchEnd);
     };
-  }, [onSwipeLeft]);
+  }, [onSwipeRight]);
 
   return (
     <section ref={ref} className={className}>

@@ -41,7 +41,7 @@ export default function App() {
       >
         <Map onOpenFeed={openFeed} />
 
-        <SwipeToClose onSwipeLeft={closeFeed} className="relative size-full shrink-0 overflow-hidden">
+        <SwipeToClose onSwipeRight={closeFeed} className="relative size-full shrink-0 overflow-hidden">
           <Feed target={feedTarget} onClose={closeFeed} />
         </SwipeToClose>
       </div>
