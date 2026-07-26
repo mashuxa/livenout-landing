@@ -65,8 +65,14 @@ body {
   isn't updated after a SwipeArea-driven open, the panel visibly stalls
   partway across the screen. Force translateX(0) explicitly for the
   open-at-rest state so it's never dependent on that variable's freshness.
+
+  Must exclude data-starting-style/data-ending-style: those are present
+  on the very first mount frame (together with data-open) to drive the
+  enter/exit transition from translateX(100%). This selector has higher
+  specificity than the plain [data-starting-style] rule below, so without
+  the exclusion it would win immediately and skip the animation entirely.
 */
-.drawer-popup[data-open]:not([data-swiping]) {
+.drawer-popup[data-open]:not([data-swiping]):not([data-starting-style]):not([data-ending-style]) {
   transform: translateX(0);
 }
 
