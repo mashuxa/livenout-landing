@@ -80,3 +80,7 @@ body[data-app="org"] .nav-glyph .dot{right:2px;top:2px}
 /* Organizer menu: single role, static identity and direct settings. */
 body[data-app="org"] .org-drawer-account .drawer-account{padding:4px 0 12px;cursor:default}
 body[data-app="org"] .org-drawer-account .drawer-item{padding-left:8px}
+
+/* Organizer bottom navigation: icons only; labels stay available to assistive technology. */
+body[data-app="org"] .nav button{justify-content:center;min-height:48px;gap:0;padding:3px 0;position:relative}
+body[data-app="org"] .nav .nav-label{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;clip-path:inset(50%);white-space:nowrap!important;border:0!important}
