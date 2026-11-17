@@ -76,3 +76,7 @@ body[data-app="org"] .nav-label{letter-spacing:-.25px;line-height:14px}
 body[data-app="org"] .nav .nav-create .nav-glyph{height:38px;width:38px;background:linear-gradient(135deg,#ff3d8b 0%,#ff8a3d 100%);border-radius:13px;color:white;box-shadow:0 3px 12px #ff3d8b25}
 body[data-app="org"] .nav .nav-create svg{stroke-width:2.25}
 body[data-app="org"] .nav-glyph .dot{right:2px;top:2px}
+
+/* Organizer menu: single role, static identity and direct settings. */
+body[data-app="org"] .org-drawer-account .drawer-account{padding:4px 0 12px;cursor:default}
+body[data-app="org"] .org-drawer-account .drawer-item{padding-left:8px}
