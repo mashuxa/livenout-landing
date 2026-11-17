@@ -192,3 +192,8 @@ body[data-app="org"] .event-workspace .booking-summary small{font-size:11px;line
 body[data-app="org"] .event-workspace{gap:8px}
 body[data-app="org"] .event-workspace .event-bookings{padding-top:4px}
 @media(max-width:350px){body[data-app="org"] .event-workspace .booking-summary{gap:4px}body[data-app="org"] .event-workspace .booking-summary small{font-size:10px}}
+
+/* Event chat in bottom-right corner of the event card. */
+body[data-app="org"] .event-card-footer{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;min-width:0}
+body[data-app="org"] .event-card-footer .event-progress{flex:1;min-width:0;margin:0;align-self:center}
+body[data-app="org"] .event-card-footer .event-chat-button{margin-left:auto}
