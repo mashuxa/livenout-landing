@@ -84,3 +84,7 @@ body[data-app="org"] .org-drawer-account .drawer-item{padding-left:8px}
 /* Organizer dashboard and unread indicator. */
 body[data-app="org"] .org-dashboard.page>.primary{margin-top:0;margin-bottom:14px}
 body[data-app="org"] .chat-unread{position:absolute;right:-7px;top:-3px;min-width:17px;height:17px;display:grid;place-items:center;padding:0 4px;border-radius:12px;background:#ff3d8b;color:#fff;font:600 10px/1 system-ui,sans-serif;font-style:normal;border:1.5px solid #0b101b;box-sizing:content-box}
+
+body[data-app="org"] .org-drawer-account{padding:18px 12px 12px;border-bottom:1px solid #242935}
+body[data-app="org"] .org-drawer-account .drawer-account{padding:4px 0;cursor:pointer;min-height:48px}
+body[data-app="org"] .org-drawer-account .drawer-avatar{width:38px;height:38px;font-size:13px}
