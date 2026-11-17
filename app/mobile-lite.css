@@ -183,3 +183,12 @@ body[data-app="org"] .event-card-actions{display:flex;align-items:center;gap:8px
 body[data-app="org"] .event-chat-button{position:relative;display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#202634;color:#b6a2e9;flex:none}
 body[data-app="org"] .event-chat-button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 body[data-app="org"] .event-chat-button .chat-unread{right:-4px;top:-5px}
+
+/* Compact, single-line booking metrics on mobile. */
+body[data-app="org"] .event-workspace .booking-summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0}
+body[data-app="org"] .event-workspace .booking-summary>div{min-width:0;min-height:56px;padding:7px 3px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;border-radius:10px}
+body[data-app="org"] .event-workspace .booking-summary b{font-size:20px;line-height:1.15;font-weight:650;font-variant-numeric:tabular-nums}
+body[data-app="org"] .event-workspace .booking-summary small{font-size:11px;line-height:1.2;white-space:nowrap;color:#aab1c0}
+body[data-app="org"] .event-workspace{gap:8px}
+body[data-app="org"] .event-workspace .event-bookings{padding-top:4px}
+@media(max-width:350px){body[data-app="org"] .event-workspace .booking-summary{gap:4px}body[data-app="org"] .event-workspace .booking-summary small{font-size:10px}}
