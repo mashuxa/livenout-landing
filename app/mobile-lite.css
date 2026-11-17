@@ -177,3 +177,9 @@ body[data-app="org"] .org-dashboard .dash-stat-label{font-size:11px;line-height:
 body[data-app="org"] .org-dashboard .dash-segment{padding:3px;gap:2px;border-radius:999px;background:#202938}
 body[data-app="org"] .org-dashboard .dash-segment button{min-height:30px;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:500}
 body[data-app="user"] .drawer-flat-user{display:flex;flex-direction:column;padding:10px 10px 12px;border-top:1px solid #242935;background:transparent}
+
+/* Event card: compact chat action with event-specific unread badge. */
+body[data-app="org"] .event-card-actions{display:flex;align-items:center;gap:8px;flex:none}
+body[data-app="org"] .event-chat-button{position:relative;display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#202634;color:#b6a2e9;flex:none}
+body[data-app="org"] .event-chat-button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body[data-app="org"] .event-chat-button .chat-unread{right:-4px;top:-5px}
