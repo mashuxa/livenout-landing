@@ -236,3 +236,10 @@ body[data-app="org"] .event-card-footer{align-items:center;justify-content:space
 body[data-app="org"] .event-footer-meta{flex:1;min-width:0;line-height:1.45;font-size:12px}
 body[data-app="org"] .event-card-footer .event-chat-button{width:36px;height:36px;border-radius:9px;flex:none;margin-left:0;margin-right:0;background:#202634}
 body[data-app="org"] .event-chat-button .chat-unread{top:-4px;right:-4px;min-width:16px;height:16px;padding:0 3px;font-size:10px}
+
+/* Three equal-size compact organizer summary metrics. */
+body[data-app="org"] .org-dashboard .dash-stats{grid-template-columns:repeat(3,minmax(0,1fr));padding:0}
+body[data-app="org"] .org-dashboard .dash-stat{min-width:0;min-height:48px;gap:4px;padding:8px 7px}
+body[data-app="org"] .org-dashboard .dash-stat-label{min-width:0;font-size:11px;line-height:1.2;overflow-wrap:anywhere}
+body[data-app="org"] .org-dashboard .dash-stat strong{font-size:20px;flex:none}
+@media(max-width:350px){body[data-app="org"] .org-dashboard .dash-stat{padding:7px 5px;gap:3px}body[data-app="org"] .org-dashboard .dash-stat-label{font-size:10px}body[data-app="org"] .org-dashboard .dash-stat strong{font-size:18px}}
