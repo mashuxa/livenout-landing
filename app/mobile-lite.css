@@ -96,3 +96,11 @@ body[data-app="org"] .dash-events-pane.inactive{visibility:hidden;pointer-events
 
 body[data-app="org"] .dash-all-title{padding:0; color:inherit; font:inherit; text-decoration:underline; text-underline-offset:3px; white-space:nowrap; cursor:pointer}
 body[data-app="org"] .dash-all-title:focus-visible{outline:2px solid #ff3d8b;outline-offset:4px;border-radius:3px}
+
+/* Organizer dashboard: up to five events requiring approval. */
+body[data-app="org"] .pending-dashboard-list{margin:0 0 10px}
+body[data-app="org"] .pending-dashboard-row{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;padding:12px 6px;min-height:46px;border-bottom:1px solid #252b39}
+body[data-app="org"] .pending-event-name{min-width:0;flex:1;font-size:14px;font-weight:550;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body[data-app="org"] .pending-event-count{display:flex;align-items:center;gap:9px;color:#ffca91;font-size:14px;font-weight:700;white-space:nowrap}
+body[data-app="org"] .pending-chevron{color:#9ca3b3;font-size:20px;font-weight:400}
+body[data-app="org"] .pending-event-summary{color:#ffca91;font-size:13px}
