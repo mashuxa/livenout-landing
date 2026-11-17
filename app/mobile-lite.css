@@ -161,3 +161,9 @@ body[data-app="org"] .nav button{min-height:52px;font-size:10px;gap:3px;padding:
 body[data-app="org"] .nav .nav-glyph{width:32px;height:32px}
 body[data-app="org"] .nav .nav-create .nav-glyph{width:36px;height:36px}
 @media(max-width:350px){body[data-app="org"] .org-dashboard.page{padding:10px 8px 20px}body[data-app="org"] .org-dashboard .dash-panel{padding:10px}body[data-app="org"] .org-dashboard .dash-stat{padding:8px}body[data-app="org"] .org-dashboard .dash-stat-label{font-size:11px}body[data-app="org"] .org-dashboard .dash-panel-title{flex-wrap:wrap}}
+
+/* Organizer-only header notifications, home in bottom navigation. */
+body[data-app="org"] #headBell{position:relative}
+body[data-app="org"] #headBell .dot{position:absolute;top:8px;right:8px}
+body[data-app="org"] #headBell svg{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body[data-app="org"] #headBell.on{color:#ff3d8b}
