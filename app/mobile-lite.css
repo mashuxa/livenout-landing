@@ -226,3 +226,13 @@ body[data-app="org"] .event-bookings .booking-accept-icon{width:36px;height:36px
 body[data-app="org"] .event-bookings .booking-accept-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 body[data-app="org"] .event-bookings .booking-person-name{overflow-wrap:anywhere}
 @media(max-width:350px){body[data-app="org"] .event-bookings .booking-controls{gap:4px}body[data-app="org"] .event-bookings .booking-person{padding:9px 8px}body[data-app="org"] .event-bookings .booking-person-top{gap:6px}}
+
+/* Event details: full-width progress and a separate aligned footer. */
+body[data-app="org"] .event-workspace .event-overview{padding:14px;gap:12px}
+body[data-app="org"] .event-card-identity{gap:12px}
+body[data-app="org"] .event-overview .event-goal-progress{margin:0;min-width:0}
+body[data-app="org"] .event-goal-progress .progress{margin:8px 0 0}
+body[data-app="org"] .event-card-footer{align-items:center;justify-content:space-between;gap:12px;min-height:36px;margin-top:0}
+body[data-app="org"] .event-footer-meta{flex:1;min-width:0;line-height:1.45;font-size:12px}
+body[data-app="org"] .event-card-footer .event-chat-button{width:36px;height:36px;border-radius:9px;flex:none;margin-left:0;margin-right:0;background:#202634}
+body[data-app="org"] .event-chat-button .chat-unread{top:-4px;right:-4px;min-width:16px;height:16px;padding:0 3px;font-size:10px}
