@@ -1,0 +1,28 @@
+name: About Us snapshot
+on:
+  push:
+    branches: [about-us-snapshot-2026-11-26]
+    paths: ['.github/workflows/about-us-snapshot.yml']
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p about-us-snapshot
+          curl --fail --location --retry 2 'https://livenout.com/ru/about-us' -o about-us-snapshot/source.html
+          python - <<'PY'
+          import re, pathlib
+          p = pathlib.Path('about-us-snapshot/source.html')
+          s = p.read_text()
+          s = re.sub(r'<script\b[^>]*>.*?</script\s*>', '', s, flags=re.I|re.S)
+          s = re.sub(r'(<head\b[^>]*>)', r'\1<base href="https://livenout.com/ru/about-us">', s, count=1, flags=re.I)
+          pathlib.Path('about-us-snapshot/index.html').write_text(s)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add about-us-snapshot/
+          git commit -m "Capture production About Us HTML"
+          git push
