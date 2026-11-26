@@ -201,7 +201,7 @@ html[data-theme=light] .end h2 em{color:#c52165}
 /* Decorative floating: starts on viewport entry, no visible control. */
 @keyframes hero-glass-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media(prefers-reduced-motion:no-preference){
- .hero-glass[data-float-visible=true]{animation:hero-glass-float 2.5s ease-in-out 2}
+ .hero-glass[data-float-visible=true]{animation:hero-glass-float 5s ease-in-out infinite}
  .hero-glass:focus-within{animation:none}
 }
 @media(hover:hover) and (pointer:fine){.hero-glass:hover{animation:none}}
@@ -237,30 +237,23 @@ html[data-theme=light] .hero .ss-query{background:var(--card);border-color:var(-
 html[data-theme=light] .hero .ss-query>svg.ss-send{color:#c52165}
 @media(max-width:360px){.hero .ss-query{padding-inline:13px;gap:8px}.hero .ss-query-text{font-size:15px}}
 
-/* Search result journey: schematic map -> area list -> event feed. */
-.hero .ss-map-panel{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:16px;min-width:0;background:#22252b}
-.hero .ss-map-art{display:block;width:100%;height:166px}
-.ss-map-marker{opacity:1}
-.ss-map-marker[data-active=false]{opacity:0}
-.ss-area-button{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);white-space:nowrap;max-width:calc(100% - 20px);padding:10px 12px;min-height:44px;background:#f8fafc;color:#111827;border:0;border-radius:999px;font:inherit;font-weight:650;font-size:12px;cursor:pointer}
-.ss-area-button span{color:#71717a}
-.ss-browse-panel{display:grid;gap:8px;min-width:0}
-.ss-map-panel[hidden],.ss-browse-panel[hidden],.ss-feed-panel[hidden],.ss-results[hidden],.ss-browse-panel .ss-results-head[hidden]{display:none!important}
-.ss-view-toolbar{display:flex;align-items:center;justify-content:space-between;gap:5px;min-width:0}
-.ss-view-back,.ss-view-switch button,.ss-feed-nav button{font:inherit;background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:9px;min-height:44px;cursor:pointer}
-.ss-view-back{font-size:11px;padding:6px 8px;line-height:1.3;text-align:left;min-width:0}
-.ss-view-switch{display:flex;gap:4px;flex:none}
-.ss-view-switch button,.ss-feed-nav button{width:44px;display:grid;place-items:center}
-.ss-view-switch button[aria-pressed=true]{color:var(--foreground);background:var(--accent-bg);border-color:var(--accent)}
-.ss-browse-panel .ss-results-head{border:0;padding:0}
-.ss-feed-panel{display:grid;gap:8px}
-.ss-feed-card{display:grid;align-content:center;gap:12px;min-height:168px;padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--card);overflow-wrap:anywhere}
-.ss-feed-category{color:var(--accent);font-size:12px;font-weight:650}
-.ss-feed-card strong{font-size:20px;line-height:1.3}
-.ss-feed-card p{color:var(--muted);font-size:13px;margin:0}
-.ss-feed-nav{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--muted);font-size:13px}
-.ss-view-toolbar button:focus-visible,.ss-area-button:focus-visible,.ss-feed-nav button:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
-@media(prefers-reduced-motion:no-preference){.ss-map-marker{transition:opacity .25s ease}}
+
+/* Native Smart Input: placeholder is separate from submitted value. */
+.hero .ss-query{padding:1px 5px 1px 15px;gap:4px;min-height:48px}
+.hero .ss-query-input{display:block;flex:1;min-width:0;width:100%;padding:8px 0;border:0;outline:0;background:transparent;color:var(--foreground);font:inherit;font-size:16px;font-weight:400;line-height:1.35;appearance:none}
+.hero .ss-query-input::placeholder{color:#9ca3af;opacity:1}
+.hero .ss-query-input:focus::placeholder{opacity:0}
+.hero .ss-query:focus-within{outline:2px solid var(--ring);outline-offset:2px}
+.hero .ss-send-button{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--pink);cursor:pointer}
+.hero .ss-send-button svg{width:20px;height:20px}
+.hero .ss-send-button:focus-visible{outline:2px solid var(--ring);outline-offset:-3px}
+html[data-theme=light] .hero .ss-query-input::placeholder{color:#626470}
+html[data-theme=light] .hero .ss-send-button{color:#c52165}
+.hero .ss-results{grid-template-rows:none;grid-auto-rows:minmax(72px,auto);align-content:start;min-height:230px}
+.hero .ss-results[hidden],.hero .ss-results-head[hidden],.hero .ss-control[hidden]{display:none!important}
+@keyframes ss-result-fade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:no-preference){.hero .ss-result.ss-new{animation:ss-result-fade .32s ease-out both}}
+@media(max-width:360px){.hero .ss-query{padding-left:13px}.hero .ss-query-input{font-size:15px}}
 
 /* Compact HTML calendar, based on the owner's original mobile calendar reference. */
 .calendar-flip{width:min(100%,220px);aspect-ratio:220/270}
@@ -318,17 +311,18 @@ html[data-theme=light] .hero .ss-query>svg.ss-send{color:#c52165}
 .group-votes button[aria-pressed=true]{color:var(--accent);border-color:var(--accent);background:var(--accent-bg)}
 .group-down{display:flex;transform:rotate(180deg)}
 .group-chat-message{margin:12px;padding:9px 11px;background:var(--accent-bg);border-radius:10px 10px 10px 3px;width:fit-content;max-width:calc(100% - 24px)}
-</style><noscript><style>.ss-map-panel{display:none!important}.ss-browse-panel[hidden],.ss-results[hidden],.ss-browse-panel .ss-results-head[hidden]{display:grid!important}.ss-view-toolbar,.ss-control,.ss-controls{display:none!important}</style></noscript></head>
+</style></head>
 <body><div class="progress-line" aria-hidden="true"></div><a class="skip" href="#main">К содержанию</a>
 <header class="header"><div class="wrap nav"><a class="brand" aria-label="Livenout — главная" href="https://livenout.com/ru"><span class="logo"><img class="brand-mark" src="https://livenout.com/apple-icon.png?apple-icon.3vz46vp1k8vqv.png" width="26" height="26" alt="" onerror="this.remove()"><span class="wordmark">Livenout</span></span></a><nav class="navlinks" aria-label="Основная навигация"><a href="https://livenout.com/ru">Главная</a><a href="https://livenout.com/ru/events/pl/warsaw">Афиша</a><a href="https://livenout.com/ru/events/recommended">Подборки</a><a href="https://livenout.com/ru/organizers">Организаторы</a></nav><div class="navtools"><a class="btn secondary nav-create" aria-label="Создать событие" href="https://livenout.com/ru/become-organizer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span class="long">Создать событие</span></a><a class="iconbtn chat-link" aria-label="Чат" href="https://livenout.com/ru/chat"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></a><a class="iconbtn login-link" aria-label="Войти" href="https://livenout.com/ru/login"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17l5-5-5-5m5 5H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/></svg></a><button type="button" class="iconbtn" id="theme" aria-label="Переключить на светлую тему" title="Переключить тему"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button><details class="nav-menu"><summary class="iconbtn" aria-label="Открыть меню"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></summary><nav class="drop" aria-label="Мобильная навигация"><a href="https://livenout.com/ru">Главная</a><a href="https://livenout.com/ru/events/pl/warsaw">Афиша</a><a href="https://livenout.com/ru/events/recommended">Подборки</a><a href="https://livenout.com/ru/organizers">Организаторы</a><a href="https://livenout.com/ru/chat">Чат</a><a href="https://livenout.com/ru/login">Войти</a></nav></details></div></div></header>
 <main id="main">
 <section class="hero"><div class="wrap hero-grid"><div class="stack hero-copy"><div class="eyebrow"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg> События и встречи в Польше</div><h1>Найдите свои события.<br><em>Встречайте своих людей.</em></h1><p class="lead">Livenout — идеи для свободного времени, встречи по интересам и новые знакомства рядом с вами.</p><article class="discovery-card find-block ss-block"><div class="stack"><h2>Просто напишите, чего хочется</h2><p>Даже если пока не знаете, куда пойти, мы предложим подходящие варианты.</p></div>
 <div class="ss-demo" id="smart-search-demo" aria-label="Пример умного поиска">
 <div class="ss-top"><span class="demo-label"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 2 11.7 8.3 18 10.1 11.7 11.9 9.9 18.2 8.1 11.9 1.8 10.1 8.1 8.3 9.9 2Z"/><path d="M19 2v5M16.5 4.5h5"/><circle cx="3.5" cy="19.5" r="1.5"/></svg> Умный поиск</span><button type="button" class="ss-control" id="ss-toggle" disabled aria-label="Приостановить автоматическую демонстрацию">Пауза</button></div>
-<div class="ss-query" aria-hidden="true"><span class="ss-query-value"><span class="ss-query-text" id="ss-typed" lang="pl">muzyka na żywo w Warszawie</span><span class="ss-caret" id="ss-caret"></span></span><svg class="ss-send" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/></svg></div>
+<form class="ss-query" id="ss-form" action="https://livenout.com/ru" method="get" role="search"><input class="ss-query-input" id="ss-input" type="search" name="q" placeholder="muzyka na żywo w Warszawie" aria-label="Что вы хотите найти?" autocomplete="off" enterkeyhint="search" required><button class="ss-send-button" type="submit" aria-label="Найти события"><svg class="ss-send" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/></svg></button></form>
 <p class="sr-status" id="ss-status" role="status">Пример запроса: muzyka na żywo w Warszawie. Показаны три события из снимка каталога.</p>
-<div class="ss-map-panel" id="ss-map-panel" role="group" aria-label="Схематичная карта результатов, расположение отметок условное"><svg class="ss-map-art" viewBox="0 0 360 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="360" height="160" fill="#22252b"/><g fill="#303a32" opacity=".8"><path d="M0 0h82l-16 46-66 16Z"/><path d="M269 93l91-25v92h-114Z"/><path d="m110 112 43-12 22 60h-82Z"/></g><path d="M272-15C235 30 277 56 220 92S208 133 182 175" fill="none" stroke="#283d50" stroke-width="24"/><g fill="none" stroke="#454951" stroke-width="2.5"><path d="M-20 27 96 53 198 35 380 73M-10 112 97 82 198 108 380 124M45-10 100 76 72 170M145-10 176 72 140 175M321-10 284 63 327 180M-20 69 380 8"/><path d="m0 147 360-95M22 0l166 160M210 0l-30 160M0 92l360 59" stroke-width="1"/></g><g fill="none" stroke="#55595e" stroke-width="4"><path d="M-10 55Q90 26 180 65T380 82M86-10l24 88 82 82"/></g><text x="129" y="82" fill="#a2a7b0" font-size="12" font-family="system-ui,sans-serif">Warszawa</text><g class="ss-map-marker" data-map-marker="0"><circle cx="92" cy="48" r="13" fill="#19b66d" stroke="#fff" stroke-width="2"/><text x="92" y="52" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">1</text></g><g class="ss-map-marker" data-map-marker="1"><circle cx="191" cy="39" r="13" fill="#19b66d" stroke="#fff" stroke-width="2"/><text x="191" y="43" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">1</text></g><g class="ss-map-marker" data-map-marker="2"><circle cx="274" cy="87" r="13" fill="#19b66d" stroke="#fff" stroke-width="2"/><text x="274" y="91" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">1</text></g></svg><button type="button" class="ss-area-button" id="ss-area-button" disabled>События в этой области <span id="ss-map-count">(3)</span></button></div><div class="ss-browse-panel" id="ss-browse-panel" hidden><div class="ss-view-toolbar" role="group" aria-label="Способ просмотра событий"><button type="button" class="ss-view-back" id="ss-back-map" disabled>‹ Изменить область поиска</button><div class="ss-view-switch"><button type="button" data-ss-view="list" aria-label="Список" aria-pressed="false" disabled><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5h12M9 12h12M9 19h12"/><path d="M3 5h.01M3 12h.01M3 19h.01"/></svg></button><button type="button" data-ss-view="feed" aria-label="Лента" aria-pressed="false" disabled><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M5 2h14M5 22h14"/></svg></button></div></div><div class="ss-results-head"><span class="mini-label">Подходящие события</span></div>
-<ul class="ss-results" id="ss-results" aria-label="Примеры событий из каталога"><li class="ss-result"><span class="ss-result-mark"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></svg></span><div class="ss-result-content"><b>Koncert Chopinowski</b><small lang="pl">28 lis. · Warszawa · PL</small></div><span class="ss-tag" lang="pl">Muzyka</span></li><li class="ss-result"><span class="ss-result-mark"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></svg></span><div class="ss-result-content"><b>Sw@da x Niczos</b><small lang="pl">29 lis. · Warszawa · PL</small></div><span class="ss-tag" lang="pl">Muzyka</span></li><li class="ss-result"><span class="ss-result-mark"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></svg></span><div class="ss-result-content"><b>Lelo: New Detroit Vol. 2: Mastiff: Pink Tiles Tour</b><small lang="pl">2 gru. · Warszawa · PL</small></div><span class="ss-tag" lang="pl">Muzyka</span></li></ul><div class="ss-feed-panel" id="ss-feed-panel" hidden><div class="ss-feed-card"><div class="ss-feed-category" id="ss-feed-category"></div><strong id="ss-feed-title"></strong><p id="ss-feed-meta"></p></div><div class="ss-feed-nav"><button type="button" id="ss-feed-prev" aria-label="Предыдущее событие" disabled>↑</button><span id="ss-feed-position" aria-live="polite"></span><button type="button" id="ss-feed-next" aria-label="Следующее событие" disabled>↓</button></div></div></div>
+<div class="ss-results-head" id="ss-results-head"><span class="mini-label">Подходящие события</span></div>
+<ul class="ss-results" id="ss-results" aria-label="Примеры событий из каталога"><li class="ss-result"><span class="ss-result-mark"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></svg></span><div class="ss-result-content"><b>Koncert Chopinowski</b><small lang="pl">28 lis. · Warszawa · PL</small></div><span class="ss-tag" lang="pl">Muzyka</span></li><li class="ss-result"><span class="ss-result-mark"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></svg></span><div class="ss-result-content"><b>Sw@da x Niczos</b><small lang="pl">29 lis. · Warszawa · PL</small></div><span class="ss-tag" lang="pl">Muzyka</span></li><li class="ss-result"><span class="ss-result-mark"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></svg></span><div class="ss-result-content"><b>Lelo: New Detroit Vol. 2: Mastiff: Pink Tiles Tour</b><small lang="pl">2 gru. · Warszawa · PL</small></div><span class="ss-tag" lang="pl">Muzyka</span></li></ul>
+
 
 
 <details class="ss-sources" hidden><summary>Источники</summary><div id="ss-sources"><a href="https://livenout.com/events/pl/warsaw/activity/relaxed">Афиша спокойных событий</a><a href="https://livenout.com/events/pl/warsaw/solo/medium">Можно прийти одному</a></div></details>
@@ -340,7 +334,7 @@ html[data-theme=light] .hero .ss-query>svg.ss-send{color:#c52165}
 <section class="section"><div class="wrap organizer v8-organizer"><div class="stack"><div class="organizer-label-row"><span class="eyebrow">Для организаторов</span><span class="organizer-price-tag" aria-label="Профиль и публикация: 0 злотых"><strong>0 zł</strong></span></div><h2>Проводите свои события?</h2><p>Создайте бесплатный профиль, публикуйте встречи и управляйте участниками в одном месте.</p><a class="textlink organizer-cta" href="https://livenout.com/ru/become-organizer">Стать организатором <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div><div class="organizer-features"><div><span class="icon-bubble"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></svg></span><div><b>AI помогает заполнить анонс</b><small>Из вашего текста — в поля события.</small></div></div><div><span class="icon-bubble"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></span><div><b>Повторяющиеся встречи</b><small>Одно описание, отдельные даты.</small></div></div><div><span class="icon-bubble"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="9" cy="7" r="4"/></svg></span><div><b>Набор участников</b><small>Минимум участников и дедлайн.</small></div></div><div><span class="icon-bubble"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6c0 4.2-8.8 9.4-8.8 9.4S3.2 12.8 3.2 8.6A4.4 4.4 0 0 1 12 7a4.4 4.4 0 0 1 8.8 1.6Z"/></svg></span><div><b>Приватные встречи</b><small>Приглашение по ссылке.</small></div></div></div></div></section>
 <section class="section"><div class="wrap faq"><div class="stack"><h2>Частые вопросы</h2><p>Всё, что важно знать перед первой встречей.</p></div><div><details><summary>Можно ли прийти одному?</summary><p>Да. Ищите отметку «Можно прийти одному». Чтобы понять, подходит ли вам встреча, прочитайте описание и обратите внимание на атмосферу, уровень активности и общения.</p></details><details><summary>Есть ли бесплатные события?</summary><p>Да. На Livenout есть бесплатные и платные встречи. Стоимость, скидки, предоплату или депозит (если предусмотрены) и способ оплаты организатор указывает на странице события. Проверьте условия перед записью.</p></details><details><summary>На каком языке проходят встречи?</summary><p>Языки общения указаны на странице события. Выбирайте тот, на котором вам удобно общаться.</p></details><details><summary>Как задать вопрос организатору?</summary><p>Задайте вопрос в чате события: уточните место, время, формат или условия участия у организатора. Там же можно познакомиться с участниками заранее.</p></details><details class="more"><summary>Ещё 7 вопросов о Livenout</summary><details><summary>Есть ли мобильное приложение?</summary><p>Приложение для iOS и Android в разработке. О запуске сообщим в Instagram. Вы также можете написать нам, какие функции важны для вас.</p></details><details><summary>Можно ли предложить своё событие?</summary><p>Да. Создать встречу может каждый. Опишите идею, а если пока не определились с датой, опубликуйте анонс без неё. Вы можете указать необходимое число участников и срок набора для встречи с датой.</p></details><details><summary>Можно ли сохранить событие или организатора?</summary><p>Да. Добавляйте их в избранное, чтобы быстро найти в личном кабинете.</p></details><details><summary>Как добавить встречу в Google Calendar?</summary><p>Откройте событие, выберите дату и нажмите кнопку календаря. Если дата ещё не объявлена, дождитесь её публикации.</p></details><details><summary>Будет ли напоминание перед встречей?</summary><p>Да. Если вы записались через Livenout и указали email в аккаунте, письмо с напоминанием придёт примерно за сутки до встречи.</p></details><details><summary>Где посмотреть отзывы об организаторе?</summary><p>В профиле организатора доступны рейтинг и опубликованные отзывы. Оставить отзыв можно после завершения встречи, если ваше участие подтверждено. Отзывы проходят модерацию.</p></details><details><summary>Что означает «Скоро» вместо даты?</summary><p>Дата ещё не объявлена. Сохраните анонс в избранное, чтобы вернуться к нему позже. Запись откроется после добавления даты.</p></details></details></div></section>
 <section class="section"><div class="wrap end"><h2 lang="en">Step out. <em>Liven up!</em></h2><p>Живите на полную. Открывайте новые места, встречайте людей и создавайте свои события.</p><div class="actions"><a class="btn primary" href="https://livenout.com/ru">Смотреть события <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a><a class="textlink" href="https://livenout.com/ru/become-organizer">Для организаторов <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a></div></div></section>
-</main><footer class="footer"><div class="wrap"><div class="foot"><a class="brand" aria-label="Livenout — главная" href="https://livenout.com/ru"><span class="logo"><img class="brand-mark" src="https://livenout.com/apple-icon.png?apple-icon.3vz46vp1k8vqv.png" width="26" height="26" alt="" onerror="this.remove()"><span class="wordmark">Livenout</span></span></a><nav class="foot-links" aria-label="Ссылки в подвале"><a href="https://t.me/livenout">Telegram</a><a href="https://www.instagram.com/livenout.local.events/">Instagram</a><a href="https://livenout.com/ru/contact">Контакты</a><a href="https://livenout.com/ru/privacy-policy">Конфиденциальность</a><a href="https://livenout.com/ru/terms-of-service">Условия</a><a href="https://livenout.com/ru/refund-policy">Возвраты</a></nav></div><p class="preview-note">Макет: фотографии, карта и примеры встреч и профилей демонстрационные.</p></div></footer>
+</main><footer class="footer"><div class="wrap"><div class="foot"><a class="brand" aria-label="Livenout — главная" href="https://livenout.com/ru"><span class="logo"><img class="brand-mark" src="https://livenout.com/apple-icon.png?apple-icon.3vz46vp1k8vqv.png" width="26" height="26" alt="" onerror="this.remove()"><span class="wordmark">Livenout</span></span></a><nav class="foot-links" aria-label="Ссылки в подвале"><a href="https://t.me/livenout">Telegram</a><a href="https://www.instagram.com/livenout.local.events/">Instagram</a><a href="https://livenout.com/ru/contact">Контакты</a><a href="https://livenout.com/ru/privacy-policy">Конфиденциальность</a><a href="https://livenout.com/ru/terms-of-service">Условия</a><a href="https://livenout.com/ru/refund-policy">Возвраты</a></nav></div><p class="preview-note">Макет: фотографии и примеры встреч и профилей демонстрационные.</p></div></footer>
 <script>
 const b=document.getElementById('theme');
 const root=document.documentElement;
@@ -377,84 +371,52 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
 });
 
 
-/* Local scripted preview: real historical catalogue titles, no vector service, no network search. */
+/* Local scripted preview: placeholder only; native GET search via q. */
 (function initSmartSearch(){
  const root=document.getElementById('smart-search-demo');if(!root)return;
  const presets=[{"q":"muzyka na żywo w Warszawie","items":[["Koncert Chopinowski","28 lis. · Warszawa · PL","Muzyka"],["Sw@da x Niczos","29 lis. · Warszawa · PL","Muzyka"],["Lelo: New Detroit Vol. 2: Mastiff: Pink Tiles Tour","2 gru. · Warszawa · PL","Muzyka"]],"sources":[["Афиша спокойных событий","https://livenout.com/events/pl/warsaw/activity/relaxed"],["Можно прийти одному","https://livenout.com/events/pl/warsaw/solo/medium"]],"lang":"pl","preferred":"PL"},{"q":"a fun night out","items":[["English Stand-Up Comedy: Piętro Niżej Open Mic","27 Nov · Warsaw · EN","Comedy"],["The Dating Show","2 Dec · Warsaw · EN + others","Show"],["MALANKA | Ukrainian Winter Celebration","8 Jan 2027 · Warsaw · EN","Culture"]],"sources":[["Афиша","https://livenout.com/events/pl/warsaw/activity/relaxed"],["Афиша общения","https://livenout.com/events/pl/warsaw/social/communication-focused"],["MALANKA","https://livenout.com/ru/event-details/malanka-ukrainian-winter-celebration"]],"lang":"en","preferred":"EN"},{"q":"куда пойти одному","items":[["НАСТОЛКИ: стратегии и быстрые партии","13 дек. · Варшава · RU","Игры"],["JAM Quiz — квиз общих знаний, музыки и мемов","2 дек. · Варшава · RU","Квиз"],["Talk&Toast • ужин с незнакомцами","28 нояб. · Варшава","Общение"]],"sources":[["Можно прийти одному","https://livenout.com/events/pl/warsaw/solo/medium"],["Афиша общения","https://livenout.com/events/pl/warsaw/social/communication-focused"]],"lang":"ru","preferred":"RU"},{"q":"квиз про кино и мемы","items":[["JAM Quiz — квиз общих знаний, музыки и мемов","2 дек. · Варшава · RU","Квиз"],["КЛАССИКА PRO — квиз по поп-культуре","9 дек. · Варшава · RU","Квиз"],["КВИЗ СОВЕТСКОЕ КИНО","3 дек. · Варшава · RU","Квиз"]],"sources":[["Афиша общения","https://livenout.com/events/pl/warsaw/social/communication-focused"],["Можно прийти одному","https://livenout.com/events/pl/warsaw/solo/medium"]],"lang":"ru","preferred":"RU"},{"q":"посмеяться бесплатно","items":[["Открытый Микрофон от StandUp Kutok","26 нояб. · Варшава · Бесплатно","Стендап"],["ОТКРЫТЫЙ МИКРОФОН 27 ноября","27 нояб. · Варшава · Бесплатно","Стендап"]],"sources":[["Афиша спокойных событий","https://livenout.com/events/pl/warsaw/activity/relaxed"]],"lang":"ru","preferred":"RU"}];
- const typed=root.querySelector('#ss-typed'),list=root.querySelector('#ss-results'),toggle=root.querySelector('#ss-toggle'),status=root.querySelector('#ss-status'),sources=root.querySelector('#ss-sources');
- const buttons=[...root.querySelectorAll('[data-ss]')],reduce=matchMedia('(prefers-reduced-motion: reduce)');
  const sparkle="<svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z\"/></svg>";
- let index=0, timer=null, visible=false, playing=!reduce.matches, char=0, phase='hold', count=presets[0].items.length;
- const mapPanel=root.querySelector('#ss-map-panel'),browse=root.querySelector('#ss-browse-panel'),area=root.querySelector('#ss-area-button'),mapCount=root.querySelector('#ss-map-count'),back=root.querySelector('#ss-back-map'),feed=root.querySelector('#ss-feed-panel'),feedTitle=root.querySelector('#ss-feed-title'),feedMeta=root.querySelector('#ss-feed-meta'),feedCategory=root.querySelector('#ss-feed-category'),feedPosition=root.querySelector('#ss-feed-position'),prev=root.querySelector('#ss-feed-prev'),next=root.querySelector('#ss-feed-next'),head=root.querySelector('.ss-results-head');
- const markers=[...root.querySelectorAll('[data-map-marker]')],views=[...root.querySelectorAll('[data-ss-view]')];
- let mode='map',feedIndex=0;
- function renderFeed(){const items=presets[index].items;feedIndex=Math.max(0,Math.min(feedIndex,items.length-1));const [title,meta,tag]=items[feedIndex];feedTitle.textContent=title;feedMeta.textContent=meta;feedCategory.textContent=tag;feedPosition.textContent=(feedIndex+1)+' / '+items.length;prev.disabled=feedIndex===0;next.disabled=feedIndex===items.length-1}
- function setView(value){mode=value;mapPanel.hidden=mode!=='map';browse.hidden=mode==='map';list.hidden=mode!=='list';head.hidden=mode!=='list';feed.hidden=mode!=='feed';views.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.ssView===mode)));if(mode==='feed')renderFeed()}
- function updateMap(n){mapCount.textContent='('+n+')';area.disabled=n===0;markers.forEach((m,i)=>m.dataset.active=String(i<n))}
- function manualView(value){playing=false;stop();select(index,true);setView(value);updateControl()}
+
+ const input=root.querySelector('#ss-input'),form=root.querySelector('#ss-form'),list=root.querySelector('#ss-results'),head=root.querySelector('#ss-results-head'),toggle=root.querySelector('#ss-toggle'),status=root.querySelector('#ss-status'),sources=root.querySelector('#ss-sources');
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)'),supported='IntersectionObserver' in window;
+ let index=0,timer=null,visible=false,focused=false,playing=true,char=0,count=0,phase='hold',first=true;
+ const custom=()=>input.value.trim().length>0;
  const stop=()=>{clearTimeout(timer);timer=null};
- const canRun=()=>playing&&visible&&!document.hidden&&!reduce.matches;
- function updateControl(){
-  root.dataset.playing=String(canRun());status.setAttribute('aria-live',playing?'off':'polite');toggle.textContent=playing?'Пауза':'Воспроизвести';
+ const canRun=()=>supported&&playing&&visible&&!focused&&!custom()&&!document.hidden&&!reduce.matches;
+ function update(){
+  root.dataset.playing=String(canRun());status.setAttribute('aria-live',canRun()?'off':'polite');
+  toggle.textContent=playing?'Пауза':'Воспроизвести';
   toggle.setAttribute('aria-label',playing?'Приостановить автоматическую демонстрацию':'Воспроизвести автоматическую демонстрацию');
-  toggle.disabled=reduce.matches;
+  toggle.disabled=!supported||reduce.matches;toggle.hidden=!supported||reduce.matches;
+  list.hidden=custom();head.hidden=custom();
  }
- function renderSources(){
-  sources.replaceChildren();presets[index].sources.forEach(([label,url])=>{const a=document.createElement('a');a.textContent=label;a.href=url;sources.append(a)});
+ function sourcesFor(){sources.replaceChildren();presets[index].sources.forEach(([label,url])=>{const a=document.createElement('a');a.textContent=label;a.href=url;sources.append(a)})}
+ function appendRow(i,animate=false){
+  const [title,meta,tag]=presets[index].items[i],li=document.createElement('li');li.className='ss-result'+(animate?' ss-new':'');
+  const mark=document.createElement('span');mark.className='ss-result-mark';mark.innerHTML=sparkle;
+  const body=document.createElement('div');body.className='ss-result-content';const b=document.createElement('b');b.textContent=title;const sm=document.createElement('small');sm.textContent=meta;sm.setAttribute('lang',presets[index].lang);body.append(b,sm);
+  const t=document.createElement('span');t.className='ss-tag';t.textContent=tag;t.setAttribute('lang',presets[index].lang);li.append(mark,body,t);list.append(li)
  }
- function setLanguage(){typed.setAttribute('lang',presets[index].lang);}
- function renderRows(n,animate=false){
-  const items=presets[index].items;
-  updateMap(n);
-  list.replaceChildren();
-  for(let i=0;i<3;i++){
-   const li=document.createElement('li');
-   if(i>=n||i>=items.length){li.className='ss-result ss-placeholder';li.setAttribute('aria-hidden','true');li.textContent=(i<items.length?'…':(i===2?'Ещё события — в каталоге':''));list.append(li);continue}
-   const [title,meta,tag]=items[i];li.className='ss-result'+(animate&&i===n-1?' ss-new':'');
-   const mark=document.createElement('span');mark.className='ss-result-mark';mark.innerHTML=sparkle;
-   const body=document.createElement('div');body.className='ss-result-content';const b=document.createElement('b');b.textContent=title;const sm=document.createElement('small');sm.textContent=meta;sm.setAttribute('lang',presets[index].lang);body.append(b,sm);
-   const t=document.createElement('span');t.className='ss-tag';t.textContent=tag;t.setAttribute('lang',presets[index].lang);li.append(mark,body,t);list.append(li);
-  }
- }
- function select(i,announce=false){
-  index=i;char=presets[index].q.length;phase='hold';count=presets[index].items.length;feedIndex=0;setView('map');
-  setLanguage();typed.textContent=presets[index].q;buttons.forEach((b,j)=>b.setAttribute('aria-pressed',String(j===index)));
-  renderRows(count);renderSources();
-  status.textContent='Пример запроса: '+presets[index].q+'. Показано событий: '+count+'.';
- }
+ function announce(){status.textContent='Пример запроса: '+presets[index].q+'. Показано событий: '+count+'.'}
+ function showStatic(){const p=presets[index];input.placeholder=p.q;char=p.q.length;count=p.items.length;phase='hold';list.replaceChildren();p.items.forEach((_,i)=>appendRow(i));sourcesFor();announce()}
+ function begin(){char=0;count=0;phase='type';input.placeholder='';list.replaceChildren();sourcesFor()}
  function schedule(ms){stop();if(canRun())timer=setTimeout(tick,ms)}
- function tick(){
-  timer=null;if(!canRun()){updateControl();return}
-  const p=presets[index];
-  if(phase==='mapHold'){setView('list');phase='hold';schedule(6500);return}
-  if(phase==='hold'){setView('map');feedIndex=0;index=(index+1)%presets.length;setLanguage();char=0;count=0;phase='type';typed.textContent='';buttons.forEach((b,j)=>b.setAttribute('aria-pressed',String(j===index)));renderRows(0);renderSources();schedule(160);return}
-  if(phase==='erase'){
-   char=Math.max(0,char-1);typed.textContent=p.q.slice(0,char);
-   if(char===0){index=(index+1)%presets.length;phase='type';count=0;buttons.forEach((b,j)=>b.setAttribute('aria-pressed',String(j===index)));renderRows(0);renderSources();schedule(160)}else schedule(35);return
-  }
-  if(phase==='type'){
-   const q=presets[index].q;char++;typed.textContent=q.slice(0,char);
-   if(char>=q.length){phase='results';schedule(170)}
-   else schedule(48+(char%3)*12);return
-  }
-  if(phase==='results'){
-   count++;renderRows(count,true);
-   if(count>=presets[index].items.length){phase='mapHold';status.textContent='Пример запроса: '+presets[index].q+'. Показано событий: '+count+'.';schedule(1800)}else schedule(270);
-  }
+ function tick(){timer=null;if(!canRun()){update();return}const p=presets[index];
+  if(phase==='hold'){index=(index+1)%presets.length;begin();schedule(160);return}
+  if(phase==='type'){char++;input.placeholder=p.q.slice(0,char);if(char>=p.q.length){phase='results';schedule(200)}else schedule(48+(char%3)*12);return}
+  if(phase==='results'){appendRow(count,true);count++;if(count===p.items.length){phase='hold';announce();schedule(6500)}else schedule(400)}
  }
- let firstPlayback=true;
- function reconcile(){stop();updateControl();if(canRun()){if(firstPlayback){firstPlayback=false;setView('map');setLanguage();char=0;count=0;phase='type';typed.textContent='';renderRows(0);schedule(180)}else{schedule(phase==='hold'?6500:phase==='mapHold'?1800:180)}}}
- area.addEventListener('click',()=>manualView('list'));back.disabled=false;back.addEventListener('click',()=>manualView('map'));
- views.forEach(btn=>{btn.disabled=false;btn.addEventListener('click',()=>manualView(btn.dataset.ssView))});
- prev.addEventListener('click',()=>{feedIndex--;renderFeed()});next.addEventListener('click',()=>{feedIndex++;renderFeed()});
- buttons.forEach((btn,i)=>{btn.disabled=false;btn.addEventListener('click',()=>{playing=false;stop();select(i,true);updateControl()})});
- toggle.addEventListener('click',()=>{const current=mode;playing=!playing;if(!playing){select(index,true);setView(current)}else if(mode==='map'&&phase==='hold'){phase='mapHold'}reconcile()});
- root.addEventListener('focusin',e=>{if(playing&&e.target!==toggle){const current=mode;playing=false;stop();select(index,true);setView(current);updateControl()}});
- if('IntersectionObserver' in window){const ob=new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v!==visible){visible=v;reconcile()}},{threshold:0});ob.observe(root)}else{playing=false;updateControl()}
+ function reconcile(){stop();update();if(!canRun())return;if(first){first=false;begin();schedule(160)}else schedule(phase==='hold'?6500:phase==='results'?400:60)}
+ input.addEventListener('focus',()=>{focused=true;reconcile()});
+ input.addEventListener('blur',()=>{focused=false;reconcile()});
+ input.addEventListener('input',reconcile);
+ form.addEventListener('submit',e=>{input.value=input.value.trim();if(!input.value){e.preventDefault();input.focus()}});
+ toggle.addEventListener('click',()=>{playing=!playing;reconcile()});
+ if(supported)new IntersectionObserver(es=>{const v=es[es.length-1].isIntersecting;if(v!==visible){visible=v;reconcile()}},{threshold:0}).observe(root);
  document.addEventListener('visibilitychange',reconcile);
- const motionChange=()=>{if(reduce.matches)playing=false;reconcile()};
+ const motionChange=()=>{if(reduce.matches)showStatic();reconcile()};
  if(reduce.addEventListener)reduce.addEventListener('change',motionChange);else if(reduce.addListener)reduce.addListener(motionChange);
- select(0);updateControl();
+ showStatic();update();
 })();
 
 
@@ -473,7 +435,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
 })();
 
 
-/* HTML calendar: rotation begins as soon as the card enters the viewport. */
+/* HTML calendar: rotation starts after half the card has entered the viewport. */
 (function initCalendarFlip(){
  const card=document.getElementById('calendar-flip');if(!card)return;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)');
@@ -483,8 +445,9 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  function renderScroll(){
   frame=0;if(!visible||manual||reduce.matches||document.hidden)return;
   const rect=card.getBoundingClientRect(),h=window.innerHeight;
-  const travel=Math.max(1,Math.min(rect.height,h*.45));
-  const progress=Math.max(0,Math.min(1,(h-rect.top)/travel));
+  const half=rect.height*.5;
+  const travel=Math.max(1,rect.height-half);
+  const progress=Math.max(0,Math.min(1,(h-rect.top-half)/travel));
   card.dataset.scrollDriven='true';
   card.style.setProperty('--calendar-angle',(progress*180).toFixed(2)+'deg');
   if(flipped!==(progress>=.5))setFlip(progress>=.5);
@@ -507,7 +470,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
 })();
 
 
-/* Replay the short decorative float on viewport re-entry; respect reduced motion. */
+/* Continuous decorative float while visible; respect reduced motion. */
 (function initHeroFloat(){
  const card=document.querySelector('.hero-glass');if(!card)return;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)');let visible=false;
