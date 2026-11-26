@@ -153,7 +153,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  const stop=()=>{clearTimeout(timer);timer=null};
  const canRun=()=>playing&&visible&&!document.hidden&&!reduce.matches;
  function updateControl(){
-  root.dataset.playing=String(canRun());toggle.textContent=playing?'Пауза':'Воспроизвести';
+  root.dataset.playing=String(canRun());status.setAttribute('aria-live',playing?'off':'polite');toggle.textContent=playing?'Пауза':'Воспроизвести';
   toggle.setAttribute('aria-label',playing?'Приостановить автоматическую демонстрацию':'Воспроизвести автоматическую демонстрацию');
   toggle.disabled=reduce.matches;
  }
@@ -183,7 +183,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
   index=i;char=presets[index].q.length;phase='hold';count=presets[index].items.length;
   typed.textContent=presets[index].q;buttons.forEach((b,j)=>b.setAttribute('aria-pressed',String(j===index)));
   renderFilters(true);renderRows(count);renderSources();
-  if(announce)status.textContent='Пример запроса: '+presets[index].q+'. Показано событий: '+count+'. '+(presets[index].filters.join(', ')||'Без дополнительных фильтров.');
+  status.textContent='Пример запроса: '+presets[index].q+'. Показано событий: '+count+'. '+(presets[index].filters.join(', ')||'Без дополнительных фильтров.');
  }
  function schedule(ms){stop();if(canRun())timer=setTimeout(tick,ms)}
  function tick(){
@@ -201,13 +201,14 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
   }
   if(phase==='results'){
    count++;renderRows(count,true);
-   if(count>=presets[index].items.length){phase='hold';schedule(3200)}else schedule(190);
+   if(count>=presets[index].items.length){phase='hold';status.textContent='Пример запроса: '+presets[index].q+'. Показано событий: '+count+'. '+(presets[index].filters.join(', ')||'Без дополнительных фильтров.');schedule(3200)}else schedule(190);
   }
  }
- function reconcile(){stop();updateControl();if(canRun()){select(index);schedule(3000)}}
+ let firstPlayback=true;
+ function reconcile(){stop();updateControl();if(canRun()){if(firstPlayback){firstPlayback=false;char=0;count=0;phase='type';typed.textContent='';renderFilters(false);renderRows(0);schedule(180)}else{select(index);schedule(3000)}}else{select(index)}}
  buttons.forEach((btn,i)=>{btn.disabled=false;btn.addEventListener('click',()=>{playing=false;stop();select(i,true);updateControl()})});
  toggle.addEventListener('click',()=>{playing=!playing;reconcile();if(!playing){select(index,true)}});
- root.addEventListener('focusin',()=>{if(playing){playing=false;stop();select(index);updateControl()}});
+ root.addEventListener('focusin',e=>{if(playing&&e.target!==toggle){playing=false;stop();select(index,true);updateControl()}});
  if('IntersectionObserver' in window){const ob=new IntersectionObserver(es=>{visible=es[0].isIntersecting;reconcile()},{threshold:.2});ob.observe(root)}else{playing=false;updateControl()}
  document.addEventListener('visibilitychange',reconcile);
  const motionChange=()=>{if(reduce.matches)playing=false;reconcile()};
