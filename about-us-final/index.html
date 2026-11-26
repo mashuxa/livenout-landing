@@ -451,7 +451,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  const canRun=()=>supported&&visible&&!focused&&!custom()&&!document.hidden&&!reduce.matches;
  function update(){
   root.dataset.playing=String(canRun());status.setAttribute('aria-live',canRun()?'off':'polite');
-  list.hidden=custom();head.hidden=custom();
+  head.querySelector('.mini-label').textContent=custom()||phase==='type'?'Примеры событий':'Подходящие события';
  }
  function sourcesFor(){sources.replaceChildren();presets[index].sources.forEach(([label,url])=>{const a=document.createElement('a');a.textContent=label;a.href=url;sources.append(a)})}
  function appendRow(i,animate=false){
@@ -462,12 +462,12 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  }
  function announce(){status.textContent='Пример запроса: '+presets[index].q+'. Показано событий: '+count+'.'}
  function showStatic(){const p=presets[index];input.placeholder=p.q;char=p.q.length;count=p.items.length;phase='hold';list.replaceChildren();p.items.forEach((_,i)=>appendRow(i));sourcesFor();announce()}
- function begin(){char=0;count=0;phase='type';input.placeholder='';list.replaceChildren();sourcesFor()}
+ function begin(){char=0;count=0;phase='type';input.placeholder='';update()}
  function schedule(ms){stop();if(canRun())timer=setTimeout(tick,ms)}
  function tick(){timer=null;if(!canRun()){update();return}const p=presets[index];
   if(phase==='hold'){index=(index+1)%presets.length;begin();schedule(160);return}
   if(phase==='type'){char++;input.placeholder=p.q.slice(0,char);if(char>=p.q.length){phase='results';schedule(200)}else schedule(48+(char%3)*12);return}
-  if(phase==='results'){appendRow(count,true);count++;if(count===p.items.length){phase='hold';announce();schedule(6500)}else schedule(400)}
+  if(phase==='results'){if(count===0){list.replaceChildren();sourcesFor();update()}appendRow(count,true);count++;if(count===p.items.length){phase='hold';announce();schedule(6500)}else schedule(400)}
  }
  function reconcile(){stop();update();if(!canRun())return;if(first){first=false;begin();schedule(160)}else schedule(phase==='hold'?6500:phase==='results'?400:60)}
  input.addEventListener('focus',()=>{focused=true;reconcile()});
