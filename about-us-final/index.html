@@ -1,4 +1,4 @@
-<!-- Version: 5 -->
+<!-- Version: 6 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -702,5 +702,15 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  input.disabled=false;const send=form.querySelector('button');const sync=()=>send.disabled=!input.value.trim();input.addEventListener('input',sync);sync();
  form.addEventListener('submit',e=>{e.preventDefault();const value=input.value.trim();if(!value)return;const msg=document.createElement('div');msg.className='group-chat-message group-chat-own';msg.textContent=value;messages.append(msg);if(messages.children.length>5)messages.firstElementChild.remove();messages.scrollTop=messages.scrollHeight;input.value='';sync()});
  showWeek('next');
+})();
+
+// Preview only: refresh the HTML every minute with a unique cache-busting URL.
+(function initPreviewAutoRefresh(){
+ if(location.hostname !== 'mashuxa.github.io')return;
+ window.setTimeout(()=>{
+  const url=new URL(location.href);
+  url.searchParams.set('_refresh',String(Date.now()));
+  location.replace(url.href);
+ },60000);
 })();
 </script></body></html>
