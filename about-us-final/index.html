@@ -1,4 +1,4 @@
-<!-- Version: 108 -->
+<!-- Version: 109 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — события и встречи в Польше</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -943,6 +943,16 @@ html{scroll-snap-type:none}
  #demand .demand-track h3{font-size:18px;overflow-wrap:break-word}
  #demand .demand .center-actions{margin-top:24px}
  #demand .demand .center-actions .btn{width:100%;max-width:100%;transform:none!important}
+}
+
+/* Mobile organizer benefits: one readable row per feature, with the icon on the left. */
+@media(max-width:820px){
+  #organizers .organizer-features{grid-template-columns:minmax(0,1fr);gap:20px;min-width:0}
+  #organizers .organizer-features>div{grid-template-columns:36px minmax(0,1fr);gap:12px;align-items:start;min-width:0}
+  #organizers .organizer-features>div>div{min-width:0}
+  #organizers .organizer-features .icon-bubble{width:36px;height:36px}
+  #organizers .organizer-features b{overflow-wrap:break-word}
+  #organizers .organizer-features small{overflow-wrap:break-word;margin-top:4px}
 }
 </style></head>
 <body><div class="progress-line" aria-hidden="true"></div><a class="skip" href="#main">К содержанию</a>
