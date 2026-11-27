@@ -1,4 +1,4 @@
-<!-- Version: 76 -->
+<!-- Version: 77 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -1155,7 +1155,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  left.addEventListener('animationend',e=>{if(e.animationName==='quiz-chat-left')showRight()});
  right.addEventListener('animationend',e=>{if(e.animationName==='quiz-chat-right'&&canRun(right))finish()});
  const header=document.querySelector('.header');
- observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.target===scene)visible=e.isIntersecting&&e.intersectionRatio>=.5});sync()},{threshold:[0,.5],rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
+ observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.target===scene)visible=e.isIntersecting&&e.intersectionRatio>=1});sync()},{threshold:[0,1],rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
  observer.observe(scene);observer.observe(left);observer.observe(right);
  document.addEventListener('visibilitychange',sync);
  const onMotion=()=>{if(reduce.matches)finish()};
@@ -1202,18 +1202,11 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
   try{
    await run(ball,[pose(startX,startY,0),pose(x,y,-330)],{duration:620,easing:'cubic-bezier(.15,.55,.65,1)'}).finished;
    if(finished||token!==generation)return;
-   const before=rows.slice(1).map(row=>row.getBoundingClientRect()),firstRect=first.getBoundingClientRect(),trackRect=track.getBoundingClientRect();
    const impact=run(icon,[{transform:'rotate(0)'},{transform:'rotate(-19deg) scale(.9)'},{transform:'rotate(7deg)'},{transform:'rotate(0)'}],{duration:280,easing:'ease-out'});
-   first.style.position='absolute';first.style.top=(firstRect.top-trackRect.top)+'px';first.style.left=(firstRect.left-trackRect.left)+'px';first.style.width=firstRect.width+'px';first.style.pointerEvents='none';
-   block.dataset.demandImpact='true';
-   const shifts=rows.slice(1).map((row,i)=>{const after=row.getBoundingClientRect();return run(row,[{transform:'translateY('+(before[i].top-after.top)+'px)'},{transform:'translateY(0)'}],{duration:650,easing:'cubic-bezier(.2,.8,.2,1)'})});
-   const fall=run(first,[{transform:'translate(0,0) rotate(0)',opacity:1},{offset:.2,transform:'translate(-12px,12px) rotate(-5deg)',opacity:1},{transform:'translate(-35px,'+(bounds.height+firstRect.height)+'px) rotate(19deg)',opacity:0}],{duration:820,easing:'cubic-bezier(.35,.03,.75,1)'});
    const bounce=run(ball,[pose(x,y,-330),{...pose(Math.max(0,x-size*1.4),Math.max(0,y-size*.5),-430),offset:.18},{...pose(Math.max(0,x*.35),Math.max(0,bounds.height-size-8),-690),offset:.65},pose(8,Math.max(0,bounds.height-size-8),-850)],{duration:1250,easing:'cubic-bezier(.16,.65,.3,1)'});
-   await Promise.all([impact.finished,fall.finished,bounce.finished,...shifts.map(a=>a.finished)]);
+   await Promise.all([impact.finished,bounce.finished]);
    if(finished||token!==generation)return;
-   // Keep the content accessible, without leaving an invisible displaced item in the page.
-   first.dataset.knocked='true';first.style.removeProperty('position');first.style.removeProperty('top');first.style.removeProperty('left');first.style.removeProperty('width');first.style.removeProperty('pointer-events');
-   fall.cancel();shifts.forEach(a=>a.cancel());impact.cancel();finished=true;block.dispatchEvent(new Event('demand-ball-finished'));
+   impact.cancel();finished=true;block.dispatchEvent(new Event('demand-ball-finished'));
   }catch{}
  }
  observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.3;if(!started&&!finished&&!motion.matches&&entry.intersectionRatio>=.5)sequence();sync()},{threshold:[0,.3,.5],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});
