@@ -183,7 +183,7 @@
       "distance": "15 км",
       "heading": "Пусть события сами вас находят.",
       "body": "Выберите, что вам интересно.",
-      "detail": "Мы сообщим о подходящих встречах — на почту или через push."
+      "detail": "Мы сообщим о подходящих встречах по почте или через уведомления."
     },
     "organizers": {
       "heading": "Проводите свои события?",
@@ -478,7 +478,7 @@
       "distance": "15 km",
       "heading": "Let events find you.",
       "body": "Choose what interests you.",
-      "detail": "We'll let you know about relevant meetups by email or push notification."
+      "detail": "We'll let you know about relevant meetups by email or through notifications."
     },
     "organizers": {
       "heading": "Do you organize events?",
@@ -773,7 +773,7 @@
       "distance": "15 km",
       "heading": "Niech wydarzenia same Cię znajdą.",
       "body": "Wybierz to, co Cię interesuje.",
-      "detail": "Powiadomimy Cię o pasujących spotkaniach e-mailem lub powiadomieniem push."
+      "detail": "Poinformujemy Cię o pasujących spotkaniach e-mailem lub za pomocą powiadomień."
     },
     "organizers": {
       "heading": "Organizujesz własne wydarzenia?",
@@ -1068,7 +1068,7 @@
       "distance": "15 км",
       "heading": "Нехай події самі вас знаходять.",
       "body": "Оберіть, що вам цікаво.",
-      "detail": "Ми повідомимо про відповідні зустрічі електронною поштою або через push-сповіщення."
+      "detail": "Ми повідомимо про відповідні зустрічі електронною поштою або через сповіщення."
     },
     "organizers": {
       "heading": "Проводите свої події?",
@@ -1363,7 +1363,7 @@
       "distance": "15 км",
       "heading": "Няхай падзеі самі вас знаходзяць.",
       "body": "Абярыце, што вам цікава.",
-      "detail": "Мы паведамім пра прыдатныя сустрэчы электроннай поштай або праз push-апавяшчэнні."
+      "detail": "Мы паведамім пра прыдатныя сустрэчы электроннай поштай або праз апавяшчэнні."
     },
     "organizers": {
       "heading": "Праводзіце свае падзеі?",
