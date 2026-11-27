@@ -1,4 +1,4 @@
-<!-- Version: 80 -->
+<!-- Version: 81 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -1206,14 +1206,18 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  async function sequence(){
   const token=++generation;started=true;finished=false;block.dispatchEvent(new Event('demand-ball-start'));flight.classList.add('collision-active');
   const bounds=flight.getBoundingClientRect(),target=cta.getBoundingClientRect(),size=ball.getBoundingClientRect().width;
-  const x=target.right-bounds.left-3,y=target.top-bounds.top+(target.height-size)/2;
-  const startX=bounds.width+size,startY=Math.max(0,y-size*1.7);
+  // Match the reference: lower right -> underside of CTA -> lower left.
+  const floor=Math.max(0,bounds.height-size-8),endX=8;
+  const x=Math.max(0,target.left-bounds.left+target.width*.75-size/2);
+  const y=target.bottom-bounds.top-size*.06;
+  const startX=Math.max(bounds.width+size,x+size*5),startY=y+(startX-x)*.5;
   const pose=(x,y,r)=>({transform:'translate('+x+'px,'+y+'px) rotate('+r+'deg)'});
   try{
-   await run(ball,[pose(startX,startY,0),pose(x,y,-330)],{duration:620,easing:'cubic-bezier(.15,.55,.65,1)'}).finished;
+   await run(ball,[pose(startX,startY,0),pose(x,y,-330)],{duration:780,easing:'linear'}).finished;
    if(finished||token!==generation)return;
-   const impact=run(cta,[{transform:'translateX(0) scale(1)'},{transform:'translateX(-7px) scale(.97)'},{transform:'translateX(3px) scale(1.015)'},{transform:'translateX(0) scale(1)'}],{duration:320,easing:'ease-out'});
-   const bounce=run(ball,[pose(x,y,-330),{...pose(Math.max(0,x-size*1.4),Math.max(0,y-size*.5),-430),offset:.18},{...pose(Math.max(0,x*.35),Math.max(0,bounds.height-size-8),-690),offset:.65},pose(8,Math.max(0,bounds.height-size-8),-850)],{duration:1250,easing:'cubic-bezier(.16,.65,.3,1)'});
+   const impact=run(cta,[{transformOrigin:'left center',transform:'rotate(0deg)',offset:0,easing:'cubic-bezier(.15,.7,.25,1)'},{transformOrigin:'left center',transform:'rotate(-7deg)',offset:.22,easing:'ease-in-out'},{transformOrigin:'left center',transform:'rotate(2.5deg)',offset:.53,easing:'ease-in-out'},{transformOrigin:'left center',transform:'rotate(-1deg)',offset:.76,easing:'ease-in-out'},{transformOrigin:'left center',transform:'rotate(0deg)',offset:1}],{duration:470,easing:'linear'});
+   const landingX=endX+(x-endX)*.22,hopX=endX+(x-endX)*.09;
+   const bounce=run(ball,[{...pose(x,y,-330),offset:0,easing:'cubic-bezier(.25,.15,.65,1)'},{...pose(landingX,floor,-510),offset:.57,easing:'ease-out'},{...pose(hopX,floor-Math.min(10,size*.18),-550),offset:.72,easing:'ease-in'},{...pose(endX+2,floor,-575),offset:.88,easing:'ease-out'},{...pose(endX,floor,-580),offset:1}],{duration:650,easing:'linear'});
    await Promise.all([impact.finished,bounce.finished]);
    if(finished||token!==generation)return;
    impact.cancel();finished=true;block.dispatchEvent(new Event('demand-ball-finished'));
