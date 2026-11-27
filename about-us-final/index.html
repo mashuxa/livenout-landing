@@ -1,4 +1,4 @@
-<!-- Version: 49 -->
+<!-- Version: 50 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -720,6 +720,12 @@ html{scroll-snap-type:none}
  #demand .demand-viking[data-entered]{animation:ln-vik-rise .85s cubic-bezier(.16,1,.3,1) both}
 }
 @keyframes ln-vik-rise{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
+
+#demand .demand-track{position:relative}
+#demand .demand-ball-flight.collision-active{visibility:visible}
+#demand .demand-ball-flight.collision-active svg{left:0;top:0;bottom:auto;transform:none;animation:none}
+#demand .demand-track article[data-knocked]{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;pointer-events:none}
+@media(prefers-reduced-motion:reduce){#demand .demand-track article[data-knocked]{position:static;width:auto;height:auto;margin:0;overflow:visible;clip-path:none;white-space:normal}}
 </style></head>
 <body><div class="progress-line" aria-hidden="true"></div><a class="skip" href="#main">К содержанию</a>
 <header class="header"><div class="wrap nav"><a class="brand" aria-label="Livenout — главная" href="https://livenout.com/ru"><span class="logo"><img class="brand-mark" src="https://livenout.com/apple-icon.png?apple-icon.3vz46vp1k8vqv.png" width="26" height="26" alt="" onerror="this.remove()"><span class="wordmark">Livenout</span></span></a><nav class="navlinks" aria-label="Основная навигация"><a href="https://livenout.com/ru">Главная</a><a href="https://livenout.com/ru/events/pl/warsaw">Афиша</a><a href="https://livenout.com/ru/events/recommended">Подборки</a><a href="https://livenout.com/ru/organizers">Организаторы</a></nav><div class="navtools"><a class="btn secondary nav-create" aria-label="Создать событие" href="https://livenout.com/ru/become-organizer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span class="long">Создать событие</span></a><a class="iconbtn chat-link" aria-label="Чат" href="https://livenout.com/ru/chat"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></a><a class="iconbtn login-link" aria-label="Войти" href="https://livenout.com/ru/login"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17l5-5-5-5m5 5H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/></svg></a><button type="button" class="iconbtn" id="theme" aria-label="Переключить на светлую тему" title="Переключить тему"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button><details class="nav-menu"><summary class="iconbtn" aria-label="Открыть меню"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></summary><nav class="drop" aria-label="Мобильная навигация"><a href="https://livenout.com/ru">Главная</a><a href="https://livenout.com/ru/events/pl/warsaw">Афиша</a><a href="https://livenout.com/ru/events/recommended">Подборки</a><a href="https://livenout.com/ru/organizers">Организаторы</a><a href="https://livenout.com/ru/chat">Чат</a><a href="https://livenout.com/ru/login">Войти</a></nav></details></div></div></header>
@@ -1064,18 +1070,38 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
 })();
 
 (function initDemandBall(){
- const block=document.querySelector('#demand .demand'),flight=block?.querySelector('.demand-ball-flight');
- if(!flight||!('IntersectionObserver' in window))return;
- const motion=matchMedia('(prefers-reduced-motion: reduce)');
- let started=false,finished=false;
- const header=document.querySelector('.header');
- const observer=new IntersectionObserver(([entry])=>{
-  const visible=entry.isIntersecting&&entry.intersectionRatio>=.3;
-  flight.dataset.visible=String(visible);
-  if(!started&&!finished&&!motion.matches&&entry.isIntersecting&&entry.intersectionRatio>=.5){started=true;flight.classList.add('is-flying')}
- },{threshold:[0,.3,.5],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});
- flight.querySelector('svg').addEventListener('animationend',()=>{finished=true;flight.classList.remove('is-flying');observer.disconnect()},{once:true});
- observer.observe(block);
+ const block=document.querySelector('#demand .demand'),flight=block?.querySelector('.demand-ball-flight'),ball=flight?.querySelector('svg'),track=block?.querySelector('.demand-track');
+ const rows=track?[...track.querySelectorAll('article')]:[],first=rows[0],icon=first?.querySelector('.demand-node');
+ if(!ball||!icon||rows.length<3||!('IntersectionObserver' in window)||!ball.animate)return;
+ const motion=matchMedia('(prefers-reduced-motion: reduce)'),header=document.querySelector('.header');
+ let visible=false,started=false,finished=false,animations=[],observer;
+ function sync(){const play=visible&&!document.hidden&&!motion.matches;animations.forEach(a=>{if(a.playState==='finished'||a.playState==='idle')return;if(play)a.play();else a.pause()})}
+ function run(el,frames,options){const a=el.animate(frames,{fill:'both',...options});animations.push(a);sync();return a}
+ function reset(){finished=true;observer?.disconnect();animations.forEach(a=>a.cancel());flight.classList.remove('collision-active');first.removeAttribute('data-knocked');first.style.removeProperty('position');first.style.removeProperty('top');first.style.removeProperty('left');first.style.removeProperty('width');first.style.removeProperty('pointer-events')}
+ async function sequence(){
+  started=true;flight.classList.add('collision-active');
+  const bounds=flight.getBoundingClientRect(),target=icon.getBoundingClientRect(),size=ball.getBoundingClientRect().width;
+  const x=target.right-bounds.left-3,y=target.top-bounds.top+(target.height-size)/2;
+  const startX=bounds.width+size,startY=Math.max(0,y-size*1.7);
+  const pose=(x,y,r)=>({transform:'translate('+x+'px,'+y+'px) rotate('+r+'deg)'});
+  try{
+   await run(ball,[pose(startX,startY,0),pose(x,y,-330)],{duration:620,easing:'cubic-bezier(.15,.55,.65,1)'}).finished;
+   if(finished)return;
+   const before=rows.slice(1).map(row=>row.getBoundingClientRect()),firstRect=first.getBoundingClientRect(),trackRect=track.getBoundingClientRect();
+   const impact=run(icon,[{transform:'rotate(0)'},{transform:'rotate(-19deg) scale(.9)'},{transform:'rotate(7deg)'},{transform:'rotate(0)'}],{duration:280,easing:'ease-out'});
+   first.style.position='absolute';first.style.top=(firstRect.top-trackRect.top)+'px';first.style.left=(firstRect.left-trackRect.left)+'px';first.style.width=firstRect.width+'px';first.style.pointerEvents='none';
+   const shifts=rows.slice(1).map((row,i)=>{const after=row.getBoundingClientRect();return run(row,[{transform:'translateY('+(before[i].top-after.top)+'px)'},{transform:'translateY(0)'}],{duration:650,easing:'cubic-bezier(.2,.8,.2,1)'})});
+   const fall=run(first,[{transform:'translate(0,0) rotate(0)',opacity:1},{offset:.2,transform:'translate(-12px,12px) rotate(-5deg)',opacity:1},{transform:'translate(-35px,'+(bounds.height+firstRect.height)+'px) rotate(19deg)',opacity:0}],{duration:820,easing:'cubic-bezier(.35,.03,.75,1)'});
+   const bounce=run(ball,[pose(x,y,-330),{...pose(Math.max(0,x-size*1.4),Math.max(0,y-size*.5),-430),offset:.18},{...pose(Math.max(0,x*.35),Math.max(0,bounds.height-size-8),-690),offset:.65},pose(8,Math.max(0,bounds.height-size-8),-850)],{duration:1250,easing:'cubic-bezier(.16,.65,.3,1)'});
+   await Promise.all([impact.finished,fall.finished,bounce.finished,...shifts.map(a=>a.finished)]);
+   if(finished)return;
+   // Keep the content accessible, without leaving an invisible displaced item in the page.
+   first.dataset.knocked='true';first.style.removeProperty('position');first.style.removeProperty('top');first.style.removeProperty('left');first.style.removeProperty('width');first.style.removeProperty('pointer-events');
+   fall.cancel();shifts.forEach(a=>a.cancel());impact.cancel();finished=true;observer.disconnect();
+  }catch{}
+ }
+ observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.3;if(!started&&!finished&&!motion.matches&&entry.intersectionRatio>=.5)sequence();sync()},{threshold:[0,.3,.5],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});
+ observer.observe(block);document.addEventListener('visibilitychange',sync);motion.addEventListener?.('change',()=>{if(motion.matches)reset()});
 })();
 
 (function initHeroBenefits(){
