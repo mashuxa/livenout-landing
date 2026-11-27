@@ -1,4 +1,4 @@
-<!-- Version: 78 -->
+<!-- Version: 79 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -1195,24 +1195,24 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
 
 (function initDemandBall(){
  const block=document.querySelector('#demand .demand'),flight=block?.querySelector('.demand-ball-flight'),ball=flight?.querySelector('svg'),track=block?.querySelector('.demand-track');
- const rows=track?[...track.querySelectorAll('article')]:[],first=rows[0],icon=first?.querySelector('.demand-node');
- if(!ball||!icon||rows.length<3||!('IntersectionObserver' in window)||!ball.animate)return;
+ const cta=block?.querySelector('.center-actions .btn.primary');
+ if(!ball||!cta||!('IntersectionObserver' in window)||!ball.animate)return;
  const motion=matchMedia('(prefers-reduced-motion: reduce)'),header=document.querySelector('.header');
  let visible=false,started=false,finished=false,animations=[],observer,generation=0;
  const replay=block.querySelector('.demand-replay');
  function sync(){const play=visible&&!document.hidden&&!motion.matches;animations.forEach(a=>{if(a.playState==='finished'||a.playState==='idle')return;if(play)a.play();else a.pause()})}
  function run(el,frames,options){const a=el.animate(frames,{fill:'both',...options});animations.push(a);sync();return a}
- function reset(){block.dispatchEvent(new Event('demand-ball-reset'));generation++;finished=true;block.removeAttribute('data-demand-impact');animations.forEach(a=>a.cancel());animations=[];flight.classList.remove('collision-active');first.removeAttribute('data-knocked');first.style.removeProperty('position');first.style.removeProperty('top');first.style.removeProperty('left');first.style.removeProperty('width');first.style.removeProperty('pointer-events')}
+ function reset(){block.dispatchEvent(new Event('demand-ball-reset'));generation++;finished=true;block.removeAttribute('data-demand-impact');animations.forEach(a=>a.cancel());animations=[];flight.classList.remove('collision-active');}
  async function sequence(){
   const token=++generation;started=true;finished=false;block.dispatchEvent(new Event('demand-ball-start'));flight.classList.add('collision-active');
-  const bounds=flight.getBoundingClientRect(),target=icon.getBoundingClientRect(),size=ball.getBoundingClientRect().width;
+  const bounds=flight.getBoundingClientRect(),target=cta.getBoundingClientRect(),size=ball.getBoundingClientRect().width;
   const x=target.right-bounds.left-3,y=target.top-bounds.top+(target.height-size)/2;
   const startX=bounds.width+size,startY=Math.max(0,y-size*1.7);
   const pose=(x,y,r)=>({transform:'translate('+x+'px,'+y+'px) rotate('+r+'deg)'});
   try{
    await run(ball,[pose(startX,startY,0),pose(x,y,-330)],{duration:620,easing:'cubic-bezier(.15,.55,.65,1)'}).finished;
    if(finished||token!==generation)return;
-   const impact=run(icon,[{transform:'rotate(0)'},{transform:'rotate(-19deg) scale(.9)'},{transform:'rotate(7deg)'},{transform:'rotate(0)'}],{duration:280,easing:'ease-out'});
+   const impact=run(cta,[{transform:'translateX(0) scale(1)'},{transform:'translateX(-7px) scale(.97)'},{transform:'translateX(3px) scale(1.015)'},{transform:'translateX(0) scale(1)'}],{duration:320,easing:'ease-out'});
    const bounce=run(ball,[pose(x,y,-330),{...pose(Math.max(0,x-size*1.4),Math.max(0,y-size*.5),-430),offset:.18},{...pose(Math.max(0,x*.35),Math.max(0,bounds.height-size-8),-690),offset:.65},pose(8,Math.max(0,bounds.height-size-8),-850)],{duration:1250,easing:'cubic-bezier(.16,.65,.3,1)'});
    await Promise.all([impact.finished,bounce.finished]);
    if(finished||token!==generation)return;
