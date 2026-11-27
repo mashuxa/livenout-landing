@@ -1,4 +1,4 @@
-<!-- Version: 96 -->
+<!-- Version: 97 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — события и встречи в Польше</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -1195,15 +1195,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  showWeek('next');
 })();
 
-// Preview only: refresh the HTML every minute with a unique cache-busting URL.
-(function initPreviewAutoRefresh(){
- if(location.hostname !== 'mashuxa.github.io')return;
- window.setTimeout(()=>{
-  const url=new URL(location.href);
-  url.searchParams.set('_refresh',String(Date.now()));
-  location.replace(url.href);
- },60000);
-})();
+
 
 (function initDemandBall(){
  const block=document.querySelector('#demand .demand'),flight=block?.querySelector('.demand-ball-flight'),ball=flight?.querySelector('svg'),track=block?.querySelector('.demand-track');
