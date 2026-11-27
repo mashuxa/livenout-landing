@@ -1,4 +1,4 @@
-<!-- Version: 3 -->
+<!-- Version: 4 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -199,9 +199,10 @@ html[data-theme=light] .end h2 em{color:#c52165}
  .calendar-month .cal-day:is(.cal-saved,.cal-today)[data-reveal=waiting]{background:transparent;border-color:#232935;color:#a0a5b1}
  .calendar-month .cal-day:is(.cal-saved,.cal-today)[data-reveal=running]{animation:calendar-date-fade 650ms ease-out var(--cal-reveal-delay,0ms) both}
  .calendar-month .cal-day[data-reveal=running][data-reveal-visible=false]{animation-play-state:paused}
- .calendar-original[data-saved=true] .save-heart[data-motion-visible=true][data-pop=true] svg{animation:calendar-heart-pop .35s ease both}
+ #calendar-save-heart[data-heartbeat=running] svg{transform-origin:center;animation:calendar-heartbeat 1.15s ease-in-out 1 both}
+ #calendar-save-heart[data-heartbeat=running][data-motion-visible=false] svg{animation-play-state:paused}
 }
-@keyframes calendar-heart-pop{0%,100%{transform:scale(1)}45%{transform:scale(1.22)}}
+@keyframes calendar-heartbeat{0%,42%,76%,100%{transform:scale(1)}18%{transform:scale(1.38)}30%{transform:scale(.94)}58%{transform:scale(1.28)}68%{transform:scale(.97)}}
 @keyframes calendar-date-fade{from{background:transparent;border-color:#232935;color:#a0a5b1}to{background:#502238;border-color:#77415b;color:#fff}}
 
 /* Decorative floating: starts on viewport entry, no visible control. */
@@ -553,10 +554,10 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
 /* Reveal the existing highlights once the calendar is at least half visible; each date waits for its own viewport entry. */
 (function initCalendarSave(){
  const root=document.getElementById('calendar-save-demo'),button=document.getElementById('calendar-save-heart'),day=document.getElementById('calendar-saved-day'),status=document.getElementById('calendar-save-status');if(!root||!button||!day||!status)return;
- const month=root.querySelector('.calendar-month');if(!month)return;
+ const month=root.querySelector('.calendar-month'),card=root.querySelector('.calendar-event-preview');if(!month||!card)return;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)'),supported='IntersectionObserver' in window;
  const cells=[...month.querySelectorAll('.cal-day.cal-saved,.cal-day.cal-today'),day],visible=new Set();
- let animate=supported&&!reduce.matches,started=false,played=false,saved=false,ratio=0;
+ let animate=supported&&!reduce.matches,started=false,played=false,saved=false,ratio=0,cardRatio=0,heartbeatPlayed=false;
  const allowed=()=>animate&&!reduce.matches&&!document.hidden;
  const onScreen=el=>visible.has(el)&&motionInViewport(el);
  function prepare(cell){
@@ -573,14 +574,16 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  }
  function setSaved(value,announce=false){
   saved=value;root.dataset.saved=String(value);button.setAttribute('aria-pressed',String(value));
-  delete button.dataset.pop;
-  if(value&&started&&allowed()&&onScreen(button)){void button.offsetWidth;button.dataset.pop='true'}
   markDate(value);
   if(announce)status.textContent=value?'Событие сохранено в демонстрационном календаре на 28 ноября.':'Событие удалено из демонстрационного избранного.';
  }
  function sync(){
   const active=allowed();button.dataset.motionVisible=String(active&&onScreen(button));
-  if(button.dataset.motionVisible!=='true')delete button.dataset.pop;
+  if(!heartbeatPlayed&&active&&cardRatio>=.5&&motionInViewport(card)&&onScreen(button)){
+   heartbeatPlayed=true;
+   if(!played){played=true;setSaved(true)}
+   button.dataset.heartbeat='running';
+  }
   if(!started&&active&&ratio>=.5&&motionInViewport(month)){
    started=true;
    if(!played){played=true;setSaved(true)}
@@ -594,20 +597,22 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  button.disabled=false;
  button.addEventListener('click',()=>{played=true;setSaved(!saved,true);sync()});
  if(animate){
+  button.addEventListener('animationend',e=>{if(e.animationName==='calendar-heartbeat'&&button.dataset.heartbeat==='running')button.dataset.heartbeat='done'});
   cells.filter(isMarked).forEach(prepare);
   cells.forEach(cell=>cell.addEventListener('animationend',e=>{if(e.animationName==='calendar-date-fade'&&cell.dataset.reveal==='running'){cell.dataset.reveal='done';cell.style.removeProperty('--cal-reveal-delay')}}));
   const header=document.querySelector('.header');
   const observer=new IntersectionObserver(entries=>{
    entries.forEach(entry=>{
     if(entry.target===month)ratio=entry.isIntersecting?entry.intersectionRatio:0;
+    else if(entry.target===card)cardRatio=entry.isIntersecting?entry.intersectionRatio:0;
     else if(entry.isIntersecting)visible.add(entry.target);
     else visible.delete(entry.target);
    });sync();
   },{threshold:[0,.5],rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
-  [month,button,...cells].forEach(el=>observer.observe(el));
+  [month,card,button,...cells].forEach(el=>observer.observe(el));
   document.addEventListener('visibilitychange',sync);
   const motionChange=()=>{
-   if(reduce.matches){animate=false;played=true;delete button.dataset.pop;cells.forEach(cell=>{delete cell.dataset.reveal;cell.style.removeProperty('--cal-reveal-delay')});observer.disconnect()}
+   if(reduce.matches){animate=false;played=true;heartbeatPlayed=true;button.dataset.heartbeat='done';cells.forEach(cell=>{delete cell.dataset.reveal;cell.style.removeProperty('--cal-reveal-delay')});observer.disconnect()}
    sync();
   };
   if(reduce.addEventListener)reduce.addEventListener('change',motionChange);else if(reduce.addListener)reduce.addListener(motionChange);
