@@ -1,4 +1,4 @@
-<!-- Version: 40 -->
+<!-- Version: 41 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -411,10 +411,10 @@ html[data-theme=light] .hero .ss-send-button{color:#c52165}
 #demand .demand>.section-head,#demand .demand>.demand-track,#demand .demand>.center-actions{position:relative;z-index:1}
 @media(prefers-reduced-motion:no-preference){
  #demand .demand-ball-flight.is-flying{visibility:visible}
- #demand .demand-ball-flight.is-flying svg{animation:demand-ball-flight 1.15s cubic-bezier(.12,.48,.42,1) both}
+ #demand .demand-ball-flight.is-flying svg{animation:demand-ball-flight 1.9s cubic-bezier(.12,.65,.38,1) both}
  #demand .demand-ball-flight[data-visible="false"] svg{animation-play-state:paused}
 }
-@keyframes demand-ball-flight{from{left:100%;transform:rotate(0deg)}to{left:calc(-1 * var(--ball-gutter) - 80px);transform:rotate(-300deg)}}
+@keyframes demand-ball-flight{from{left:100%;transform:rotate(0deg)}to{left:-80px;transform:rotate(-540deg)}}
 
 .hero-scene>.hero-description{padding:18px 2px 0}.hero-scene>.hero-description .lead{max-width:none;margin:0}@media(max-width:560px){.hero-scene>.hero-description{padding-top:14px}}
 
@@ -611,8 +611,7 @@ html{--snap-header-height:var(--header-height,72px);scroll-padding-top:var(--sna
 @keyframes sub-highlight{from{border-color:var(--border);background:transparent;color:var(--muted)}to{border-color:var(--accent);background:var(--accent-bg);color:var(--accent)}}
 
 /* A low, fast football pass across the full viewport, easing out at the left. */
-#demand .demand{overflow:visible}
-#demand .demand-ball-flight{--ball-gutter:max(0px,calc((100vw - 100%)/2));inset:0 calc(-1 * var(--ball-gutter));overflow:hidden;z-index:2;clip-path:inset(0)}
+#demand .demand-ball-flight{inset:0;overflow:hidden;z-index:2;clip-path:inset(0 round 24px)}
 #demand .demand-ball-flight svg{top:auto;bottom:8px;left:100%;transform:none}
 
 /* Accessible full-viewport section navigation. Native document scrolling. */
