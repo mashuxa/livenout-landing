@@ -1,4 +1,4 @@
-<!-- Version: 71 -->
+<!-- Version: 72 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -924,7 +924,7 @@ function pulse(el){el.classList.remove('changed');if(!motionInViewport(el))retur
  const targets=[...document.querySelectorAll('.hero-copy,.photo-grid,.section-head,.demand-track')],header=document.querySelector('.header');
  const visible=new Set();
  function sync(el){const active=!reduce.matches&&visible.has(el)&&motionInViewport(el);el.dataset.entranceVisible=String(active);if(active)el.classList.add('in-view')}
- const ob=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)visible.add(e.target);else visible.delete(e.target);sync(e.target)}),{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
+ const ob=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.5)visible.add(e.target);else visible.delete(e.target);sync(e.target)}),{threshold:[0,.5],rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
  targets.forEach(el=>ob.observe(el));
  document.addEventListener('visibilitychange',()=>targets.forEach(sync));
  const onMotion=()=>targets.forEach(sync);
@@ -1083,7 +1083,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  const card=document.querySelector('.hero-glass');if(!card)return;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)');let visible=false;
  function sync(){card.dataset.floatVisible=String(visible&&!reduce.matches&&motionInViewport(card))}
- if('IntersectionObserver' in window){const header=document.querySelector('.header');new IntersectionObserver(entries=>{visible=entries[entries.length-1].isIntersecting;sync()},{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'}).observe(card)}
+ if('IntersectionObserver' in window){const header=document.querySelector('.header');new IntersectionObserver(entries=>{const entry=entries[entries.length-1];visible=entry.isIntersecting&&entry.intersectionRatio>=.5;sync()},{threshold:[0,.5],rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'}).observe(card)}
  document.addEventListener('visibilitychange',sync);if(reduce.addEventListener)reduce.addEventListener('change',sync);else if(reduce.addListener)reduce.addListener(sync);sync();
 })();
 
@@ -1145,7 +1145,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  left.addEventListener('animationend',e=>{if(e.animationName==='quiz-chat-left')showRight()});
  right.addEventListener('animationend',e=>{if(e.animationName==='quiz-chat-right'&&canRun(right))finish()});
  const header=document.querySelector('.header');
- observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.target===scene)visible=e.isIntersecting});sync()},{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
+ observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.target===scene)visible=e.isIntersecting&&e.intersectionRatio>=.5});sync()},{threshold:[0,.5],rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
  observer.observe(scene);observer.observe(left);observer.observe(right);
  document.addEventListener('visibilitychange',sync);
  const onMotion=()=>{if(reduce.matches)finish()};
