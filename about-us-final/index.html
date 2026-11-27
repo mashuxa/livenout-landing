@@ -1,4 +1,4 @@
-<!-- Version: 68 -->
+<!-- Version: 69 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -1323,9 +1323,9 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  function paint(){const phase=elapsed-5000;let active=-1;
   if(phase>=0&&phase<1500)active=0;
   else if(phase>=1900&&phase<3400)active=1;
-  else if(phase>=3800)active=2;
+  else if(phase>=3800&&phase<5300)active=2;
   headings.forEach((h,i)=>h.toggleAttribute('data-highlighted',i===active));
-  if(phase>=4250){done=true;stop();observer.disconnect()}
+  if(phase>=5750){done=true;stop();observer.disconnect()}
  }
  function tick(now){frame=0;if(!visible||document.hidden||reduce.matches||done)return;
   if(last)elapsed+=Math.min(now-last,100);last=now;
