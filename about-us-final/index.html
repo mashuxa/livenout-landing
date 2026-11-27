@@ -1,4 +1,4 @@
-<!-- Version: 74 -->
+<!-- Version: 75 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -1024,13 +1024,13 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  const root=document.getElementById('calendar-save-demo'),button=document.getElementById('calendar-save-heart'),day=document.getElementById('calendar-saved-day'),status=document.getElementById('calendar-save-status');if(!root||!button||!day||!status)return;
  const month=root.querySelector('.calendar-month'),card=root.closest('.calendar-split')?.querySelector('.calendar-event-preview');if(!month||!card)return;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)'),supported='IntersectionObserver' in window;
- const cells=[...month.querySelectorAll('.cal-day.cal-saved,.cal-day.cal-today'),day],visible=new Set();
+ const cells=[...month.querySelectorAll('.cal-day.cal-saved,.cal-day.cal-today'),day].sort((a,b)=>Number(a.textContent)-Number(b.textContent)),visible=new Set();
  let animate=supported&&!reduce.matches,started=false,played=false,saved=false,ratio=0,cardRatio=0,heartbeatPlayed=false;
  const allowed=()=>animate&&!reduce.matches&&!document.hidden;
  const onScreen=el=>visible.has(el)&&motionInViewport(el);
  function prepare(cell){
   if(!animate)return;
-  cell.style.setProperty('--cal-reveal-delay',(150+Math.floor(Math.random()*901))+'ms');
+  cell.style.setProperty('--cal-reveal-delay',(cells.indexOf(cell)*100)+'ms');
   cell.dataset.reveal='waiting';
  }
  function isMarked(cell){return cell.classList.contains('cal-saved')||cell.classList.contains('cal-today')}
