@@ -1,4 +1,4 @@
-<!-- Version: 31 -->
+<!-- Version: 32 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -682,7 +682,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
   const [title,meta,tag]=presets[index].items[i],li=document.createElement('li');li.className='ss-result';
   const mark=document.createElement('span');mark.className='ss-result-mark';mark.innerHTML=sparkle;
   const body=document.createElement('div');body.className='ss-result-content';const b=document.createElement('b');b.textContent=title;const sm=document.createElement('small');sm.textContent=meta;sm.setAttribute('lang',presets[index].lang);body.append(b,sm);
-  const t=document.createElement('span');t.className='ss-tag';t.textContent=tag;t.setAttribute('lang',presets[index].lang);li.append(mark,body,t);if(list.children[i]){const existing=list.children[i];existing.replaceChildren(...li.childNodes)}else list.append(li)
+  const t=document.createElement('span');t.className='ss-tag';t.textContent=tag;t.setAttribute('lang',presets[index].lang);li.append(mark,body,t);if(list.children[i]){const existing=list.children[i];existing.replaceChildren(...li.childNodes);if(animate&&motionInViewport(existing)&&!reduce.matches){Array.from(existing.children).forEach(child=>{if(typeof child.animate==='function')child.animate([{opacity:0},{opacity:1}],{duration:320,easing:'ease-out'})})}}else list.append(li)
  }
  function announce(){status.textContent=copy.status+presets[index].q+copy.count+count+'.'}
  function showStatic(){const p=presets[index];input.placeholder=p.q;char=p.q.length;count=p.items.length;phase='hold';list.replaceChildren();p.items.forEach((_,i)=>appendRow(i));sourcesFor();announce()}
@@ -692,7 +692,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
   if(phase==='hold'){if(index===presets.length-1){phase='invite';char=0;update();schedule(160);return}index++;begin();schedule(160);return}
   if(phase==='invite'){char++;input.placeholder=invitation.slice(0,char);if(char>=invitation.length){phase='done';root.dataset.ready='true';update();const active=document.activeElement;if(!document.hidden&&!custom()&&motionInViewport(input)&&(!active||active===document.body||active===document.documentElement||active===input))input.focus({preventScroll:true})}else schedule(65);return}
   if(phase==='type'){char++;input.placeholder=p.q.slice(0,char);if(char>=p.q.length){phase='results';schedule(200)}else schedule(48+(char%3)*12);return}
-  if(phase==='results'){if(count===0){sourcesFor();for(let i=0;i<p.items.length;i++)appendRow(i,false);count=p.items.length;phase='hold';announce();schedule(800)}}
+  if(phase==='results'){if(count===0){sourcesFor();update()}appendRow(count,true);count++;if(count===p.items.length){phase='hold';announce();schedule(800)}else schedule(400)}
  }
  function reconcile(){update();if(first){if(!supported||focused||custom()||document.hidden||reduce.matches||!inputVisible||!motionInViewport(form)){stop();return}first=false;begin();schedule(160);return}if(!canRun()){stop();return}if(timer!==null)return;schedule(phase==='hold'?800:phase==='results'?200:60)}
  input.addEventListener('focus',()=>{focused=true;reconcile()});
