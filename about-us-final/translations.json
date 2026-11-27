@@ -242,7 +242,8 @@
     "final": {
       "body": "Живите на полную. Открывайте новые места, встречайте людей и создавайте свои события.",
       "slogan1": "Step out.",
-      "slogan2": "Liven up!"
+      "slogan2": "Liven up!",
+      "createEvents": "Создавать события"
     },
     "footer": {
       "contacts": "Контакты",
@@ -536,7 +537,8 @@
     "final": {
       "body": "Live life to the fullest. Discover new places, meet people and create your own events.",
       "slogan1": "Step out.",
-      "slogan2": "Liven up!"
+      "slogan2": "Liven up!",
+      "createEvents": "Create events"
     },
     "footer": {
       "contacts": "Contact",
@@ -830,7 +832,8 @@
     "final": {
       "body": "Żyj pełnią życia. Odkrywaj nowe miejsca, poznawaj ludzi i twórz własne wydarzenia.",
       "slogan1": "Step out.",
-      "slogan2": "Liven up!"
+      "slogan2": "Liven up!",
+      "createEvents": "Twórz wydarzenia"
     },
     "footer": {
       "contacts": "Kontakt",
@@ -1124,7 +1127,8 @@
     "final": {
       "body": "Живіть на повну. Відкривайте нові місця, зустрічайте людей і створюйте свої події.",
       "slogan1": "Step out.",
-      "slogan2": "Liven up!"
+      "slogan2": "Liven up!",
+      "createEvents": "Створювати події"
     },
     "footer": {
       "contacts": "Контакти",
@@ -1418,7 +1422,8 @@
     "final": {
       "body": "Жывіце напоўніцу. Адкрывайце новыя месцы, сустракайце людзей і стварайце свае падзеі.",
       "slogan1": "Step out.",
-      "slogan2": "Liven up!"
+      "slogan2": "Liven up!",
+      "createEvents": "Ствараць падзеі"
     },
     "footer": {
       "contacts": "Кантакты",
