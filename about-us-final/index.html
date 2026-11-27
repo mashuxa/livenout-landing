@@ -30,7 +30,7 @@ html{scroll-padding-top:88px}.section{margin-block:88px}.brand-mark{display:bloc
 .progress-line{position:fixed;left:0;top:0;width:100%;height:2px;background:linear-gradient(90deg,var(--pink),var(--orange));transform:scaleX(0);transform-origin:left;z-index:40;pointer-events:none;display:none}
 @keyframes rise-in{from{opacity:.55;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes panel-in{from{opacity:.65;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:no-preference){.hero-copy{animation:rise-in .65s cubic-bezier(.2,.8,.2,1) both}.photo-grid{animation:rise-in .7s .08s cubic-bezier(.2,.8,.2,1) both}.hero-glass{animation:glass-in .65s .22s cubic-bezier(.2,.8,.2,1) both}.mood-result.changed,#lang-results.changed{animation:panel-in .25s ease-out}.section-head.in-view,.demand-track.in-view{animation:rise-in .45s cubic-bezier(.2,.8,.2,1) both}.photo-tile img{transition:transform .45s ease}@supports(animation-timeline:scroll()){.progress-line{display:block;animation:reading-progress linear both;animation-timeline:scroll(root block)}}}
+@media(prefers-reduced-motion:no-preference){.hero-copy.in-view{animation:rise-in .65s cubic-bezier(.2,.8,.2,1) both}.photo-grid.in-view{animation:rise-in .7s .08s cubic-bezier(.2,.8,.2,1) both}.hero-glass.in-view{animation:glass-in .65s .22s cubic-bezier(.2,.8,.2,1) both}.mood-result.changed,#lang-results.changed{animation:panel-in .25s ease-out}.section-head.in-view,.demand-track.in-view{animation:rise-in .45s cubic-bezier(.2,.8,.2,1) both}.photo-tile img{transition:transform .45s ease}@supports(animation-timeline:scroll()){.progress-line{display:block;animation:reading-progress linear both;animation-timeline:scroll(root block)}}}
 @keyframes glass-in{from{opacity:.5;transform:translateY(calc(50% + 15px))}to{opacity:1;transform:translateY(50%)}}@keyframes reading-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.photo-tile:hover img{transform:scale(1.055)}.glass-link{transition:transform .18s}.hero-glass:hover .glass-link{transform:translateX(2px)}}
 @media(max-width:1100px){.navlinks{display:none}.nav .nav-menu{display:block}.nav .chat-link{display:inline-flex}.nav .login-link{display:inline-flex}}
@@ -50,7 +50,7 @@ html{scroll-padding-top:88px}.section{margin-block:88px}.brand-mark{display:bloc
 .photo-small:nth-child(2){background:radial-gradient(ellipse at 80% 10%,#ff8a3d44,transparent 65%),var(--hero-photo)}
 .choice:disabled{opacity:.65;cursor:default}
 .sr-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-@media(prefers-reduced-motion:no-preference){.hero-glass{animation:rise-in .65s .22s cubic-bezier(.2,.8,.2,1) both}}
+@media(prefers-reduced-motion:no-preference){.hero-glass.in-view[data-entrance-visible=true]{animation:rise-in .65s .22s cubic-bezier(.2,.8,.2,1) both}}
 @media(max-width:560px){.hero-glass{margin:-16px 8px 0 auto;width:calc(100% - 16px)}.hero-scene>figcaption{padding-top:8px}}
 
 /* V9 — scoped free-text search demo, no global token changes. */
@@ -190,13 +190,13 @@ html[data-theme=light] .end h2 em{color:#c52165}
 .calendar-event-preview .save-preview b{overflow-wrap:anywhere}
 .calendar-event-preview .save-heart{width:44px;height:44px}
 .calendar-event-preview .save-heart:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
-.calendar-month{display:grid;width:100%;aspect-ratio:220/255;border:1px solid #2b303b;border-radius:14px;min-width:0;box-sizing:border-box}
+.calendar-month{display:grid;width:100%;border:1px solid #2b303b;border-radius:14px;min-width:0;box-sizing:border-box}
 .calendar-original figcaption{text-align:center}
 .cal-day.cal-saved{background:#502238;border-color:#77415b;color:#fff}
 @media(prefers-reduced-motion:no-preference){
- .calendar-event-preview .save-heart{transition:background .2s,border-color .2s}
- #calendar-saved-day{transition:background .3s ease .18s,border-color .3s ease .18s,color .3s ease .18s}
- .calendar-original[data-saved=true] .save-heart svg{animation:calendar-heart-pop .35s ease both}
+ .calendar-event-preview .save-heart[data-motion-visible=true]{transition:background .2s,border-color .2s}
+ #calendar-saved-day[data-motion-visible=true]{transition:background .3s ease .18s,border-color .3s ease .18s,color .3s ease .18s}
+ .calendar-original[data-saved=true] .save-heart[data-motion-visible=true][data-pop=true] svg{animation:calendar-heart-pop .35s ease both}
 }
 @keyframes calendar-heart-pop{0%,100%{transform:scale(1)}45%{transform:scale(1.22)}}
 
@@ -258,7 +258,7 @@ html[data-theme=light] .hero .ss-send-button{color:#c52165}
 @media(max-width:360px){.hero .ss-query{padding-left:13px}.hero .ss-query-input{font-size:15px}}
 
 /* Compact HTML calendar, based on the owner's original mobile calendar reference. */
-.calendar-month{grid-template-rows:25px 22px 14px minmax(0,1fr) 23px;gap:5px;padding:8px;background:#050914;color:#a0a5b1;font-size:9px;line-height:1.2;text-align:left;border-color:#2b303b}
+.calendar-month{grid-template-rows:25px 22px 14px auto 23px;gap:5px;padding:8px;background:#050914;color:#a0a5b1;font-size:9px;line-height:1.2;text-align:left;border-color:#2b303b}
 .cal-tabs{display:flex;align-items:center;justify-content:center;justify-self:center;gap:2px;max-width:100%;padding:2px;background:#131b27;border:1px solid #2b303b;border-radius:999px;white-space:nowrap}
 .cal-tabs>span{display:flex;align-items:center;gap:3px;padding:4px 5px;font-weight:600}
 .cal-tabs svg,.cal-find svg{width:12px;height:12px;flex:none}
@@ -269,8 +269,8 @@ html[data-theme=light] .hero .ss-send-button{color:#c52165}
 .cal-selects svg{width:10px;height:10px;color:#666c79}
 .cal-weekdays,.cal-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;align-items:center;text-align:center;min-width:0}
 .cal-weekdays{font-size:8px;font-weight:600}
-.cal-days{grid-template-rows:repeat(6,minmax(0,1fr));align-items:stretch}
-.cal-day{display:grid;place-items:center;min-width:0;min-height:0;border:1px solid #232935;border-radius:6px;color:#a0a5b1;font-size:9px;font-weight:550}
+.cal-days{grid-auto-rows:auto;align-items:start;align-content:start}
+.cal-day,.cal-empty{width:100%;aspect-ratio:1 / 1;min-width:0;min-height:0}.cal-day{display:grid;place-items:center;border:1px solid #232935;border-radius:6px;color:#a0a5b1;font-size:9px;font-weight:550}
 .cal-day.cal-today{background:#502238;border-color:#77415b;color:#fff}
 .cal-find{display:inline-flex;align-items:center;justify-content:center;justify-self:start;gap:3px;padding:3px 8px;border:1px solid #51263c;border-radius:999px;background:#21121e;color:#f06599;font-weight:600}
 .cal-find svg{fill:currentColor}
@@ -296,6 +296,7 @@ html[data-theme=light] .hero .ss-send-button{color:#c52165}
  .quiz-chat-scene[data-chat-stage=waiting] .bubble,.quiz-chat-scene[data-chat-stage=left] .reply{opacity:0}
  .quiz-chat-scene[data-chat-stage=left] .bubble:not(.reply){animation:quiz-chat-left .56s cubic-bezier(.22,1,.36,1) both}
  .quiz-chat-scene[data-chat-stage=right] .reply{animation:quiz-chat-right .56s cubic-bezier(.22,1,.36,1) both}
+ .quiz-chat-scene[data-chat-visible=false] .bubble{animation-play-state:paused}
 }
 .group-chat-preview{min-width:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--background);font-size:13px}
 .group-chat-head{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--border)}
@@ -371,7 +372,7 @@ html[data-theme=light] .hero .ss-send-button{color:#c52165}
 /* Mobile calendar: fill available width, cap at 360 CSS px. */
 @media(max-width:820px){
  .calendar-original{width:100%;min-width:0}
- .calendar-month{grid-template-rows:34px 30px 19px minmax(0,1fr) 30px;gap:6px;padding:10px;font-size:12px}
+ .calendar-month{grid-template-rows:34px 30px 19px auto 30px;gap:6px;padding:10px;font-size:12px}
  .cal-tabs>span{padding:5px 7px;gap:4px}
  .cal-tabs svg,.cal-find svg{width:15px;height:15px}
  .cal-selects>span,.cal-day{font-size:12px}
@@ -380,6 +381,10 @@ html[data-theme=light] .hero .ss-send-button{color:#c52165}
 }
 @media(max-width:340px){.cal-tabs>span{font-size:10px;padding-inline:5px}.calendar-month{padding:8px;gap:5px}}
 
+/* A one-time entrance may pause out of view, but never start there. */
+@media(prefers-reduced-motion:no-preference){
+ .hero-copy.in-view[data-entrance-visible=false],.photo-grid.in-view[data-entrance-visible=false],.section-head.in-view[data-entrance-visible=false],.demand-track.in-view[data-entrance-visible=false]{animation-play-state:paused}
+}
 /* Disable snapping only while the vertical scroll is driving the gallery. */
 #organizer-gallery-track[data-scroll-driven=true]{scroll-snap-type:none;scroll-behavior:auto}
 </style></head>
@@ -420,7 +425,12 @@ const moodPresets={
  social:{title:"Разговорный клуб",desc:"Живое общение и новые знакомства",image:"https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=75"},
  inspire:{title:"Мастер-класс",desc:"Новые идеи и творческие впечатления",image:"https://images.unsplash.com/photo-1565193298595-6ba6558241d9?w=800&auto=format&fit=crop&q=75"}
 };
-function pulse(el){el.classList.remove('changed');void el.offsetWidth;el.classList.add('changed')}
+function motionInViewport(el){
+ if(!el||document.hidden)return false;
+ const r=el.getBoundingClientRect(),header=document.querySelector('.header'),top=header?Math.max(0,header.getBoundingClientRect().bottom):0;
+ return r.width>0&&r.height>0&&r.bottom>top&&r.top<window.innerHeight&&r.right>0&&r.left<window.innerWidth;
+}
+function pulse(el){el.classList.remove('changed');if(!motionInViewport(el))return;void el.offsetWidth;el.classList.add('changed')}
 document.querySelectorAll('[data-mood]').forEach(btn=>btn.addEventListener('click',()=>{
  const p=moodPresets[btn.dataset.mood];if(!p)return;
  document.querySelectorAll('[data-mood]').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));
@@ -443,10 +453,18 @@ document.querySelectorAll('[data-mood]').forEach(btn=>btn.addEventListener('clic
  if(narrow.addEventListener)narrow.addEventListener('change',resize);else if(narrow.addListener)narrow.addListener(resize);
  show('pl');
 })();
-if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
- const ob=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');ob.unobserve(e.target)}}),{threshold:.18});
- document.querySelectorAll('.section-head,.demand-track').forEach(el=>ob.observe(el));
-}
+(function initViewportEntrances(){
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+ if(!('IntersectionObserver' in window)||reduce.matches)return;
+ const targets=[...document.querySelectorAll('.hero-copy,.photo-grid,.hero-glass,.section-head,.demand-track')],header=document.querySelector('.header');
+ const visible=new Set();
+ function sync(el){const active=!reduce.matches&&visible.has(el)&&motionInViewport(el);el.dataset.entranceVisible=String(active);if(active)el.classList.add('in-view')}
+ const ob=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)visible.add(e.target);else visible.delete(e.target);sync(e.target)}),{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
+ targets.forEach(el=>ob.observe(el));
+ document.addEventListener('visibilitychange',()=>targets.forEach(sync));
+ const onMotion=()=>targets.forEach(sync);
+ if(reduce.addEventListener)reduce.addEventListener('change',onMotion);else if(reduce.addListener)reduce.addListener(onMotion);
+})();
 document.querySelectorAll('.nav-menu').forEach(menu=>{
  menu.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.open){menu.open=false;menu.querySelector('summary').focus()}});
  document.addEventListener('pointerdown',e=>{if(menu.open&&!menu.contains(e.target))menu.open=false});
@@ -467,28 +485,28 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
 
  const input=root.querySelector('#ss-input'),form=root.querySelector('#ss-form'),list=root.querySelector('#ss-results'),head=root.querySelector('#ss-results-head'),status=root.querySelector('#ss-status'),sources=root.querySelector('#ss-sources');
  const reduce=matchMedia('(prefers-reduced-motion: reduce)'),supported='IntersectionObserver' in window;
- let index=0,timer=null,visible=false,focused=false,char=0,count=0,phase='hold',first=true;
+ let index=0,timer=null,inputVisible=false,resultsVisible=false,focused=false,char=0,count=0,phase='hold',first=true;
  form.action='https://livenout.com/'+locale;
  input.setAttribute('aria-label',copy.input);form.querySelector('button').setAttribute('aria-label',copy.submit);
  const title=root.querySelector('.ss-top .demo-label');if(title&&title.lastChild)title.lastChild.textContent=' '+copy.search;
  const custom=()=>input.value.trim().length>0;
  const stop=()=>{clearTimeout(timer);timer=null};
- const canRun=()=>supported&&visible&&!focused&&!custom()&&!document.hidden&&!reduce.matches&&phase!=='done';
+ const canRun=()=>supported&&!focused&&!custom()&&!document.hidden&&!reduce.matches&&phase!=='done'&&(phase==='results'?resultsVisible&&motionInViewport(list):inputVisible&&motionInViewport(form));
  function update(){
   root.dataset.playing=String(canRun());status.setAttribute('aria-live',canRun()?'off':'polite');
   head.querySelector('.mini-label').textContent=custom()||['type','invite','done'].includes(phase)?copy.examples:copy.heading;
  }
  function sourcesFor(){sources.replaceChildren();presets[index].sources.forEach(([label,url])=>{const a=document.createElement('a');a.textContent=label;a.href=url;sources.append(a)})}
  function appendRow(i,animate=false){
-  const [title,meta,tag]=presets[index].items[i],li=document.createElement('li');li.className='ss-result'+(animate?' ss-new':'');
+  const [title,meta,tag]=presets[index].items[i],li=document.createElement('li');li.className='ss-result';
   const mark=document.createElement('span');mark.className='ss-result-mark';mark.innerHTML=sparkle;
   const body=document.createElement('div');body.className='ss-result-content';const b=document.createElement('b');b.textContent=title;const sm=document.createElement('small');sm.textContent=meta;sm.setAttribute('lang',presets[index].lang);body.append(b,sm);
-  const t=document.createElement('span');t.className='ss-tag';t.textContent=tag;t.setAttribute('lang',presets[index].lang);li.append(mark,body,t);list.append(li)
+  const t=document.createElement('span');t.className='ss-tag';t.textContent=tag;t.setAttribute('lang',presets[index].lang);li.append(mark,body,t);list.append(li);if(animate&&motionInViewport(li))li.classList.add('ss-new')
  }
  function announce(){status.textContent=copy.status+presets[index].q+copy.count+count+'.'}
  function showStatic(){const p=presets[index];input.placeholder=p.q;char=p.q.length;count=p.items.length;phase='hold';list.replaceChildren();p.items.forEach((_,i)=>appendRow(i));sourcesFor();announce()}
  function begin(){char=0;count=0;phase='type';input.placeholder='';update()}
- function schedule(ms){stop();if(canRun())timer=setTimeout(tick,ms)}
+ function schedule(ms){stop();update();if(canRun())timer=setTimeout(tick,ms)}
  function tick(){timer=null;if(!canRun()){update();return}const p=presets[index];
   if(phase==='hold'){if(index===presets.length-1){phase='invite';char=0;update();schedule(160);return}index++;begin();schedule(160);return}
   if(phase==='invite'){char++;input.placeholder=invitation.slice(0,char);if(char>=invitation.length){phase='done';update()}else schedule(65);return}
@@ -500,7 +518,10 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  input.addEventListener('blur',()=>{focused=false;reconcile()});
  input.addEventListener('input',reconcile);
  form.addEventListener('submit',e=>{input.value=input.value.trim();if(!input.value){e.preventDefault();input.focus()}});
- if(supported)new IntersectionObserver(es=>{const v=es[es.length-1].isIntersecting;if(v!==visible){visible=v;reconcile()}},{threshold:0}).observe(root);
+ if(supported){
+  const header=document.querySelector('.header'),observer=new IntersectionObserver(es=>{let changed=false;es.forEach(e=>{if(e.target===form){if(inputVisible!==e.isIntersecting)changed=true;inputVisible=e.isIntersecting}else if(e.target===list){if(resultsVisible!==e.isIntersecting)changed=true;resultsVisible=e.isIntersecting}});if(changed)reconcile()},{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
+  observer.observe(form);observer.observe(list);
+ }
  document.addEventListener('visibilitychange',reconcile);
  const motionChange=()=>{if(reduce.matches&&phase!=='done')showStatic();reconcile()};
  if(reduce.addEventListener)reduce.addEventListener('change',motionChange);else if(reduce.addListener)reduce.addListener(motionChange);
@@ -519,30 +540,45 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  function randomGroup(){let pool=eligible.slice();for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}let picked=pool.slice(0,3);if(picked.map(p=>p.n).sort().join('|')===last)picked[2]=pool[3];return picked}
  function render(group){grid.replaceChildren();group.forEach(p=>{const el=document.createElement('div');el.className='roulette-person';const av=document.createElement('span');av.className='roulette-avatar tone-'+p.style;av.setAttribute('aria-hidden','true');av.textContent=p.initial;const name=document.createElement('b');name.textContent=p.n;const lang=document.createElement('small');lang.textContent=p.langs.join(' · ');const interest=document.createElement('span');interest.className='roulette-interest';interest.textContent=p.interests[1];el.append(av,name,lang,interest);grid.append(el)})}
  function finish(group){render(group);last=group.map(p=>p.n).sort().join('|');root.dataset.spinning='false';grid.setAttribute('aria-busy','false');spinning=false;button.disabled=false;step.textContent='Группа подобрана';status.textContent='Подобраны: '+group.map(p=>p.n).join(', ')+'. Общие: Варшава, RU, квизы.'}
- button.disabled=false;button.addEventListener('click',()=>{if(spinning)return;spinning=true;const group=randomGroup();if(reduced.matches){finish(group);return}button.disabled=true;root.dataset.spinning='true';grid.setAttribute('aria-busy','true');step.textContent='Подбираем…';status.textContent='Ищем людей с общими интересами…';let frames=0;const timer=setInterval(()=>{if(++frames>=6){clearInterval(timer);finish(group)}else render(randomGroup())},140)});
+ button.disabled=false;button.addEventListener('click',()=>{if(spinning)return;spinning=true;const group=randomGroup();if(reduced.matches||!motionInViewport(grid)){finish(group);return}button.disabled=true;root.dataset.spinning='true';grid.setAttribute('aria-busy','true');step.textContent='Подбираем…';status.textContent='Ищем людей с общими интересами…';let frames=0;const timer=setInterval(()=>{if(++frames>=6||reduced.matches||!motionInViewport(grid)){clearInterval(timer);finish(group)}else render(randomGroup())},140)});
 })();
 
 
 /* Demonstrate saving an event once when the calendar enters view; manual toggling remains. */
 (function initCalendarSave(){
  const root=document.getElementById('calendar-save-demo'),button=document.getElementById('calendar-save-heart'),day=document.getElementById('calendar-saved-day'),status=document.getElementById('calendar-save-status');if(!root||!button||!day||!status)return;
- const reduce=matchMedia('(prefers-reduced-motion: reduce)');
- let saved=false,played=false,visible=false,observer=null;
- function setSaved(value,announce=false){
-  saved=value;root.dataset.saved=String(value);button.setAttribute('aria-pressed',String(value));
-  day.classList.toggle('cal-saved',value);day.setAttribute('aria-label',value?'28 ноября, есть сохранённые события':'28 ноября');
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)'),supported='IntersectionObserver' in window;
+ let saved=false,played=false,pending=false,heartVisible=false,dayVisible=false,observer=null;
+ function syncMotion(){
+  const allowed=!reduce.matches&&!document.hidden;
+  button.dataset.motionVisible=String(allowed&&heartVisible&&motionInViewport(button));
+  day.dataset.motionVisible=String(allowed&&dayVisible&&motionInViewport(day));
+  if(button.dataset.motionVisible!=='true')delete button.dataset.pop;
+ }
+ function markDate(value){day.classList.toggle('cal-saved',value);day.setAttribute('aria-label',value?'28 ноября, есть сохранённые события':'28 ноября')}
+ function setSaved(value,announce=false,deferDate=false){
+  syncMotion();saved=value;root.dataset.saved=String(value);button.setAttribute('aria-pressed',String(value));
+  delete button.dataset.pop;if(value&&button.dataset.motionVisible==='true'){void button.offsetWidth;button.dataset.pop='true'}
+  pending=value&&deferDate&&!dayVisible;
+  if(!pending)markDate(value);
   if(announce)status.textContent=value?'Событие сохранено в демонстрационном календаре на 28 ноября.':'Событие удалено из демонстрационного избранного.';
  }
- function consume(){played=true;observer?.disconnect()}
- function auto(){if(!played&&visible&&!reduce.matches&&!document.hidden){consume();setSaved(true)}}
+ function auto(){
+  syncMotion();if(reduce.matches||document.hidden)return;
+  if(!played&&(button.dataset.motionVisible==='true'||day.dataset.motionVisible==='true')){
+   played=true;setSaved(true,false,day.dataset.motionVisible!=='true');
+  }
+  if(pending&&day.dataset.motionVisible==='true'){pending=false;markDate(saved)}
+ }
  button.disabled=false;
- button.addEventListener('click',()=>{consume();setSaved(!saved,true)});
- if('IntersectionObserver' in window&&!reduce.matches){
-  observer=new IntersectionObserver(entries=>{const entry=entries[entries.length-1];visible=entry.isIntersecting&&entry.intersectionRatio>=.35;auto()},{threshold:.35});
-  observer.observe(root);
+ button.addEventListener('click',()=>{played=true;pending=false;setSaved(!saved,true)});
+ if(supported){
+  const header=document.querySelector('.header');
+  observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.target===button)heartVisible=entry.isIntersecting;else if(entry.target===day)dayVisible=entry.isIntersecting});auto()},{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
+  observer.observe(button);observer.observe(day);
   document.addEventListener('visibilitychange',auto);
  }
- const motionChange=()=>{if(reduce.matches)consume()};
+ const motionChange=()=>{syncMotion();if(reduce.matches){played=true;if(pending){pending=false;markDate(saved)}}};
  if(reduce.addEventListener)reduce.addEventListener('change',motionChange);else if(reduce.addListener)reduce.addListener(motionChange);
 })();
 
@@ -551,8 +587,8 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
 (function initHeroFloat(){
  const card=document.querySelector('.hero-glass');if(!card)return;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)');let visible=false;
- function sync(){card.dataset.floatVisible=String(visible&&!document.hidden&&!reduce.matches)}
- if('IntersectionObserver' in window){new IntersectionObserver(entries=>{visible=entries[entries.length-1].isIntersecting;sync()},{threshold:.1}).observe(card)}
+ function sync(){card.dataset.floatVisible=String(visible&&!reduce.matches&&motionInViewport(card))}
+ if('IntersectionObserver' in window){const header=document.querySelector('.header');new IntersectionObserver(entries=>{visible=entries[entries.length-1].isIntersecting;sync()},{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'}).observe(card)}
  document.addEventListener('visibilitychange',sync);if(reduce.addEventListener)reduce.addEventListener('change',sync);else if(reduce.addListener)reduce.addListener(sync);sync();
 })();
 
@@ -562,7 +598,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  const reduce=matchMedia('(prefers-reduced-motion: reduce)');
  if(track.children.length<2||!('IntersectionObserver' in window))return;
  let visible=false,manual=false,frame=0,touch=null;
- const canRun=()=>visible&&!manual&&!reduce.matches&&!document.hidden;
+ const canRun=()=>visible&&!manual&&!reduce.matches&&motionInViewport(track);
  function stop(){if(frame)cancelAnimationFrame(frame);frame=0;delete track.dataset.scrollDriven}
  function render(){frame=0;if(!canRun())return;
   const h=window.innerHeight,rect=track.getBoundingClientRect();
@@ -578,7 +614,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  track.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)>Math.abs(e.deltaY)||e.shiftKey)interrupt()},{passive:true});
  track.addEventListener('keydown',interrupt);
  track.addEventListener('focusin',interrupt);
- new IntersectionObserver(entries=>{const next=entries[entries.length-1].isIntersecting;if(next===visible)return;visible=next;if(!visible){stop();manual=false}},{threshold:0}).observe(track);
+ const header=document.querySelector('.header');new IntersectionObserver(entries=>{const next=entries[entries.length-1].isIntersecting;if(next===visible)return;visible=next;if(!visible){stop();manual=false}},{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'}).observe(track);
  window.addEventListener('scroll',schedule,{passive:true});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
  const motionChange=()=>{if(reduce.matches)stop()};
@@ -590,15 +626,31 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  const scene=document.getElementById('quiz-chat-preview');if(!scene||!('IntersectionObserver' in window))return;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)');if(reduce.matches)return;
  const left=scene.querySelector('.bubble:not(.reply)'),right=scene.querySelector('.reply');if(!left||!right)return;
- let started=false,timer=null;
- function finish(){clearTimeout(timer);scene.dataset.chatStage='done'}
- function showRight(){if(scene.dataset.chatStage!=='left')return;clearTimeout(timer);scene.dataset.chatStage='right';timer=setTimeout(finish,700)}
- scene.dataset.chatStage='waiting';
+ let visible=false,timer=null,stage='waiting',observer=null;
+ function setStage(value){stage=value;scene.dataset.chatStage=value}
+ function stop(){clearTimeout(timer);timer=null}
+ function canRun(el){return visible&&!reduce.matches&&motionInViewport(el)}
+ function finish(){stop();setStage('done');observer?.disconnect()}
+ function sync(){
+  stop();
+  const active=canRun(stage==='right'?right:left);scene.dataset.chatVisible=String(active);
+  if(!active||stage==='done')return;
+  if(stage==='waiting')setStage('left');
+  if(stage==='left')timer=setTimeout(showRight,700);
+  else if(stage==='right')timer=setTimeout(()=>{if(canRun(right))finish()},700);
+ }
+ function showRight(){
+  if(stage!=='left'||!canRun(left))return;
+  stop();setStage('right');sync();
+ }
+ setStage('waiting');
  left.addEventListener('animationend',e=>{if(e.animationName==='quiz-chat-left')showRight()});
- right.addEventListener('animationend',e=>{if(e.animationName==='quiz-chat-right')finish()});
- const observer=new IntersectionObserver(entries=>{if(started||!entries.some(e=>e.isIntersecting))return;started=true;observer.disconnect();scene.dataset.chatStage='left';timer=setTimeout(showRight,700)},{threshold:0});
- observer.observe(scene);
- const onMotion=()=>{if(reduce.matches){started=true;observer.disconnect();finish()}};
+ right.addEventListener('animationend',e=>{if(e.animationName==='quiz-chat-right'&&canRun(right))finish()});
+ const header=document.querySelector('.header');
+ observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.target===scene)visible=e.isIntersecting});sync()},{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
+ observer.observe(scene);observer.observe(left);observer.observe(right);
+ document.addEventListener('visibilitychange',sync);
+ const onMotion=()=>{if(reduce.matches)finish()};
  if(reduce.addEventListener)reduce.addEventListener('change',onMotion);else if(reduce.addListener)reduce.addListener(onMotion);
 })();
 (function initGroupChatPreview(){
