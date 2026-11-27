@@ -1,4 +1,4 @@
-<!-- Version: 50 -->
+<!-- Version: 51 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -811,7 +811,7 @@ function pulse(el){el.classList.remove('changed');if(!motionInViewport(el))retur
  const order=['pl','en','ja','ru'];
  function stop(){clearTimeout(timer);timer=null}
  function cancel(){done=true;stop();observer?.disconnect()}
- function schedule(){if(done||!visible||document.hidden||reduce.matches||timer!==null)return;timer=setTimeout(()=>{timer=null;if(done||!visible||document.hidden||reduce.matches)return;index++;while(index<order.length&&order[index]==='ru'&&narrow.matches)index++;if(index>=order.length){cancel();return}show(order[index],false);schedule()},950)}
+ function schedule(){if(done||!visible||document.hidden||reduce.matches||timer!==null)return;timer=setTimeout(()=>{timer=null;if(done||!visible||document.hidden||reduce.matches)return;index++;while(index<order.length&&order[index]==='ru'&&narrow.matches)index++;if(index>=order.length){cancel();return}show(order[index],false);schedule()},1900)}
  if(panel&&'IntersectionObserver' in window&&!reduce.matches){const header=document.querySelector('.header');observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.5;if(visible)schedule();else stop()},{threshold:[0,.5],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});observer.observe(panel);document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else schedule()});reduce.addEventListener?.('change',()=>{if(reduce.matches)cancel()})}
 })();
 (function initViewportEntrances(){
