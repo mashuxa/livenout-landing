@@ -172,7 +172,7 @@
       "group": "Ваша компания",
       "example": "Пример подбора",
       "members": "3 человека с общими интересами",
-      "cta": "Подобрать событие",
+      "cta": "Подобрать события",
       "matched": "Группа подобрана",
       "matching": "Подбираем…",
       "searching": "Ищем людей с общими интересами…"
@@ -467,7 +467,7 @@
       "group": "Your group",
       "example": "Example match",
       "members": "3 people with shared interests",
-      "cta": "Find an event",
+      "cta": "Find matching events",
       "matched": "Group matched",
       "matching": "Matching…",
       "searching": "Looking for people with shared interests…"
@@ -762,7 +762,7 @@
       "group": "Twoja ekipa",
       "example": "Przykładowe dopasowanie",
       "members": "3 osoby o wspólnych zainteresowaniach",
-      "cta": "Dobierz wydarzenie",
+      "cta": "Dobierz wydarzenia",
       "matched": "Grupa dobrana",
       "matching": "Dobieramy…",
       "searching": "Szukamy osób o wspólnych zainteresowaniach…"
@@ -1057,7 +1057,7 @@
       "group": "Ваша компанія",
       "example": "Приклад підбору",
       "members": "3 людини зі спільними інтересами",
-      "cta": "Підібрати подію",
+      "cta": "Підібрати події",
       "matched": "Групу підібрано",
       "matching": "Підбираємо…",
       "searching": "Шукаємо людей зі спільними інтересами…"
@@ -1352,7 +1352,7 @@
       "group": "Ваша кампанія",
       "example": "Прыклад падбору",
       "members": "3 чалавекі з агульнымі інтарэсамі",
-      "cta": "Падабраць падзею",
+      "cta": "Падабраць падзеі",
       "matched": "Група падабрана",
       "matching": "Падбіраем…",
       "searching": "Шукаем людзей з агульнымі інтарэсамі…"
