@@ -1,4 +1,4 @@
-<!-- Version: 32 -->
+<!-- Version: 33 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -81,8 +81,8 @@ html{scroll-padding-top:88px}.section{margin-block:88px}.brand-mark{display:bloc
 .ss-links{display:flex;gap:6px 20px;align-items:center;flex-wrap:wrap}
 @media(min-width:821px){#discovery .v8-discovery{align-items:start}.ss-block{grid-template-rows:auto auto auto}.ss-block .ss-demo{margin:0}}
 @media(max-width:560px){.ss-demo{padding:12px;gap:10px}.ss-query{min-height:54px}.ss-query-text{font-size:15px}.ss-results{grid-template-rows:repeat(3,minmax(74px,auto));min-height:236px}.ss-result{grid-template-columns:25px minmax(0,1fr);gap:8px}.ss-result-mark{width:25px;height:25px}.ss-tag{display:none}.ss-result-content b{font-size:13px}.ss-example{padding-inline:9px}}
-@media(prefers-reduced-motion:no-preference){.ss-demo[data-playing=true] .ss-caret{animation:ss-blink .85s step-end infinite}.ss-result.ss-new{animation:ss-appear .24s ease-out both}}
-@keyframes ss-blink{50%{opacity:0}}@keyframes ss-appear{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:no-preference){.ss-demo[data-playing=true] .ss-caret{animation:ss-blink .85s step-end infinite}}
+@keyframes ss-blink{50%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.ss-caret{display:none!important}.ss-demo *{animation:none!important;transition:none!important}}
 
 /* Compact natural-language queries; wrapping remains available at narrow widths or zoom. */
@@ -259,8 +259,8 @@ html[data-theme=light] .hero .ss-query-input::placeholder{color:#626470}
 html[data-theme=light] .hero .ss-send-button{color:#c52165}
 .hero .ss-results{grid-template-rows:none;grid-auto-rows:minmax(72px,auto);align-content:start;min-height:230px}
 .hero .ss-results[hidden],.hero .ss-results-head[hidden],.hero .ss-control[hidden]{display:none!important}
-@keyframes ss-result-fade{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:no-preference){.hero .ss-result.ss-new{animation:ss-result-fade .32s ease-out both}}
+
+
 @media(max-width:360px){.hero .ss-query{padding-left:13px}.hero .ss-query-input{font-size:15px}}
 
 /* Compact HTML calendar, based on the owner's original mobile calendar reference. */
@@ -553,11 +553,8 @@ html[data-theme=light] .hero .ss-send-button{color:#c52165}
 
 /* Stable search results and one-time sequential border highlight. */
 .hero .ss-results{grid-template-rows:repeat(3,minmax(72px,1fr));grid-auto-rows:auto;align-content:stretch}
-@media(prefers-reduced-motion:no-preference){
- .hero .ss-result[data-border-pulse="running"]{animation:search-border-pulse 650ms ease-in-out both}
- .hero .ss-results[data-pulse-visible="false"] .ss-result{animation-play-state:paused}
-}
-@keyframes search-border-pulse{0%,100%{border-color:var(--border);box-shadow:none}50%{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}}
+
+
 /* Blur only the background photo, preserving sharp chat bubbles. */
 #quiz-chat-preview>img{width:100%;height:100%;object-fit:cover;object-position:center;filter:blur(8px);transform:scale(1.09)}
 
@@ -568,6 +565,12 @@ html[data-theme=light] .hero .ss-send-button{color:#c52165}
 #subscriptions .sub-chip{padding:4px 8px}
 #subscriptions .sub-filter:last-child{border-top:1px solid var(--border);padding-top:10px}
 @media(max-width:375px){#subscriptions .subscription-preview{padding:12px;gap:10px}}
+
+/* Search results: only a sequential whole-card fade. Preserve three layout slots. */
+.hero .ss-result.ss-awaiting{visibility:hidden;opacity:0}
+@media(prefers-reduced-motion:no-preference){.hero .ss-result.ss-fade-in{animation:ss-card-fade 350ms ease-out both}.hero .ss-demo[data-playing=false] .ss-result.ss-fade-in{animation-play-state:paused}}
+@keyframes ss-card-fade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.hero .ss-result.ss-awaiting{visibility:visible;opacity:1}}
 </style></head>
 <body><div class="progress-line" aria-hidden="true"></div><a class="skip" href="#main">К содержанию</a>
 <header class="header"><div class="wrap nav"><a class="brand" aria-label="Livenout — главная" href="https://livenout.com/ru"><span class="logo"><img class="brand-mark" src="https://livenout.com/apple-icon.png?apple-icon.3vz46vp1k8vqv.png" width="26" height="26" alt="" onerror="this.remove()"><span class="wordmark">Livenout</span></span></a><nav class="navlinks" aria-label="Основная навигация"><a href="https://livenout.com/ru">Главная</a><a href="https://livenout.com/ru/events/pl/warsaw">Афиша</a><a href="https://livenout.com/ru/events/recommended">Подборки</a><a href="https://livenout.com/ru/organizers">Организаторы</a></nav><div class="navtools"><a class="btn secondary nav-create" aria-label="Создать событие" href="https://livenout.com/ru/become-organizer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span class="long">Создать событие</span></a><a class="iconbtn chat-link" aria-label="Чат" href="https://livenout.com/ru/chat"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></a><a class="iconbtn login-link" aria-label="Войти" href="https://livenout.com/ru/login"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17l5-5-5-5m5 5H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/></svg></a><button type="button" class="iconbtn" id="theme" aria-label="Переключить на светлую тему" title="Переключить тему"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button><details class="nav-menu"><summary class="iconbtn" aria-label="Открыть меню"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></summary><nav class="drop" aria-label="Мобильная навигация"><a href="https://livenout.com/ru">Главная</a><a href="https://livenout.com/ru/events/pl/warsaw">Афиша</a><a href="https://livenout.com/ru/events/recommended">Подборки</a><a href="https://livenout.com/ru/organizers">Организаторы</a><a href="https://livenout.com/ru/chat">Чат</a><a href="https://livenout.com/ru/login">Войти</a></nav></details></div></div></header>
@@ -682,7 +685,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
   const [title,meta,tag]=presets[index].items[i],li=document.createElement('li');li.className='ss-result';
   const mark=document.createElement('span');mark.className='ss-result-mark';mark.innerHTML=sparkle;
   const body=document.createElement('div');body.className='ss-result-content';const b=document.createElement('b');b.textContent=title;const sm=document.createElement('small');sm.textContent=meta;sm.setAttribute('lang',presets[index].lang);body.append(b,sm);
-  const t=document.createElement('span');t.className='ss-tag';t.textContent=tag;t.setAttribute('lang',presets[index].lang);li.append(mark,body,t);if(list.children[i]){const existing=list.children[i];existing.replaceChildren(...li.childNodes);if(animate&&motionInViewport(existing)&&!reduce.matches){Array.from(existing.children).forEach(child=>{if(typeof child.animate==='function')child.animate([{opacity:0},{opacity:1}],{duration:320,easing:'ease-out'})})}}else list.append(li)
+  const t=document.createElement('span');t.className='ss-tag';t.textContent=tag;t.setAttribute('lang',presets[index].lang);li.append(mark,body,t);if(list.children[i])list.children[i].replaceWith(li);else list.append(li);if(animate&&!reduce.matches)li.classList.add('ss-fade-in')
  }
  function announce(){status.textContent=copy.status+presets[index].q+copy.count+count+'.'}
  function showStatic(){const p=presets[index];input.placeholder=p.q;char=p.q.length;count=p.items.length;phase='hold';list.replaceChildren();p.items.forEach((_,i)=>appendRow(i));sourcesFor();announce()}
@@ -692,7 +695,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
   if(phase==='hold'){if(index===presets.length-1){phase='invite';char=0;update();schedule(160);return}index++;begin();schedule(160);return}
   if(phase==='invite'){char++;input.placeholder=invitation.slice(0,char);if(char>=invitation.length){phase='done';root.dataset.ready='true';update();const active=document.activeElement;if(!document.hidden&&!custom()&&motionInViewport(input)&&(!active||active===document.body||active===document.documentElement||active===input))input.focus({preventScroll:true})}else schedule(65);return}
   if(phase==='type'){char++;input.placeholder=p.q.slice(0,char);if(char>=p.q.length){phase='results';schedule(200)}else schedule(48+(char%3)*12);return}
-  if(phase==='results'){if(count===0){sourcesFor();update()}appendRow(count,true);count++;if(count===p.items.length){phase='hold';announce();schedule(800)}else schedule(400)}
+  if(phase==='results'){if(count===0){sourcesFor();list.querySelectorAll('.ss-result').forEach(row=>{row.classList.remove('ss-fade-in');row.classList.add('ss-awaiting')});update()}appendRow(count,true);count++;if(count===p.items.length){phase='hold';announce();schedule(800)}else schedule(420)}
  }
  function reconcile(){update();if(first){if(!supported||focused||custom()||document.hidden||reduce.matches||!inputVisible||!motionInViewport(form)){stop();return}first=false;begin();schedule(160);return}if(!canRun()){stop();return}if(timer!==null)return;schedule(phase==='hold'?800:phase==='results'?200:60)}
  input.addEventListener('focus',()=>{focused=true;reconcile()});
@@ -931,15 +934,4 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  if(motion.addEventListener)motion.addEventListener('change',onMotion);else if(motion.addListener)motion.addListener(onMotion);
 })();
 
-(function initSearchBorderPulse(){
- const list=document.getElementById('ss-results');if(!list||!('IntersectionObserver' in window))return;
- const reduce=matchMedia('(prefers-reduced-motion: reduce)'),header=document.querySelector('.header');
- let index=0,visible=false,running=false,done=false;
- const rows=()=>Array.from(list.querySelectorAll('.ss-result'));
- function advance(){if(done||running||!visible||document.hidden||reduce.matches)return;const row=rows()[index];if(!row)return;running=true;row.dataset.borderPulse='running';row.addEventListener('animationend',finish,{once:true});function finish(){delete row.dataset.borderPulse;running=false;index++;if(index>=3){done=true;observer.disconnect()}else advance()}}
- function sync(){list.dataset.pulseVisible=String(visible&&!document.hidden&&!reduce.matches);advance()}
- const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.5;sync()},{threshold:[0,.5],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});
- observer.observe(list);document.addEventListener('visibilitychange',sync);
- reduce.addEventListener?.('change',()=>{if(reduce.matches){done=true;rows().forEach(row=>delete row.dataset.borderPulse);observer.disconnect()}sync()});
-})();
 </script></body></html>
