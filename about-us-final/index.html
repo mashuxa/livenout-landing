@@ -1,4 +1,4 @@
-<!-- Version: 91 -->
+<!-- Version: 92 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -1229,9 +1229,9 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
    impact.cancel();finished=true;block.dispatchEvent(new Event('demand-ball-finished'));
   }catch{}
  }
- observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.3;if(!started&&!finished&&!motion.matches&&entry.intersectionRatio>=.5)sequence();sync()},{threshold:[0,.3,.5],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});
+ observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=1;if(visible&&!started&&!finished&&!motion.matches)sequence();sync()},{threshold:[0,1],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});
  observer.observe(block);
- if(replay){replay.hidden=false;replay.addEventListener('click',()=>{reset();if(motion.matches)return;const rect=block.getBoundingClientRect();visible=rect.bottom>(header?.getBoundingClientRect().bottom||0)&&rect.top<innerHeight;sequence()})}
+ if(replay){replay.hidden=false;replay.addEventListener('click',()=>{if(motion.matches)return;reset();started=false;finished=false;if(visible)sequence()})}
  document.addEventListener('visibilitychange',sync);motion.addEventListener?.('change',()=>{if(motion.matches)reset()});
 })();
 
@@ -1320,7 +1320,7 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  block.addEventListener('demand-ball-reset',reset);
  block.addEventListener('demand-ball-start',reset);
  block.addEventListener('demand-ball-finished',()=>{ballFinished=true;sync()});
- const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=.3;sync()},{threshold:[0,.3,.5],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});
+ const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting&&entry.intersectionRatio>=1;sync()},{threshold:[0,1],rootMargin:'-'+Math.ceil(header?.getBoundingClientRect().height||0)+'px 0px 0px 0px'});
  observer.observe(block);document.addEventListener('visibilitychange',sync);reduce.addEventListener?.('change',sync);
 })();
 
