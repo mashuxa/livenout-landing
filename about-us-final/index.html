@@ -1,4 +1,4 @@
-<!-- Version: 4 -->
+<!-- Version: 5 -->
 <!doctype html>
 <html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Livenout — события и встречи в Польше по интересам, языку общения и настроению."><title>О Livenout — Final Preview</title><style>
 /* Preview semantic tokens: values below are temporary except brand pink and light logo navy.
@@ -250,7 +250,8 @@ html[data-theme=light] .hero .ss-query>svg.ss-send{color:#c52165}
 .hero .ss-query-input{display:block;flex:1;min-width:0;width:100%;padding:8px 0;border:0;outline:0;background:transparent;color:var(--foreground);font:inherit;font-size:16px;font-weight:400;line-height:1.35;appearance:none}
 .hero .ss-query-input::placeholder{color:#9ca3af;opacity:1}
 .hero .ss-query-input:focus::placeholder{opacity:0}
-.hero .ss-query:focus-within{outline:2px solid var(--ring);outline-offset:2px}
+.hero .ss-query:focus-within,.hero .ss-demo[data-ready=true] .ss-query{outline:2px solid var(--ring);outline-offset:2px}
+.hero .ss-demo[data-ready=true] .ss-query-input:focus::placeholder{opacity:1}
 .hero .ss-send-button{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--pink);cursor:pointer}
 .hero .ss-send-button svg{width:20px;height:20px}
 .hero .ss-send-button:focus-visible{outline:2px solid var(--ring);outline-offset:-3px}
@@ -516,14 +517,14 @@ document.querySelectorAll('.nav-menu').forEach(menu=>{
  function schedule(ms){stop();update();if(canRun())timer=setTimeout(tick,ms)}
  function tick(){timer=null;if(!canRun()){update();return}const p=presets[index];
   if(phase==='hold'){if(index===presets.length-1){phase='invite';char=0;update();schedule(160);return}index++;begin();schedule(160);return}
-  if(phase==='invite'){char++;input.placeholder=invitation.slice(0,char);if(char>=invitation.length){phase='done';update()}else schedule(65);return}
+  if(phase==='invite'){char++;input.placeholder=invitation.slice(0,char);if(char>=invitation.length){phase='done';root.dataset.ready='true';update();const active=document.activeElement;if(!document.hidden&&!custom()&&motionInViewport(input)&&(!active||active===document.body||active===document.documentElement||active===input))input.focus({preventScroll:true})}else schedule(65);return}
   if(phase==='type'){char++;input.placeholder=p.q.slice(0,char);if(char>=p.q.length){phase='results';schedule(200)}else schedule(48+(char%3)*12);return}
-  if(phase==='results'){if(count===0){list.replaceChildren();sourcesFor();update()}appendRow(count,true);count++;if(count===p.items.length){phase='hold';announce();schedule(6500)}else schedule(400)}
+  if(phase==='results'){if(count===0){list.replaceChildren();sourcesFor();update()}appendRow(count,true);count++;if(count===p.items.length){phase='hold';announce();schedule(800)}else schedule(400)}
  }
- function reconcile(){stop();update();if(!canRun())return;if(first){first=false;begin();schedule(160)}else schedule(phase==='hold'?6500:phase==='results'?400:60)}
+ function reconcile(){stop();update();if(!canRun())return;if(first){first=false;begin();schedule(160)}else schedule(phase==='hold'?800:phase==='results'?400:60)}
  input.addEventListener('focus',()=>{focused=true;reconcile()});
  input.addEventListener('blur',()=>{focused=false;reconcile()});
- input.addEventListener('input',reconcile);
+ input.addEventListener('input',()=>{delete root.dataset.ready;reconcile()});
  form.addEventListener('submit',e=>{input.value=input.value.trim();if(!input.value){e.preventDefault();input.focus()}});
  if(supported){
   const header=document.querySelector('.header'),observer=new IntersectionObserver(es=>{let changed=false;es.forEach(e=>{if(e.target===form){if(inputVisible!==e.isIntersecting)changed=true;inputVisible=e.isIntersecting}else if(e.target===list){if(resultsVisible!==e.isIntersecting)changed=true;resultsVisible=e.isIntersecting}});if(changed)reconcile()},{threshold:0,rootMargin:'-'+Math.ceil(header?header.getBoundingClientRect().height:0)+'px 0px 0px 0px'});
